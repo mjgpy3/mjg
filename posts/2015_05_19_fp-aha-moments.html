@@ -1,0 +1,148 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../highlight/styles/tomorrow-night-bright.css">
+    <script src="../highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="shortcut icon" href="../images/favicon.png" />
+    <link rel="stylesheet" href="../css/font-awesome-4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/pure-release-0.6.0/pure-min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="../css/pure-release-0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+      <link rel="stylesheet" href="../css/pure-release-0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+  </head>
+  <body style="padding: 20px;">
+    <div class="pure-g">
+      <div class="pure-u-1">
+        <h1>Michael Gilliland's Site</h1>
+        <a class="button-large pure-button pure-button-primary" href="index.html">About Me</a>
+        <a class="button-large pure-button pure-button-primary" href="../archive.html"><u>Blog > Archive</u></a>
+        <br />
+        <br />
+<h2>Functional Programming Aha! Moments</h2>
+In the past couple of years, I've dedicated a fair amount of time to closet-functional-programming. Although I haven't gotten an opportunity to use a more purist functional programming language (e.g. not FrameWorkOfTheDay.JS) in my day-to-day day, industry work, I believe some of the values of functional programming have bled into my daily practice, for the better.<br />
+<br />
+Industry aside, I want to share some of the "Aha! moments" I've had while learning about functional programming. These are moments where something just clicked for me; some part of me almost can't help but share them.<br />
+<h2>
+  Lets Can Be Described by Anonymous Functions</h2>
+<div>
+  Although "functional programming" is one of those things were if you ask five people for a definition you are likely to get six different definitions, one general consensus seems to hold: assignment should be reduced, minimally scoped or eliminated entirely in functional programming.</div>
+<div>
+  <br /></div>
+<div>
+  The let macro/expression/sugar is basically a means of reducing assignments into minimally scoped, (generally) non-mutative expressions with a set of bindings. Here's a contrived example of what this might look like in Clojure</div>
+<div>
+  <br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+  <a href="http://1.bp.blogspot.com/-nH9mlnmyq3U/VVtr_uNfVJI/AAAAAAAAAIc/abkj8bvnrGY/s1600/let.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="141" src="http://1.bp.blogspot.com/-nH9mlnmyq3U/VVtr_uNfVJI/AAAAAAAAAIc/abkj8bvnrGY/s320/let.png" width="320" /></a></div>
+<div>
+  <br /></div>
+<div>
+  Here we're saying, let's bind `x` to `35` then `y` to a value calculated from `x`, then we'll use `y` to calculate some result. This entire expression is just that, <i>it's an expression</i>. This `let` is evaluated as a whole, and the result is simply `42`.</div>
+<div>
+  <br /></div>
+<div>
+  So, here comes the first "Aha!" This same kind of scoped assignment can be done through applying anonymous functions! Here's what that looks like for the above example</div>
+<div>
+  <br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+  <a href="http://1.bp.blogspot.com/-FXNgKho6ThY/VVtyJoZi0fI/AAAAAAAAAIw/dBTylUmt3ek/s1600/let_as_lambdas.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="122" src="http://1.bp.blogspot.com/-FXNgKho6ThY/VVtyJoZi0fI/AAAAAAAAAIw/dBTylUmt3ek/s320/let_as_lambdas.png" width="320" /></a></div>
+<div>
+  Basically the pattern here is just, for each bound symbol (in this case `x` and `y`) nest and call an anonymous function, passing the bound value down (`35` and `(- x 14)`)! I found this discovery exceptionally cool because it further emphasized the power of these functional languages: something as simple as anonymous functions can be combined to form powerful abstractions.&nbsp;</div>
+<h2>
+  Monadic Bind Is Like Method Chaining</h2>
+<div>
+  Monads, in general, have provided many an "Aha" for me. They're definitely one of those constructs where, once you get passed the initial "this is slightly out of my comfort zone" feeling, you are ready to embrace an overwhelming amount of power.`bind` (looks like `&gt;&gt;=`) is one of the crucial operations implementable by a monad, it has the following type signature</div>
+<div>
+  <br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+  <a href="http://2.bp.blogspot.com/-wnBNvCm9vv4/VVt0uMBkrkI/AAAAAAAAAJA/S4UMDMCg4Z0/s1600/monad_bind_signiture.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="112" src="http://2.bp.blogspot.com/-wnBNvCm9vv4/VVt0uMBkrkI/AAAAAAAAAJA/S4UMDMCg4Z0/s320/monad_bind_signiture.png" width="320" /></a></div>
+<div>
+  Ignoring currying and some other subtleties, if I'm thinking in an "object oriented mindset" I might reason about this as follows:</div>
+<div>
+  <ul>
+    <li>`bind` is a function that take 2 arguments</li>
+    <ul>
+      <li>a generic wrapper around some type `a`</li>
+      <li>a function which takes some `a` and returns some generic wrapper around type `b` (where `b` may be the same type as `a`)</li>
+    </ul>
+    <li>`bind` returns some generic wrapper around type `b`</li>
+  </ul>
+  <div>
+    To me, this sounds exactly like a single call that enables method chaining! Think a la calling `bind` to transform from monad to monad to monad... In my mind, `bind` is an enabling feature, that allows Haskell code to be elegant, expressive and powerful without lacking type safety (see <a href="http://en.wikibooks.org/wiki/Haskell/do_notation">`do` notation</a>).</div>
+</div>
+<div>
+  <br /></div>
+<div>
+  To visualize how this is kind of like method chaining, observe the following Ruby code</div>
+<div>
+  <br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+  <a href="http://2.bp.blogspot.com/-GlMg5kXOnJQ/VVt3XT0hJiI/AAAAAAAAAJQ/3K9qBKLCXFk/s1600/ruby_chain.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="163" src="http://2.bp.blogspot.com/-GlMg5kXOnJQ/VVt3XT0hJiI/AAAAAAAAAJQ/3K9qBKLCXFk/s320/ruby_chain.png" width="320" /></a></div>
+<div>
+  We can imagine these calls (with the exception of `count`) being like a type-not-so-safe version of Haskell's `bind` applied a couple of times (2 to be exact). Here are what the steps might look like</div>
+<div>
+  <ol>
+    <li>`m a` is a range of `Fixnum` (e.g. `Range&nbsp;Fixnum`)</li>
+    <li>`map` applies a block that takes the `Range Fixnum` and returns an `Array&nbsp;Fixnum`</li>
+    <li>`select`, with its block, takes an `Array&nbsp;Fixnum` and returns an `Array&nbsp;Fixnum`</li>
+    <li>Finally, `count` is simply applied to the `Array&nbsp;Fixnum`</li>
+  </ol>
+</div>
+<h2>
+  Message Passing (OOP Style) Can Be Achieved via Closures</h2>
+<div>
+  Disclaimer/Plug: this last "Aha" is shamelessly ripped off from&nbsp;<i><a href="https://mitpress.mit.edu/sicp/full-text/book/book.html">The Structure and Interpretation of Computer Programs</a>&nbsp;(SICP). </i>I am over half way through this book, it is wonderful, please consider showing the authors your support by buying it.</div>
+<div>
+  <br /></div>
+<div>
+  The authors of SICP take the reader through a fantastic journey in which the powers of LISP and functional programming are clearly displayed through examples in the Scheme dialect. One piece of this journey that recently blew my mind was when the authors used closures to define a mutable bank account that <i>responds to different messages</i>. Here's the code (<a href="https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-20.html#%_sec_3.1.1">again shamelessly ripped</a>)</div>
+<div>
+  <br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+  <a href="http://2.bp.blogspot.com/-v23xv-FJTKk/VVt8CCt5OtI/AAAAAAAAAJg/signM3ZVUbQ/s1600/sicp_1.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="182" src="http://2.bp.blogspot.com/-v23xv-FJTKk/VVt8CCt5OtI/AAAAAAAAAJg/signM3ZVUbQ/s320/sicp_1.PNG" width="320" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+  What you're seeing here is basically a constructor that builds objects, given a beginning balance, that respond to the `'withdraw` and `'deposit` messages.</div>
+<div>
+  <br /></div>
+<div>
+  Frankly, I don't really know what I can say about this that the authors haven't already said (1) more articulately, (2) more clearly and (3) in a more inspirational manner.</div>
+<div>
+  <br /></div>
+<div>
+  In conclusion, these are just a few of the awesome concepts I've picked up in my pursuit of functional programming. If you have any thoughts on these, or my description of them, don't hesitate to comment.</div>
+<br />
+        <a target="_blank" href="http://www.github.com/mjgpy3">
+          <button class="pure-button">
+            <i class="fa fa-github"></i>
+          </button>
+        </a>
+        <a target="_blank" href="http://stackexchange.com/users/1465223/mjgpy3">
+          <button class="pure-button">
+            <i class="fa fa-stack-overflow"></i>
+          </button>
+        </a>
+        <a target="_blank" href="https://twitter.com/mjgpy3">
+          <button class="pure-button">
+            <i class="fa fa-twitter"></i>
+          </button>
+        </a>
+        <a target="_blank" href="https://www.linkedin.com/in/mjgpy3">
+          <button class="pure-button">
+            <i class="fa fa-linkedin"></i>
+          </button>
+        </a>
+        <a target="_blank" href="mailto:mjg.py3@gmail.com" target="_top">
+          <button class="pure-button">
+            <i class="fa fa-envelope"></i>
+          </button>
+        </a>
+      </div>
+      <div class="pure-u-1">
+      </div>
+    </div>
+  </body>
+</html>
