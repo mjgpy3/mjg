@@ -1,0 +1,123 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../highlight/styles/tomorrow-night-bright.css">
+    <script src="../highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="shortcut icon" href="../images/favicon.png" />
+    <link rel="stylesheet" href="../css/font-awesome-4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/pure-release-0.6.0/pure-min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="../css/pure-release-0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+      <link rel="stylesheet" href="../css/pure-release-0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+  </head>
+  <body style="padding: 20px;">
+    <div class="pure-g">
+      <div class="pure-u-1">
+        <h1>Michael Gilliland's Site</h1>
+        <a class="button-large pure-button pure-button-primary" href="index.html">About Me</a>
+        <a class="button-large pure-button pure-button-primary" href="../archive.html"><u>Blog > Archive</u></a>
+        <br />
+        <br />
+<h2>Favor Deletable Code Over Reusable Code</h2>
+As problem solvers who work primarily in the medium of software, we're sold reusability throughout our careers (and even, likely, in our educations). We're told that if we just think ahead, if we put forth more effort, we can jump to a new plane of abstraction and achieve a solution that will be usable in the future to more quickly and easily solve a similar problem. Although this sounds pretty awesome in theory, I don't buy it in practice.<br />
+<br />
+<h1>
+  Arguments against optimizing for reuse</h1>
+<div>
+  The first real problem I have with premature abstraction (in the hope of reuse) is just that -- it's premature. We'd like to think we know how our system ought to flex in the future, but we just don't. We're not fortune tellers.</div>
+<div>
+  <br /></div>
+<div>
+  We mean well. We build a more general solution than needed to solve a real problem</div>
+<div class="separator" style="clear: both; text-align: center;">
+  <a href="http://3.bp.blogspot.com/-HYg9kDILLmg/VY_0AgK0coI/AAAAAAAAAJ8/_SR7T0wFueY/s1600/1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="184" src="http://3.bp.blogspot.com/-HYg9kDILLmg/VY_0AgK0coI/AAAAAAAAAJ8/_SR7T0wFueY/s320/1.png" width="320" /></a></div>
+<div>
+  Our hope, thinking and intention is that future, <i>similar </i>problems will fit nicely into our "framework"</div>
+<div class="separator" style="clear: both; text-align: center;">
+  <a href="http://2.bp.blogspot.com/-xD1ncO0THMg/VY_0u6Ze7GI/AAAAAAAAAKE/R-UUSHGQg0M/s1600/2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="147" src="http://2.bp.blogspot.com/-xD1ncO0THMg/VY_0u6Ze7GI/AAAAAAAAAKE/R-UUSHGQg0M/s320/2.png" width="320" /></a></div>
+<div>
+  This sounds great, but there's a lot that can go wrong.</div>
+<div>
+  <br /></div>
+<div>
+  Firstly, what happens if our expanded solution doesn't "fully" solve the problem at hand?</div>
+<div class="separator" style="clear: both; text-align: center;">
+  <a href="http://3.bp.blogspot.com/-Sy6uwU_RX8w/VY_2zmWwxWI/AAAAAAAAAKQ/uIuYFN-b0q8/s1600/3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="136" src="http://3.bp.blogspot.com/-Sy6uwU_RX8w/VY_2zmWwxWI/AAAAAAAAAKQ/uIuYFN-b0q8/s320/3.png" width="320" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+  Do we rewrite our more general solution to accommodate the actual problem? I find, generally, we don't. Instead we extend and further abstract our large solution to make it encompass the areas we missed. If we do re-write the general solution entirely, the previous general solution was effectively a time sink.</div>
+<div class="separator" style="clear: both; text-align: left;">
+  <br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+  There's a fair amount of regression headache here as well. If I decided to extend my prior abstraction, then I have to do without breaking the parts that partially solved the problem to begin with. Also, assuming I still believed parts of the original abstraction to be valuable to future solutions, I would be required to also keep those from breaking.</div>
+<div class="separator" style="clear: both; text-align: left;">
+  <br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+  &nbsp;Secondly, there's a question I try to ask myself before I solve future problems:&nbsp;<i>what will happen if this problem is a one-off?</i>&nbsp;I usually have a few different answers to this</div>
+<div class="separator" style="clear: both; text-align: left;">
+</div>
+<ul>
+  <li>I will have wasted time building abstractions and tests that weren't actually needed</li>
+  <li>I will have obfuscated the intent of the solution with unnecessary abstraction, forcing future maintainers (myself included) to understand a more general problem than the one actually being solved, and</li>
+  <li>I will have introduced more actual code and tests to maintain (in many codebases this may be a drop in a bucket, but still, more is more)</li>
+</ul>
+<div>
+  The third and final consideration I have before thinking about reuse is really a few tightly-related questions, pertaining to reuse itself</div>
+<div>
+  <ol>
+    <li>If a future problem is solvable by my abstraction, how will developers know to use it?</li>
+    <li>If a future problem looks like it's solved by my abstraction, but it's actually a different problem, how will other developers know <i>not</i>&nbsp;<i>to use</i>&nbsp;my abstraction?</li>
+    <li>What happens when a future problem is 90% solved by my abstraction? Is it flexible enough that <i>someone else</i>&nbsp;will be able to extend it to fit that extra 10%, while maintaining its integrity?</li>
+  </ol>
+  <div>
+    In my fairly short exposure to professional software development, I find the answers are something along the lines of</div>
+</div>
+<div>
+  <ol>
+    <li>They won't. They'll build another solution, and maybe their own abstraction framework to some degree.</li>
+    <li>See 1, they probably won't ever see my abstraction or understand it. Although, I have seen a good bit of the "copy the original source, and tweak to fit" pattern applied in response to this question</li>
+    <li>It won't be flexible enough. They'll build another solution.</li>
+  </ol>
+  <div>
+    Like I said, I'm a novice developer. So if you have solutions to these questions and problems, I'm eager to hear them!<br />
+    <br /></div>
+</div>
+<h1>
+  Deletable code</h1>
+<div>
+  Alright, honesty time. The above words are truly my take on some points made in&nbsp;<a href="https://vimeo.com/108441214">Greg Young's the art of destroying software talk</a>. At this point, I could spend paragraphs describing the value obtained by having code that, by nature, is easy to delete. But, to do so would be a waste of time when Greg has so well articulated the points. So, with that, I urge you to watch the linked talk, and rip my arguments to shreds in the comments section.</div>
+<br />
+        <a target="_blank" href="http://www.github.com/mjgpy3">
+          <button class="pure-button">
+            <i class="fa fa-github"></i>
+          </button>
+        </a>
+        <a target="_blank" href="http://stackexchange.com/users/1465223/mjgpy3">
+          <button class="pure-button">
+            <i class="fa fa-stack-overflow"></i>
+          </button>
+        </a>
+        <a target="_blank" href="https://twitter.com/mjgpy3">
+          <button class="pure-button">
+            <i class="fa fa-twitter"></i>
+          </button>
+        </a>
+        <a target="_blank" href="https://www.linkedin.com/in/mjgpy3">
+          <button class="pure-button">
+            <i class="fa fa-linkedin"></i>
+          </button>
+        </a>
+        <a target="_blank" href="mailto:mjg.py3@gmail.com" target="_top">
+          <button class="pure-button">
+            <i class="fa fa-envelope"></i>
+          </button>
+        </a>
+      </div>
+      <div class="pure-u-1">
+      </div>
+    </div>
+  </body>
+</html>
