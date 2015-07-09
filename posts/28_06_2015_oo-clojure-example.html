@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../highlight/styles/zenburn.css">
+    <script src="../highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="shortcut icon" href="../images/favicon.png" />
+    <link rel="stylesheet" href="../css/font-awesome-4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/pure-release-0.6.0/pure-min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="../css/pure-release-0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+      <link rel="stylesheet" href="../css/pure-release-0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+  </head>
+  <body style="padding: 20px;">
+    <div class="pure-g">
+      <div class="pure-u-1">
+        <h1>Michael Gilliland's Site</h1>
+        <a class="button-large pure-button pure-button-primary" href="index.html">About Me</a>
+        <a class="button-large pure-button pure-button-primary" href="../archive.html"><u>Blog > Archive</u></a>
+        <br />
+        <br />
+<h2>Object Oriented Clojure Example</h2>
+Inspired by the message passing content in <i><a target="_blank" href="http://www.amazon.com/Structure-Interpretation-Computer-Programs-Engineering/dp/0262510871">The Structure and Interpretation of Computer Programs</a></i>&nbsp;(SICP), I decided to try my hand at object oriented-style programming in Clojure. Here's what I came up with, using the traditional bank account example<br />
+<br />
+<pre><code class="clojure">(defn make-account [initial-balance]
+  (let [bal (ref initial-balance)
+        withdraw (fn [amount]
+                   (dosync (alter bal #(- % amount))))
+        deposit (fn [amount]
+                  (dosync (alter bal (partial + amount))))
+        amount (fn []
+                 (deref bal))
+        reset (fn []
+                (dosync (ref-set bal initial-balance)))]
+    (fn [meth &amp; args]
+      (cond
+        (= meth :withdraw) (withdraw (first args))
+        (= meth :deposit) (deposit (first args))
+        (= meth :amount) (amount)
+        (= meth :reset) (reset)))))</code></pre>
+<br />
+Overall, it was a fun little bit of code to write! It has a constructor (make-account), a private variable with mutation (bal) and some messages it responds to (:withdraw, :deposit, :amount and :reset).<br />
+<br />
+Here's an example of it being used<br />
+<pre><code class="clojure">(def account (make-account 1000))
+(println (account :amount))
+; -&gt; 1000
+
+(account :withdraw 75)
+(println (account :amount))
+; -&gt; 1925
+
+(account :reset)
+(println (account :amount))
+; -&gt; 1000
+</code></pre>
+        <a target="_blank" href="http://www.github.com/mjgpy3">
+          <button class="pure-button">
+            <i class="fa fa-github"></i>
+          </button>
+        </a>
+        <a target="_blank" href="http://stackexchange.com/users/1465223/mjgpy3">
+          <button class="pure-button">
+            <i class="fa fa-stack-overflow"></i>
+          </button>
+        </a>
+        <a target="_blank" href="https://twitter.com/mjgpy3">
+          <button class="pure-button">
+            <i class="fa fa-twitter"></i>
+          </button>
+        </a>
+        <a target="_blank" href="https://www.linkedin.com/in/mjgpy3">
+          <button class="pure-button">
+            <i class="fa fa-linkedin"></i>
+          </button>
+        </a>
+        <a target="_blank" href="mailto:mjg.py3@gmail.com" target="_top">
+          <button class="pure-button">
+            <i class="fa fa-envelope"></i>
+          </button>
+        </a>
+      </div>
+      <div class="pure-u-1">
+      </div>
+    </div>
+  </body>
+</html>
