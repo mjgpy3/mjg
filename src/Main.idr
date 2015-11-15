@@ -1,6 +1,7 @@
 module Main
 
 import Post
+import Posts.Each
 
 writeFile : String -> String -> IO ()
 writeFile f s = do

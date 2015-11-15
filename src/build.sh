@@ -1,3 +1,7 @@
 #!/bin/bash
 
-idris -p effects -o gen_blog Post.idr Main.idr
+POSTS=`find Posts -name "*.idr"`
+
+echo $POSTS
+
+idris -p effects -o gen_blog Post.idr $POSTS Main.idr
