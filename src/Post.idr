@@ -31,12 +31,34 @@ Content : Type
 Content =
   List Component
 
+Date : Type
+Date = (Int, Int, Int)
+--      YR   MO   Day
+
 data Post =
-  BlogPost Title Tags Content
+  BlogPost Title Tags Date Content
+
+fileName : Date -> String -> String
+fileName (year, month, day) title = concat [
+  show year
+  ,"_", show month
+  ,"_", show day
+  ,"_", urlify title
+  ,".html"]
+  where
+    urlify = concat . intersperse "-" . split (not . isAlphaNum)
+
+contentToHtml : Content -> String
+contentToHtml cs = concat $ map go cs
+  where
+  go = ?todo
+
+postToHtml : Post -> (String, String)
+postToHtml (BlogPost title tags date content) = (fileName date title, contentToHtml content)
 
 object_oriented_clojure_example : Post
 object_oriented_clojure_example =
-  BlogPost "Object Oriented Clojure Example" [ClojureTag, FPTag, OOPTag, ProgrammingTag] [
+  BlogPost "Object Oriented Clojure Example" [ClojureTag, FPTag, OOPTag, ProgrammingTag] (2015, 06, 28) [
     Text [
       Plain "Inspired by the message passing content in",
       Link
