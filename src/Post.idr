@@ -6,6 +6,9 @@ Title = String
 data ProgrammingLanguage =
   ClojureLanguage
 
+instance Show ProgrammingLanguage where
+  show ClojureLanguage = "Clojure"
+
 data Tag =
   ClojureTag
   | FPTag
@@ -48,10 +51,17 @@ fileName (year, month, day) title = concat [
   where
     urlify = concat . intersperse "-" . split (not . isAlphaNum)
 
+textComponentToString : TextComponent -> String
+textComponentToString (Plain text) = text ++ " "
+textComponentToString (Link text url) = concat ["<a target=\"_blank\" href=\"", url, "\">", text, "</a> "]
+textComponentToString (InlineCode code) = concat ["<code>", code, "</code> "]
+
+componentToHtml : Component -> String
+componentToHtml (Text elements) = concat ["<p>", concat $ map textComponentToString elements, "</p>\n"]
+componentToHtml (Code lang text) = concat ["<pre><code class=\"", toLower $ show lang, "\">\n", text, "\n</code></pre>\n"]
+
 contentToHtml : Content -> String
-contentToHtml cs = concat $ map go cs
-  where
-  go = ?todo
+contentToHtml cs = concatMap componentToHtml cs
 
 postToHtml : Post -> (String, String)
 postToHtml (BlogPost title tags date content) = (fileName date title, contentToHtml content)
