@@ -58,7 +58,7 @@ textComponentToString (InlineCode code) = concat ["<code>", code, "</code> "]
 
 componentToHtml : Component -> String
 componentToHtml (Text elements) = concat ["<p>", concat $ map textComponentToString elements, "</p>\n"]
-componentToHtml (Code lang text) = concat ["<pre><code class=\"", toLower $ show lang, "\">\n", text, "\n</code></pre>\n"]
+componentToHtml (Code lang text) = concat ["<pre><code class=\"", toLower $ show lang, "\">", text, "</code></pre>\n"]
 
 contentToHtml : Content -> String
 contentToHtml cs = concatMap componentToHtml cs
@@ -76,8 +76,7 @@ object_oriented_clojure_example =
         "http://www.amazon.com/Structure-Interpretation-Computer-Programs-Engineering/dp/0262510871",
       Plain "(SICP), I decided to try my hand at object oriented-style programming in Clojure. Here's what I came up with, using the traditional bank account example"
     ],
-    Code ClojureLanguage """
-(defn make-account [initial-balance]
+    Code ClojureLanguage """(defn make-account [initial-balance]
   (let [bal (ref initial-balance)
         withdraw (fn [amount]
                    (dosync (alter bal #(- % amount))))
@@ -107,8 +106,7 @@ object_oriented_clojure_example =
     Text [
       Plain "Here's an example of it being used"
     ],
-    Code ClojureLanguage """
-(def account (make-account 1000))
+    Code ClojureLanguage """(def account (make-account 1000))
 (println (account :amount))
 ; -> 1000
 
