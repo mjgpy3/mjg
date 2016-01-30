@@ -1,6 +1,7 @@
-module Posts (Action, Model, update, view) where
+module Posts (Action, Model, update, view, init) where
 
-import Html exposing (div, h1, text)
+import Html exposing (div, h1, text, button)
+import Html.Events exposing (onClick)
 
 import Html
 import Post
@@ -16,7 +17,19 @@ init : Model
 init = Nothing
 
 view : Signal.Address Action -> Model -> Html.Html
-view address model = div [] []
+view address model = case model of
+  Nothing -> postList address
+  Just post -> singlePost address post.selectedPostId
+
+postList : Signal.Address Action -> Html.Html
+postList address = div
+  []
+  [button [onClick address <| SelectPost 1] [text "select 1"]]
+
+singlePost : Signal.Address Action -> Int -> Html.Html
+singlePost address id = div
+  []
+  [button [onClick address MoveToList] [text "Back"]]
 
 type Action = MoveToList | SelectPost Int
 
@@ -36,7 +49,10 @@ monthYearToPost =
     List.foldr reducer Dict.empty postsWithIds
 
 postById : Int -> Maybe Post.Post
-postById id = Nothing {- TODO -}
+postById id =
+  postsWithIds |>
+  Dict.fromList |>
+  Dict.get id
 
 postsWithIds : List (Int, Post.Post)
 postsWithIds =

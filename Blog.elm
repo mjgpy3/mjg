@@ -1,10 +1,20 @@
-module Blog (view) where
+module Blog (Action, Model, view, init, update) where
 
 import Html exposing (div, p, text)
 
-view : Html.Html
-view =
+import Posts
+
+type alias Action = Posts.Action
+
+type alias Model =  Posts.Model
+
+init : Model
+init = Posts.init
+
+update : Action -> Model -> Model
+update = Posts.update
+
+view : Signal.Address Posts.Action -> Posts.Model -> Html.Html
+view address model =
   div []
-    [
-      p [] [text "WIP"]
-    ]
+    [ Posts.view address model ]
