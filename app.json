@@ -1,5 +1,5 @@
 {
-    "name": "mjg, the personal site of Michael Gilliland",
+    "name": "mjg, Michael Gilliland's site",
     "repository": "https://github.com/mjgpy3/mjg",
     "env": {
         "ELM_COMPILE": "elm make Main.elm",
