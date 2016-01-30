@@ -10453,7 +10453,7 @@ Elm.Posts.make = function (_elm) {
    F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),
    _U.range(1,$List.length(allPosts)),
    A2($List.map,$Basics.fst,allPosts));
-   var postById = function (id) {    return A2($Dict.get,id,$Dict.fromList(postsWithIds));};
+   var postHtmlById = function (id) {    return A2($Dict.get,id,$Dict.fromList(postsWithIds));};
    var yearMonthToPost = function () {
       var getWithDefault = F3(function (def,k,d) {    return A2($Maybe.withDefault,def,A2($Dict.get,k,d));});
       var reducer = F2(function (_p0,r) {
@@ -10466,39 +10466,49 @@ Elm.Posts.make = function (_elm) {
    var SelectPost = function (a) {    return {ctor: "SelectPost",_0: a};};
    var MoveToList = {ctor: "MoveToList"};
    var singlePost = F2(function (address,id) {
-      return A2($Html.div,_U.list([]),_U.list([A2($Html.button,_U.list([A2($Html$Events.onClick,address,MoveToList)]),_U.list([$Html.text("Back")]))]));
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.a,_U.list([A2($Html$Events.onClick,address,MoveToList),$Html$Attributes.href("#")]),_U.list([$Html.text("Archive")]))
+              ,function () {
+                 var _p2 = postHtmlById(id);
+                 if (_p2.ctor === "Nothing") {
+                       return A2($Html.div,_U.list([]),_U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text("Post not found!")]))]));
+                    } else {
+                       return A2($Html.div,_U.list([]),_U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text($Basics.toString(id))]))]));
+                    }
+              }()]));
    });
-   var toPost = F2(function (address,_p2) {
-      var _p3 = _p2;
-      return A2($Html.a,_U.list([$Html$Attributes.href("#"),A2($Html$Events.onClick,address,SelectPost(_p3._0))]),_U.list([$Html.text(_p3._1._0)]));
+   var toPost = F2(function (address,_p3) {
+      var _p4 = _p3;
+      return A2($Html.a,_U.list([$Html$Attributes.href("#"),A2($Html$Events.onClick,address,SelectPost(_p4._0))]),_U.list([$Html.text(_p4._1._0)]));
    });
-   var toMonthList = F4(function (address,_p4,posts,list) {
-      var _p5 = _p4;
+   var toMonthList = F4(function (address,_p5,posts,list) {
+      var _p6 = _p5;
       return A2($Basics._op["++"],
       list,
       _U.list([A2($Html.li,
       _U.list([]),
-      _U.list([$Html.text(A2($Basics._op["++"],$Basics.toString(_p5._1),A2($Basics._op["++"],"/",$Basics.toString(_p5._0))))
+      _U.list([$Html.text(A2($Basics._op["++"],$Basics.toString(_p6._1),A2($Basics._op["++"],"/",$Basics.toString(_p6._0))))
               ,A2($Html.ul,_U.list([]),A2($List.map,toPost(address),posts))]))]));
    });
    var postList = function (address) {
       return A2($Html.div,_U.list([]),_U.list([A2($Html.ul,_U.list([]),A3($Dict.foldl,toMonthList(address),_U.list([]),yearMonthToPost))]));
    };
    var view = F2(function (address,model) {
-      var _p6 = model;
-      if (_p6.ctor === "Nothing") {
+      var _p7 = model;
+      if (_p7.ctor === "Nothing") {
             return postList(address);
          } else {
-            return A2(singlePost,address,_p6._0.selectedPostId);
+            return A2(singlePost,address,_p7._0.selectedPostId);
          }
    });
    var init = $Maybe.Nothing;
    var update = F2(function (action,model) {
-      var _p7 = action;
-      if (_p7.ctor === "MoveToList") {
+      var _p8 = action;
+      if (_p8.ctor === "MoveToList") {
             return init;
          } else {
-            return $Maybe.Just({selectedPostId: _p7._0});
+            return $Maybe.Just({selectedPostId: _p8._0});
          }
    });
    return _elm.Posts.values = {_op: _op,update: update,view: view,init: init};

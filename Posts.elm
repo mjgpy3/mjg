@@ -1,6 +1,6 @@
 module Posts (Action, Model, update, view, init) where
 
-import Html exposing (div, h1, text, button, ul, li, a)
+import Html exposing (div, h1, h3, text, button, ul, li, a)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (..)
 
@@ -43,7 +43,11 @@ toPost address (id, Post.BlogPost title _ _ _) =
 singlePost : Signal.Address Action -> Int -> Html.Html
 singlePost address id = div
   []
-  [button [onClick address MoveToList] [text "Back"]]
+  [ a [onClick address MoveToList, href "#"] [text "Archive"]
+  , case postHtmlById id of
+      Nothing -> div [] [h3 [] [text "Post not found!"]]
+      Just _ -> div [] [h3 [] [text <| toString id]]
+  ]
 
 type Action = MoveToList | SelectPost Int
 
@@ -62,8 +66,8 @@ yearMonthToPost =
   in
     List.foldr reducer Dict.empty postsWithIds
 
-postById : Int -> Maybe Post.Post
-postById id =
+postHtmlById : Int -> Maybe Post.Post
+postHtmlById id =
   postsWithIds |>
   Dict.fromList |>
   Dict.get id
