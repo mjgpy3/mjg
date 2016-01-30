@@ -1,8 +1,10 @@
 module Blog (view) where
 
-import Html exposing (div, text)
+import Html exposing (div, p, text)
 
 view : Html.Html
 view =
   div []
-    [text "foobar2"]
+    [
+      p [] [text "WIP"]
+    ]

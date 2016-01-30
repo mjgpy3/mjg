@@ -28,7 +28,7 @@ contentStyle : Html.Attribute
 contentStyle =
   style
     [
-      ("margin-left", "70px")
-    , ("margin-right", "70px")
+      ("margin-left", "10%")
+    , ("margin-right", "10%")
     , ("margin-top", "50px")
     ]

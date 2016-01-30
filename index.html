@@ -10279,6 +10279,27 @@ Elm.StartApp.Simple.make = function (_elm) {
    };
    var Config = F3(function (a,b,c) {    return {model: a,view: b,update: c};});
    return _elm.StartApp.Simple.values = {_op: _op,Config: Config,start: start};
+};Elm.CommonStyles = Elm.CommonStyles || {};
+Elm.CommonStyles.make = function (_elm) {
+   "use strict";
+   _elm.CommonStyles = _elm.CommonStyles || {};
+   if (_elm.CommonStyles.values) return _elm.CommonStyles.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var image = function (attrs) {
+      return $Html$Attributes.style(A2($Basics._op["++"],
+      _U.list([{ctor: "_Tuple2",_0: "margin-left",_1: "auto"},{ctor: "_Tuple2",_0: "margin-right",_1: "auto"},{ctor: "_Tuple2",_0: "display",_1: "block"}]),
+      attrs));
+   };
+   return _elm.CommonStyles.values = {_op: _op,image: image};
 };Elm.About = Elm.About || {};
 Elm.About.make = function (_elm) {
    "use strict";
@@ -10286,14 +10307,23 @@ Elm.About.make = function (_elm) {
    if (_elm.About.values) return _elm.About.values;
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
+   $CommonStyles = Elm.CommonStyles.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var view = A2($Html.div,_U.list([]),_U.list([$Html.text("foobar")]));
+   var imageStyle = $CommonStyles.image(_U.list([{ctor: "_Tuple2",_0: "max-width",_1: "100%"},{ctor: "_Tuple2",_0: "height",_1: "auto"}]));
+   var view = A2($Html.div,
+   _U.list([]),
+   _U.list([A2($Html.p,
+           _U.list([]),
+           _U.list([$Html.text("My name is Michael Gilliland. I\'m a software engineer who enjoys functional programming, testing, collaboratively building software and problem solving.")]))
+           ,A2($Html.p,_U.list([]),_U.list([$Html.text("Here\'s a picture of me walking around Pittsburgh")]))
+           ,A2($Html.img,_U.list([$Html$Attributes.src("https://github.com/mjgpy3/mjg/blob/master/images/me.jpg?raw=true"),imageStyle]),_U.list([]))]));
    return _elm.About.values = {_op: _op,view: view};
 };Elm.Blog = Elm.Blog || {};
 Elm.Blog.make = function (_elm) {
@@ -10309,7 +10339,7 @@ Elm.Blog.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var view = A2($Html.div,_U.list([]),_U.list([$Html.text("foobar2")]));
+   var view = A2($Html.div,_U.list([]),_U.list([A2($Html.p,_U.list([]),_U.list([$Html.text("WIP")]))]));
    return _elm.Blog.values = {_op: _op,view: view};
 };Elm.Header = Elm.Header || {};
 Elm.Header.make = function (_elm) {
@@ -10332,6 +10362,11 @@ Elm.Header.make = function (_elm) {
    var headerStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "100%"}
                                                     ,{ctor: "_Tuple2",_0: "height",_1: "70px"}
                                                     ,{ctor: "_Tuple2",_0: "background",_1: "black"}]));
+   var titleStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "color",_1: "white"}
+                                                   ,{ctor: "_Tuple2",_0: "position",_1: "absolute"}
+                                                   ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
+                                                   ,{ctor: "_Tuple2",_0: "margin",_1: "10px"}
+                                                   ,{ctor: "_Tuple2",_0: "text-align",_1: "center"}]));
    var baseItemStyle = function (styles) {
       return $Html$Attributes.style(A2($Basics._op["++"],
       _U.list([{ctor: "_Tuple2",_0: "height",_1: "50px"}
@@ -10364,7 +10399,11 @@ Elm.Header.make = function (_elm) {
    var init = About;
    var Blog = {ctor: "Blog"};
    var items = _U.list([{ctor: "_Tuple2",_0: "About",_1: About},{ctor: "_Tuple2",_0: "Blog",_1: Blog}]);
-   var view = F2(function (address,model) {    return A2($Html.div,_U.list([headerStyle]),A2($List.map,A2(itemAsHtml,address,model),items));});
+   var view = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([headerStyle]),
+      A2($Basics._op["++"],_U.list([A2($Html.h1,_U.list([titleStyle]),_U.list([$Html.text("MJG")]))]),A2($List.map,A2(itemAsHtml,address,model),items)));
+   });
    return _elm.Header.values = {_op: _op,view: view,init: init,update: update,Action: Action,Blog: Blog,About: About};
 };Elm.Main = Elm.Main || {};
 Elm.Main.make = function (_elm) {
@@ -10385,8 +10424,8 @@ Elm.Main.make = function (_elm) {
    $Signal = Elm.Signal.make(_elm),
    $StartApp$Simple = Elm.StartApp.Simple.make(_elm);
    var _op = {};
-   var contentStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "margin-left",_1: "70px"}
-                                                     ,{ctor: "_Tuple2",_0: "margin-right",_1: "70px"}
+   var contentStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "margin-left",_1: "10%"}
+                                                     ,{ctor: "_Tuple2",_0: "margin-right",_1: "10%"}
                                                      ,{ctor: "_Tuple2",_0: "margin-top",_1: "50px"}]));
    var view = F2(function (address,model) {
       var currentBody = function () {    var _p0 = model;if (_p0.ctor === "About") {    return $About.view;} else {    return $Blog.view;}}();

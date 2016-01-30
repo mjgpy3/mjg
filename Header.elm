@@ -1,6 +1,6 @@
 module Header (Action, Model(..), view, init, update) where
 
-import Html exposing (div, text)
+import Html exposing (div, h1, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 
@@ -62,9 +62,19 @@ baseItemStyle styles =
     , ("cursor", "pointer")
     ] ++ styles)
 
+titleStyle : Html.Attribute
+titleStyle =
+  style
+    [ ("color", "white")
+    , ("position", "absolute")
+    , ("display", "inline-block")
+    , ("margin", "10px")
+    , ("text-align", "center")
+    ]
+
 view : Signal.Address Action -> Model -> Html.Html
 view address model =
-  div [headerStyle] <| List.map (itemAsHtml address model) items
+  div [headerStyle] <| [h1 [titleStyle] [text "MJG"]] ++ List.map (itemAsHtml address model) items
 
 headerStyle : Html.Attribute
 headerStyle =
