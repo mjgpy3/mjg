@@ -1,4 +1,4 @@
-module Header (Action, Model, view, init, update) where
+module Header (Action, Model(..), view, init, update) where
 
 import Html exposing (div, text)
 import Html.Attributes exposing (..)

@@ -10279,6 +10279,38 @@ Elm.StartApp.Simple.make = function (_elm) {
    };
    var Config = F3(function (a,b,c) {    return {model: a,view: b,update: c};});
    return _elm.StartApp.Simple.values = {_op: _op,Config: Config,start: start};
+};Elm.About = Elm.About || {};
+Elm.About.make = function (_elm) {
+   "use strict";
+   _elm.About = _elm.About || {};
+   if (_elm.About.values) return _elm.About.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var view = A2($Html.div,_U.list([]),_U.list([$Html.text("foobar")]));
+   return _elm.About.values = {_op: _op,view: view};
+};Elm.Blog = Elm.Blog || {};
+Elm.Blog.make = function (_elm) {
+   "use strict";
+   _elm.Blog = _elm.Blog || {};
+   if (_elm.Blog.values) return _elm.Blog.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var view = A2($Html.div,_U.list([]),_U.list([$Html.text("foobar2")]));
+   return _elm.Blog.values = {_op: _op,view: view};
 };Elm.Header = Elm.Header || {};
 Elm.Header.make = function (_elm) {
    "use strict";
@@ -10333,24 +10365,33 @@ Elm.Header.make = function (_elm) {
    var Blog = {ctor: "Blog"};
    var items = _U.list([{ctor: "_Tuple2",_0: "About",_1: About},{ctor: "_Tuple2",_0: "Blog",_1: Blog}]);
    var view = F2(function (address,model) {    return A2($Html.div,_U.list([headerStyle]),A2($List.map,A2(itemAsHtml,address,model),items));});
-   return _elm.Header.values = {_op: _op,view: view,init: init,update: update,Action: Action};
+   return _elm.Header.values = {_op: _op,view: view,init: init,update: update,Action: Action,Blog: Blog,About: About};
 };Elm.Main = Elm.Main || {};
 Elm.Main.make = function (_elm) {
    "use strict";
    _elm.Main = _elm.Main || {};
    if (_elm.Main.values) return _elm.Main.values;
    var _U = Elm.Native.Utils.make(_elm),
+   $About = Elm.About.make(_elm),
    $Basics = Elm.Basics.make(_elm),
+   $Blog = Elm.Blog.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $Header = Elm.Header.make(_elm),
    $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm),
    $StartApp$Simple = Elm.StartApp.Simple.make(_elm);
    var _op = {};
-   var view = F2(function (address,model) {    return A2($Html.div,_U.list([]),_U.list([A2($Header.view,address,model)]));});
+   var contentStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "margin-left",_1: "70px"}
+                                                     ,{ctor: "_Tuple2",_0: "margin-right",_1: "70px"}
+                                                     ,{ctor: "_Tuple2",_0: "margin-top",_1: "50px"}]));
+   var view = F2(function (address,model) {
+      var currentBody = function () {    var _p0 = model;if (_p0.ctor === "About") {    return $About.view;} else {    return $Blog.view;}}();
+      return A2($Html.div,_U.list([]),_U.list([A2($Header.view,address,model),A2($Html.div,_U.list([contentStyle]),_U.list([currentBody]))]));
+   });
    var main = $StartApp$Simple.start({model: $Header.init,view: view,update: $Header.update});
-   return _elm.Main.values = {_op: _op,main: main,view: view};
+   return _elm.Main.values = {_op: _op,main: main,view: view,contentStyle: contentStyle};
 };</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.Main)</script></body></html>
