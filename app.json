@@ -2,7 +2,8 @@
     "name": "mjg, the personal site of Michael Gilliland",
     "repository": "https://github.com/mjgpy3/mjg",
     "env": {
-        "ELM_COMPILE": "elm make Main.elm"
+        "ELM_COMPILE": "elm make Main.elm",
+        "ELM_STATIC_DIR": "."
     },
     "buildpacks": [
         {
