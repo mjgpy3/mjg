@@ -10501,11 +10501,30 @@ Elm.Post.make = function (_elm) {
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
+   var textComponentToHtml = function (component) {
+      var _p0 = component;
+      switch (_p0.ctor)
+      {case "Plain": return $Html.text(_p0._0);
+         case "Link": return A2($Html.a,_U.list([$Html$Attributes.target("_blank"),$Html$Attributes.href(_p0._1)]),_U.list([$Html.text(_p0._0)]));
+         default: return A2($Html.code,_U.list([]),_U.list([$Html.text(_p0._0)]));}
+   };
+   var componentToHtml = function (component) {
+      var _p1 = component;
+      if (_p1.ctor === "Text") {
+            return A2($Html.p,_U.list([]),A2($List.map,textComponentToHtml,_p1._0));
+         } else {
+            return A2($Html.pre,_U.list([]),_U.list([$Html.text(_p1._1)]));
+         }
+   };
+   var contentToHtml = function (cs) {    return A2($Html.div,_U.list([]),A2($List.map,componentToHtml,cs));};
+   var postToHtml = function (_p2) {    var _p3 = _p2;return A2($Html.div,_U.list([]),_U.list([contentToHtml(_p3._3)]));};
    var BlogPost = F4(function (a,b,c,d) {    return {ctor: "BlogPost",_0: a,_1: b,_2: c,_3: d};});
    var Code = F2(function (a,b) {    return {ctor: "Code",_0: a,_1: b};});
    var Text = function (a) {    return {ctor: "Text",_0: a};};
@@ -10516,9 +10535,11 @@ Elm.Post.make = function (_elm) {
    var OOPTag = {ctor: "OOPTag"};
    var FPTag = {ctor: "FPTag"};
    var ClojureTag = {ctor: "ClojureTag"};
+   var languageToString = function (lang) {    var _p4 = lang;return "clojure";};
    var ClojureLanguage = {ctor: "ClojureLanguage"};
    return _elm.Post.values = {_op: _op
                              ,ClojureLanguage: ClojureLanguage
+                             ,languageToString: languageToString
                              ,ClojureTag: ClojureTag
                              ,FPTag: FPTag
                              ,OOPTag: OOPTag
@@ -10528,5 +10549,70 @@ Elm.Post.make = function (_elm) {
                              ,InlineCode: InlineCode
                              ,Text: Text
                              ,Code: Code
-                             ,BlogPost: BlogPost};
+                             ,BlogPost: BlogPost
+                             ,textComponentToHtml: textComponentToHtml
+                             ,componentToHtml: componentToHtml
+                             ,contentToHtml: contentToHtml
+                             ,postToHtml: postToHtml};
+};Elm.Posts = Elm.Posts || {};
+Elm.Posts.ObjectOrientedClojureExample = Elm.Posts.ObjectOrientedClojureExample || {};
+Elm.Posts.ObjectOrientedClojureExample.make = function (_elm) {
+   "use strict";
+   _elm.Posts = _elm.Posts || {};
+   _elm.Posts.ObjectOrientedClojureExample = _elm.Posts.ObjectOrientedClojureExample || {};
+   if (_elm.Posts.ObjectOrientedClojureExample.values) return _elm.Posts.ObjectOrientedClojureExample.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Post = Elm.Post.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var object_oriented_clojure_example = A4($Post.BlogPost,
+   "Object Oriented Clojure Example",
+   _U.list([$Post.ClojureTag,$Post.FPTag,$Post.OOPTag,$Post.ProgrammingTag]),
+   {ctor: "_Tuple3",_0: 2015,_1: 6,_2: 28},
+   _U.list([$Post.Text(_U.list([$Post.Plain("Inspired by the message passing content in")
+                               ,A2($Post.Link,
+                               "The Structure and Interpretation of Computer Programs",
+                               "http://www.amazon.com/Structure-Interpretation-Computer-Programs-Engineering/dp/0262510871")
+                               ,$Post.Plain("(SICP), I decided to try my hand at object oriented-style programming in Clojure. Here\'s what I came up with, using the traditional bank account example")]))
+           ,A2($Post.Code,
+           $Post.ClojureLanguage,
+           "(defn make-account [initial-balance]\n  (let [bal (ref initial-balance)\n        withdraw (fn [amount]\n                   (dosync (alter bal #(- % amount))))\n        deposit (fn [amount]\n                  (dosync (alter bal (partial + amount))))\n        amount (fn []\n                 (deref bal))\n        reset (fn []\n                (dosync (ref-set bal initial-balance)))]\n    (fn [meth & args]\n      (cond\n        (= meth :withdraw) (withdraw (first args))\n        (= meth :deposit) (deposit (first args))\n        (= meth :amount) (amount)\n        (= meth :reset) (reset)))))\n")
+           ,$Post.Text(_U.list([$Post.Plain("Overall, it was a fun little bit of code to write! It has a constructor (make-account), a private variable with mutation (bal) and some messages it responds to (")
+                               ,$Post.InlineCode(":withdraw")
+                               ,$Post.Plain(",")
+                               ,$Post.InlineCode(":deposit")
+                               ,$Post.Plain(",")
+                               ,$Post.InlineCode(":amount")
+                               ,$Post.Plain("and")
+                               ,$Post.InlineCode(":reset")]))
+           ,$Post.Text(_U.list([$Post.Plain("Here\'s an example of it being used")]))
+           ,A2($Post.Code,
+           $Post.ClojureLanguage,
+           "(def account (make-account 1000))\n(println (account :amount))\n; -> 1000\n\n(account :withdraw 75)\n(println (account :amount))\n; -> 1925\n\n(account :reset)\n(println (account :amount))\n; -> 1000\n")]));
+   var post = {ctor: "_Tuple2",_0: object_oriented_clojure_example,_1: $Post.postToHtml(object_oriented_clojure_example)};
+   return _elm.Posts.ObjectOrientedClojureExample.values = {_op: _op,post: post};
+};Elm.Posts = Elm.Posts || {};
+Elm.Posts.make = function (_elm) {
+   "use strict";
+   _elm.Posts = _elm.Posts || {};
+   if (_elm.Posts.values) return _elm.Posts.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Post = Elm.Post.make(_elm),
+   $Posts$ObjectOrientedClojureExample = Elm.Posts.ObjectOrientedClojureExample.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var allPosts = _U.list([$Posts$ObjectOrientedClojureExample.post]);
+   return _elm.Posts.values = {_op: _op,allPosts: allPosts};
 };</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.Main)</script></body></html>

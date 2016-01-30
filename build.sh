@@ -6,4 +6,6 @@ elm make Main.elm \
 	 About.elm \
 	 CommonStyles.elm \
 	 Footer.elm \
-	 Post.elm --output=index.html
+	 Post.elm \
+	 Posts/*.elm \
+         Posts.elm --output=index.html
