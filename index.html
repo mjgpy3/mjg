@@ -10493,4 +10493,40 @@ Elm.Main.make = function (_elm) {
    });
    var main = $StartApp$Simple.start({model: $Header.init,view: view,update: $Header.update});
    return _elm.Main.values = {_op: _op,main: main,view: view,contentStyle: contentStyle};
+};Elm.Post = Elm.Post || {};
+Elm.Post.make = function (_elm) {
+   "use strict";
+   _elm.Post = _elm.Post || {};
+   if (_elm.Post.values) return _elm.Post.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var BlogPost = F4(function (a,b,c,d) {    return {ctor: "BlogPost",_0: a,_1: b,_2: c,_3: d};});
+   var Code = F2(function (a,b) {    return {ctor: "Code",_0: a,_1: b};});
+   var Text = function (a) {    return {ctor: "Text",_0: a};};
+   var InlineCode = function (a) {    return {ctor: "InlineCode",_0: a};};
+   var Link = F2(function (a,b) {    return {ctor: "Link",_0: a,_1: b};});
+   var Plain = function (a) {    return {ctor: "Plain",_0: a};};
+   var ProgrammingTag = {ctor: "ProgrammingTag"};
+   var OOPTag = {ctor: "OOPTag"};
+   var FPTag = {ctor: "FPTag"};
+   var ClojureTag = {ctor: "ClojureTag"};
+   var ClojureLanguage = {ctor: "ClojureLanguage"};
+   return _elm.Post.values = {_op: _op
+                             ,ClojureLanguage: ClojureLanguage
+                             ,ClojureTag: ClojureTag
+                             ,FPTag: FPTag
+                             ,OOPTag: OOPTag
+                             ,ProgrammingTag: ProgrammingTag
+                             ,Plain: Plain
+                             ,Link: Link
+                             ,InlineCode: InlineCode
+                             ,Text: Text
+                             ,Code: Code
+                             ,BlogPost: BlogPost};
 };</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.Main)</script></body></html>
