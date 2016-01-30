@@ -9,15 +9,21 @@ view : Html.Html
 view =
   div []
     [
-      p [] [text "My name is Michael Gilliland. I'm a software engineer who enjoys functional programming, testing, collaboratively building software and problem solving."]
+      p [] [text tagLine]
     , p [] [text "Here's a picture of me walking around Pittsburgh"]
-    , img [src "https://github.com/mjgpy3/mjg/blob/master/images/me.jpg?raw=true", imageStyle] []
+    , img [src imageSource, imageStyle] []
     ]
+
+tagLine : String
+tagLine = "My name is Michael Gilliland. I'm a software engineer who enjoys functional programming, testing, collaboratively building software and problem solving."
+
+imageSource : String
+imageSource = "https://github.com/mjgpy3/mjg/blob/master/images/me.jpg?raw=true"
 
 imageStyle : Html.Attribute
 imageStyle =
   CommonStyles.image
     [
-      ("max-width","100%")
+      ("max-width","80%")
     , ("height","auto")
     ]

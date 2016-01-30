@@ -10316,14 +10316,14 @@ Elm.About.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var imageStyle = $CommonStyles.image(_U.list([{ctor: "_Tuple2",_0: "max-width",_1: "100%"},{ctor: "_Tuple2",_0: "height",_1: "auto"}]));
+   var imageStyle = $CommonStyles.image(_U.list([{ctor: "_Tuple2",_0: "max-width",_1: "80%"},{ctor: "_Tuple2",_0: "height",_1: "auto"}]));
+   var imageSource = "https://github.com/mjgpy3/mjg/blob/master/images/me.jpg?raw=true";
+   var tagLine = "My name is Michael Gilliland. I\'m a software engineer who enjoys functional programming, testing, collaboratively building software and problem solving.";
    var view = A2($Html.div,
    _U.list([]),
-   _U.list([A2($Html.p,
-           _U.list([]),
-           _U.list([$Html.text("My name is Michael Gilliland. I\'m a software engineer who enjoys functional programming, testing, collaboratively building software and problem solving.")]))
+   _U.list([A2($Html.p,_U.list([]),_U.list([$Html.text(tagLine)]))
            ,A2($Html.p,_U.list([]),_U.list([$Html.text("Here\'s a picture of me walking around Pittsburgh")]))
-           ,A2($Html.img,_U.list([$Html$Attributes.src("https://github.com/mjgpy3/mjg/blob/master/images/me.jpg?raw=true"),imageStyle]),_U.list([]))]));
+           ,A2($Html.img,_U.list([$Html$Attributes.src(imageSource),imageStyle]),_U.list([]))]));
    return _elm.About.values = {_op: _op,view: view};
 };Elm.Blog = Elm.Blog || {};
 Elm.Blog.make = function (_elm) {
