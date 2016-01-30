@@ -10350,12 +10350,55 @@ Elm.Footer.make = function (_elm) {
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var view = A2($Html.div,_U.list([]),_U.list([]));
+   var items = _U.list([{ctor: "_Tuple2",_0: "https://github.com/mjgpy3",_1: "glyphicons-social-22-github.png"}
+                       ,{ctor: "_Tuple2",_0: "https://twitter.com/mjgpy3",_1: "glyphicons-social-32-twitter.png"}
+                       ,{ctor: "_Tuple2",_0: "http://michaeljgilliland.blogspot.com/",_1: "glyphicons-social-6-blogger.png"}
+                       ,{ctor: "_Tuple2",_0: "https://www.linkedin.com/in/mjgpy3",_1: "glyphicons-social-18-linked-in.png"}
+                       ,{ctor: "_Tuple2",_0: "http://stackoverflow.com/users/1378292/mjgpy3",_1: "glyphicons-social-65-stackoverflow.png"}
+                       ,{ctor: "_Tuple2",_0: "mailto:mjg.py3@gmail.com",_1: "glyphicons-social-19-gmail.png"}]);
+   var linkImage = function (_p0) {
+      var _p1 = _p0;
+      return A2($Html.a,
+      _U.list([$Html$Attributes.href(_p1._0),$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "display",_1: "inline-block"}]))]),
+      _U.list([A2($Html.img,
+      _U.list([$Html$Attributes.src(A2($Basics._op["++"],"https://github.com/mjgpy3/mjg/blob/master/images/",A2($Basics._op["++"],_p1._1,"?raw=true")))]),
+      _U.list([]))]));
+   };
+   var styleOnly = function (attrs) {    return A2($Html.div,_U.list([$Html$Attributes.style(attrs)]),_U.list([]));};
+   var ball = function (_p2) {
+      var _p3 = _p2;
+      return styleOnly(_U.list([{ctor: "_Tuple2",_0: "content",_1: ""}
+                               ,{ctor: "_Tuple2",_0: "display",_1: "block"}
+                               ,{ctor: "_Tuple2",_0: "width",_1: "5px"}
+                               ,{ctor: "_Tuple2",_0: "height",_1: "10px"}
+                               ,{ctor: "_Tuple2",_0: "position",_1: "relative"}
+                               ,{ctor: "_Tuple2",_0: "left",_1: _p3._0}
+                               ,{ctor: "_Tuple2",_0: "top",_1: _p3._1}
+                               ,{ctor: "_Tuple2",_0: "background",_1: "#970202"}
+                               ,{ctor: "_Tuple2",_0: "border-radius",_1: "5px"}
+                               ,{ctor: "_Tuple2",_0: "display",_1: ""}]));
+   };
+   var connector = A2($Html.div,
+   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "15px"}
+                                           ,{ctor: "_Tuple2",_0: "height",_1: "5px"}
+                                           ,{ctor: "_Tuple2",_0: "background",_1: "#970202"}
+                                           ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
+                                           ,{ctor: "_Tuple2",_0: "margin-left",_1: "10px"}
+                                           ,{ctor: "_Tuple2",_0: "margin-right",_1: "10px"}
+                                           ,{ctor: "_Tuple2",_0: "margin-bottom",_1: "8px"}]))]),
+   _U.list([ball({ctor: "_Tuple2",_0: "15px",_1: "-3px"}),ball({ctor: "_Tuple2",_0: "-5px",_1: "-13px"})]));
+   var footerContent = A2($Html.div,_U.list([]),A2($List.intersperse,connector,A2($List.map,linkImage,items)));
+   var view = A2($Html.div,
+   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "padding-top",_1: "20px"}
+                                           ,{ctor: "_Tuple2",_0: "width",_1: "30%"}
+                                           ,{ctor: "_Tuple2",_0: "margin",_1: "auto"}]))]),
+   _U.list([footerContent]));
    return _elm.Footer.values = {_op: _op,view: view};
 };Elm.Header = Elm.Header || {};
 Elm.Header.make = function (_elm) {
@@ -10431,6 +10474,7 @@ Elm.Main.make = function (_elm) {
    $Basics = Elm.Basics.make(_elm),
    $Blog = Elm.Blog.make(_elm),
    $Debug = Elm.Debug.make(_elm),
+   $Footer = Elm.Footer.make(_elm),
    $Header = Elm.Header.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
@@ -10445,7 +10489,7 @@ Elm.Main.make = function (_elm) {
                                                      ,{ctor: "_Tuple2",_0: "margin-top",_1: "50px"}]));
    var view = F2(function (address,model) {
       var currentBody = function () {    var _p0 = model;if (_p0.ctor === "About") {    return $About.view;} else {    return $Blog.view;}}();
-      return A2($Html.div,_U.list([]),_U.list([A2($Header.view,address,model),A2($Html.div,_U.list([contentStyle]),_U.list([currentBody]))]));
+      return A2($Html.div,_U.list([]),_U.list([A2($Header.view,address,model),A2($Html.div,_U.list([contentStyle]),_U.list([currentBody,$Footer.view]))]));
    });
    var main = $StartApp$Simple.start({model: $Header.init,view: view,update: $Header.update});
    return _elm.Main.values = {_op: _op,main: main,view: view,contentStyle: contentStyle};

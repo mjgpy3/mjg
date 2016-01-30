@@ -2,6 +2,7 @@ module Main where
 
 import About
 import Blog
+import Footer
 import Header
 
 import Html exposing (div)
@@ -21,7 +22,7 @@ view address model =
   in
     div []
       [ Header.view address model
-      , div [contentStyle] [currentBody]
+      , div [contentStyle] [currentBody, Footer.view]
       ]
 
 contentStyle : Html.Attribute
