@@ -3,7 +3,7 @@
   "repository": "https://github.com/mjgpy3/mjg",
   "image": "nginx",
   "env": {
-    "ELM_COMPILE": "elm make Main.elm",
+    "ELM_COMPILE": "elm make Main.elm --output=index.html",
     "ELM_STATIC_DIR": "."
   },
   "buildpacks": [
