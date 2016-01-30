@@ -10341,6 +10341,22 @@ Elm.Blog.make = function (_elm) {
    var _op = {};
    var view = A2($Html.div,_U.list([]),_U.list([A2($Html.p,_U.list([]),_U.list([$Html.text("WIP")]))]));
    return _elm.Blog.values = {_op: _op,view: view};
+};Elm.Footer = Elm.Footer || {};
+Elm.Footer.make = function (_elm) {
+   "use strict";
+   _elm.Footer = _elm.Footer || {};
+   if (_elm.Footer.values) return _elm.Footer.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var view = A2($Html.div,_U.list([]),_U.list([]));
+   return _elm.Footer.values = {_op: _op,view: view};
 };Elm.Header = Elm.Header || {};
 Elm.Header.make = function (_elm) {
    "use strict";
