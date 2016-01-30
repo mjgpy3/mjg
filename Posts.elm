@@ -1,4 +1,4 @@
-module Posts (view) where
+module Posts (Action, Model, update, view) where
 
 import Html exposing (div, h1, text)
 
@@ -25,15 +25,24 @@ update action model = case action of
   MoveToList -> init
   SelectPost id -> Just { selectedPostId = id }
 
-monthYearToPost : Dict.Dict (Int, Int) (List (Post.Post, Html.Html))
+monthYearToPost : Dict.Dict (Int, Int) (List (Int, Post.Post))
 monthYearToPost =
   let
     getWithDefault def k d = Maybe.withDefault def <| Dict.get k d
-    reducer ((Post.BlogPost _ _ (year, month, _) _, _) as post) r =
+    reducer ((id, (Post.BlogPost _ _ (year, month, _) _)) as post) r =
       let key = (year, month)
       in Dict.insert key (post::getWithDefault [] key r) r
   in
-     List.foldr reducer Dict.empty allPosts
+    List.foldr reducer Dict.empty postsWithIds
+
+postById : Int -> Maybe Post.Post
+postById id = Nothing {- TODO -}
+
+postsWithIds : List (Int, Post.Post)
+postsWithIds =
+  allPosts |>
+  List.map fst |>
+  List.map2 (,) [1..List.length allPosts]
 
 allPosts : List (Post.Post, Html.Html)
 allPosts =

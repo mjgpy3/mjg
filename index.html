@@ -10615,14 +10615,19 @@ Elm.Posts.make = function (_elm) {
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
    var allPosts = _U.list([$Posts$ObjectOrientedClojureExample.post]);
+   var postsWithIds = A3($List.map2,
+   F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),
+   _U.range(1,$List.length(allPosts)),
+   A2($List.map,$Basics.fst,allPosts));
+   var postById = function (id) {    return $Maybe.Nothing;};
    var monthYearToPost = function () {
       var getWithDefault = F3(function (def,k,d) {    return A2($Maybe.withDefault,def,A2($Dict.get,k,d));});
       var reducer = F2(function (_p0,r) {
          var _p1 = _p0;
-         var key = {ctor: "_Tuple2",_0: _p1._0._2._0,_1: _p1._0._2._1};
+         var key = {ctor: "_Tuple2",_0: _p1._1._2._0,_1: _p1._1._2._1};
          return A3($Dict.insert,key,A2($List._op["::"],_p1,A3(getWithDefault,_U.list([]),key,r)),r);
       });
-      return A3($List.foldr,reducer,$Dict.empty,allPosts);
+      return A3($List.foldr,reducer,$Dict.empty,postsWithIds);
    }();
    var SelectPost = function (a) {    return {ctor: "SelectPost",_0: a};};
    var MoveToList = {ctor: "MoveToList"};
@@ -10636,5 +10641,5 @@ Elm.Posts.make = function (_elm) {
             return $Maybe.Just({selectedPostId: _p2._0});
          }
    });
-   return _elm.Posts.values = {_op: _op,view: view};
+   return _elm.Posts.values = {_op: _op,update: update,view: view};
 };</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.Main)</script></body></html>
