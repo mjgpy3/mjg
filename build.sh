@@ -1,3 +1,3 @@
 #!/bin/bash
 
-elm make *.elm --output=index.html
+elm make Main.elm Header.elm --output=index.html
