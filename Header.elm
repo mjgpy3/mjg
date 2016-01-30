@@ -1,6 +1,6 @@
 module Header (Action, Model(..), view, init, update) where
 
-import Html exposing (div, h1, text)
+import Html exposing (a, h1, text, div)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 
@@ -22,7 +22,7 @@ itemAsHtml address selected (value, option) =
             then selectedItemStyle
             else itemStyle
   in
-    div [style, onClick address { selectedModel = option }]
+    a [style, onClick address { selectedModel = option }]
       [div
         []
         [text value]]

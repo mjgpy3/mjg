@@ -1,7 +1,8 @@
 module Posts (Action, Model, update, view, init) where
 
-import Html exposing (div, h1, text, button)
+import Html exposing (div, h1, text, button, ul, li, a)
 import Html.Events exposing (onClick)
+import Html.Attributes exposing (..)
 
 import Html
 import Post
@@ -23,8 +24,21 @@ view address model = case model of
 
 postList : Signal.Address Action -> Html.Html
 postList address = div
-  []
-  [button [onClick address <| SelectPost 1] [text "select 1"]]
+  [] <| [ul [] <| Dict.foldl (toMonthList address) [] yearMonthToPost]
+
+toMonthList : Signal.Address Action -> (Int, Int) -> List (Int, Post.Post) -> List Html.Html -> List Html.Html
+toMonthList address (year, month) posts list = list ++ [
+  li [] [
+      text <| toString month ++ "/" ++ toString year
+    , ul [] <| List.map (toPost address) posts
+    ]
+  ]
+
+toPost : Signal.Address Action -> (Int, Post.Post) -> Html.Html
+toPost address (id, Post.BlogPost title _ _ _) =
+  a
+    [href "#", onClick address <| SelectPost id]
+    [text title]
 
 singlePost : Signal.Address Action -> Int -> Html.Html
 singlePost address id = div
@@ -38,8 +52,8 @@ update action model = case action of
   MoveToList -> init
   SelectPost id -> Just { selectedPostId = id }
 
-monthYearToPost : Dict.Dict (Int, Int) (List (Int, Post.Post))
-monthYearToPost =
+yearMonthToPost : Dict.Dict (Int, Int) (List (Int, Post.Post))
+yearMonthToPost =
   let
     getWithDefault def k d = Maybe.withDefault def <| Dict.get k d
     reducer ((id, (Post.BlogPost _ _ (year, month, _) _)) as post) r =
