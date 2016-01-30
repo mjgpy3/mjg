@@ -1,16 +1,17 @@
 {
-    "name": "mjg",
-    "repository": "https://github.com/mjgpy3/mjg",
-    "env": {
-        "ELM_COMPILE": "elm make Main.elm",
-        "ELM_STATIC_DIR": "."
+  "name": "mjg",
+  "repository": "https://github.com/mjgpy3/mjg",
+  "image": "nginx",
+  "env": {
+    "ELM_COMPILE": "elm make Main.elm",
+    "ELM_STATIC_DIR": "."
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/srid/heroku-buildpack-elm.git"
     },
-    "buildpacks": [
-        {
-            "url": "https://github.com/srid/heroku-buildpack-elm.git"
-        },
-        {
-            "url": "https://github.com/hone/heroku-buildpack-static"
-        }
-    ]
+    {
+      "url": "https://github.com/ryandotsmith/nginx-buildpack"
+    }
+  ]
 }
