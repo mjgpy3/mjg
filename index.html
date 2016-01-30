@@ -10605,6 +10605,7 @@ Elm.Posts.make = function (_elm) {
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
+   $Dict = Elm.Dict.make(_elm),
    $Html = Elm.Html.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
@@ -10614,5 +10615,26 @@ Elm.Posts.make = function (_elm) {
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
    var allPosts = _U.list([$Posts$ObjectOrientedClojureExample.post]);
-   return _elm.Posts.values = {_op: _op,allPosts: allPosts};
+   var monthYearToPost = function () {
+      var getWithDefault = F3(function (def,k,d) {    return A2($Maybe.withDefault,def,A2($Dict.get,k,d));});
+      var reducer = F2(function (_p0,r) {
+         var _p1 = _p0;
+         var key = {ctor: "_Tuple2",_0: _p1._0._2._0,_1: _p1._0._2._1};
+         return A3($Dict.insert,key,A2($List._op["::"],_p1,A3(getWithDefault,_U.list([]),key,r)),r);
+      });
+      return A3($List.foldr,reducer,$Dict.empty,allPosts);
+   }();
+   var SelectPost = function (a) {    return {ctor: "SelectPost",_0: a};};
+   var MoveToList = {ctor: "MoveToList"};
+   var view = F2(function (address,model) {    return A2($Html.div,_U.list([]),_U.list([]));});
+   var init = $Maybe.Nothing;
+   var update = F2(function (action,model) {
+      var _p2 = action;
+      if (_p2.ctor === "MoveToList") {
+            return init;
+         } else {
+            return $Maybe.Just({selectedPostId: _p2._0});
+         }
+   });
+   return _elm.Posts.values = {_op: _op,view: view};
 };</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.Main)</script></body></html>
