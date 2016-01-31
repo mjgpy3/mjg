@@ -33,15 +33,17 @@ type alias Url = String
 
 type TextComponent =
   Plain String
+  | Emph String
   | Link String Url
   | InlineCode String
   | BulletedList (List (List TextComponent))
+  | NumberedList (List (List TextComponent))
 
 type Component =
   Text (List TextComponent)
   | Code ProgrammingLanguage String
   | Section String (List Component)
-  | Img String
+  | Img (Maybe Int) String
 
 type alias Content = List Component
 
@@ -53,8 +55,10 @@ type Post = BlogPost Title Tags Date Content
 textComponentToHtml : TextComponent -> Html.Html
 textComponentToHtml component = case component of
   (Plain content) -> text content
+  (Emph content) -> i [] [text content]
   (Link content url) -> a [target "_blank", href url] [text <| " " ++ content ++ " "]
-  (BulletedList items) -> ul [] <| List.map (li [] << List.map textComponentToHtml) items
+  (BulletedList items) -> list ul items
+  (NumberedList items) -> list ol items
   (InlineCode content) ->
     code
       [ style
@@ -65,6 +69,9 @@ textComponentToHtml component = case component of
         ]
       ]
       [text content]
+
+list : (List Html.Attribute -> List Html.Html -> Html.Html) -> (List (List TextComponent)) -> Html.Html
+list f items = f [] <| List.map (li [] << List.map textComponentToHtml) items
 
 componentToHtml : Component -> Html.Html
 componentToHtml component = case component of
@@ -83,9 +90,13 @@ componentToHtml component = case component of
       [ text content ]
   (Section title components) ->
     div [] <| h2 [] [text title]::List.map componentToHtml components
-  (Img assetname) ->
+  (Img scale assetname) ->
     img
-      [ CommonStyles.image [("max-width","60%")]
+      [ CommonStyles.image
+        [ ("max-width", (toString <| Maybe.withDefault 60 scale) ++ "%")
+        , ("border-radius", "10px")
+        , ("border", "5px solid black")
+        ]
       , src <| "https://github.com/mjgpy3/mjg/blob/master/images/" ++ assetname ++ "?raw=true"
       ]
       []

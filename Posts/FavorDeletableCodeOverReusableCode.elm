@@ -16,6 +16,61 @@ post =
       Text [
         Plain "We mean well. We build a more general solution than needed to solve a real problem"
       ],
-      Img "favor_delete_1.png"
+      Img Nothing "favor_delete_1.png",
+      Text [
+        Plain "Our hope, thinking and intention is that future, similar problems will fit nicely into our \"framework\""
+      ],
+      Img (Just 40) "favor_delete_2.png",
+      Text [
+        Plain "This sounds great, but there's a lot that can go wrong."
+      ],
+      Text [
+        Plain "Firstly, what happens if our expanded solution doesn't \"fully\" solve the problem at hand?"
+      ],
+      Img (Just 40) "favor_delete_2.png",
+      Text [
+        Plain "Do we rewrite our more general solution to accommodate the actual problem? I find, generally, we don't. Instead we extend and further abstract our large solution to make it encompass the areas we missed. If we do re-write the general solution entirely, the previous general solution was effectively a time sink."
+      ],
+      Text [
+        Plain "There's a fair amount of regression headache here as well. If I decided to extend my prior abstraction, then I have to do without breaking the parts that partially solved the problem to begin with. Also, assuming I still believed parts of the original abstraction to be valuable to future solutions, I would be required to also keep those from breaking."
+      ],
+      Text [
+        Plain "Secondly, there's a question I try to ask myself before I solve future problems: ",
+        Emph "what will happen if this problem is a one-off?",
+        Plain " I usually have a few different answers to this",
+        BulletedList [
+          [Plain "I will have wasted time building abstractions and tests that weren't actually needed"],
+          [Plain "I will have obfuscated the intent of the solution with unnecessary abstraction, forcing future maintainers (myself included) to understand a more general problem than the one actually being solved, and"],
+          [Plain "I will have introduced more actual code and tests to maintain (in many codebases this may be a drop in a bucket, but still, more is more)"]
+        ]
+      ],
+      Text [
+        Plain "The third and final consideration I have before thinking about reuse is really a few tightly-related questions, pertaining to reuse itself",
+        NumberedList [
+          [Plain "If a future problem is solvable by my abstraction, how will developers know to use it?"],
+          [Plain "If a future problem looks like it's solved by my abstraction, but it's actually a different problem, how will other developers know not to use my abstraction?"],
+          [Plain "What happens when a future problem is 90% solved by my abstraction? Is it flexible enough that someone else will be able to extend it to fit that extra 10%, while maintaining its integrity?"]
+        ]
+      ],
+      Text [
+        Plain "In my fairly short exposure to professional software development, I find the answers are something along the lines of",
+        NumberedList [
+          [Plain "They won't. They'll build another solution, and maybe their own abstraction framework to some degree."],
+          [Plain "See 1, they probably won't ever see my abstraction or understand it. Although, I have seen a good bit of the \"copy the original source, and tweak to fit\" pattern applied in response to this question"],
+          [Plain "It won't be flexible enough. They'll build another solution."]
+        ]
+      ],
+      Text [
+        Plain "Like I said, I'm a novice developer. So if you have solutions to these questions and problems, I'm eager to hear them!"
+      ]
+    ],
+    Section "Deletable code" [
+      Text [
+        Plain "Alright, honesty time. The above words are truly my take on some points made in",
+        Link
+          "Greg Young's the art of destroying software talk"
+          "https://vimeo.com/108441214",
+        Plain ". At this point, I could spend paragraphs describing the value obtained by having code that, by nature, is easy to delete. But, to do so would be a waste of time when Greg has so well articulated the points. So, with that, I urge you to watch the linked talk, and rip my arguments to shreds in the comments section."
+      ]
     ]
   ]
