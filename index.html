@@ -11396,39 +11396,59 @@ Elm.Post.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var titleToHtml = F2(function (title,_p0) {
-      var _p1 = _p0;
+   var tagToString = function (tag) {
+      var _p0 = tag;
+      switch (_p0.ctor)
+      {case "ProgrammingTag": return "programming";
+         case "ClojureTag": return "clojure";
+         case "HaskellTag": return "haskell";
+         case "LispTag": return "lisp";
+         case "MappyTag": return "mappy";
+         case "FPTag": return "functional_programming";
+         case "OOPTag": return "object_oriented_programming";
+         case "IdrisTag": return "idris";
+         default: return "data_structures_and_algorithms";}
+   };
+   var tagsToHtml = function (tags) {
+      return A2($Html.i,
+      _U.list([]),
+      A2(F2(function (x,y) {    return A2($List._op["::"],x,y);}),
+      $Html.text("Tags: "),
+      A2($List.intersperse,$Html.text(", "),A2($List.map,function (_p1) {    return $Html.text(tagToString(_p1));},tags))));
+   };
+   var titleToHtml = F2(function (title,_p2) {
+      var _p3 = _p2;
       return A2($Html.div,
       _U.list([]),
       _U.list([A2($Html.h1,_U.list([]),_U.list([$Html.text(title)]))
               ,A2($Html.p,
               _U.list([]),
               _U.list([$Html.text(A2($Basics._op["++"],
-              $Basics.toString(_p1._1),
-              A2($Basics._op["++"],"/",A2($Basics._op["++"],$Basics.toString(_p1._2),A2($Basics._op["++"],"/",$Basics.toString(_p1._0))))))]))
+              $Basics.toString(_p3._1),
+              A2($Basics._op["++"],"/",A2($Basics._op["++"],$Basics.toString(_p3._2),A2($Basics._op["++"],"/",$Basics.toString(_p3._0))))))]))
               ,A2($Html.br,_U.list([]),_U.list([]))]));
    });
    var textComponentToHtml = function (component) {
-      var _p2 = component;
-      switch (_p2.ctor)
-      {case "Plain": return $Html.text(_p2._0);
+      var _p4 = component;
+      switch (_p4.ctor)
+      {case "Plain": return $Html.text(_p4._0);
          case "Link": return A2($Html.a,
-           _U.list([$Html$Attributes.target("_blank"),$Html$Attributes.href(_p2._1)]),
-           _U.list([$Html.text(A2($Basics._op["++"]," ",A2($Basics._op["++"],_p2._0," ")))]));
+           _U.list([$Html$Attributes.target("_blank"),$Html$Attributes.href(_p4._1)]),
+           _U.list([$Html.text(A2($Basics._op["++"]," ",A2($Basics._op["++"],_p4._0," ")))]));
          case "BulletedList": return A2($Html.ul,
            _U.list([]),
-           A2($List.map,function (_p3) {    return A2($Html.li,_U.list([]),A2($List.map,textComponentToHtml,_p3));},_p2._0));
+           A2($List.map,function (_p5) {    return A2($Html.li,_U.list([]),A2($List.map,textComponentToHtml,_p5));},_p4._0));
          default: return A2($Html.code,
            _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid grey"}
                                                    ,{ctor: "_Tuple2",_0: "background",_1: "black"}
                                                    ,{ctor: "_Tuple2",_0: "color",_1: "#64FE2E"}
                                                    ,{ctor: "_Tuple2",_0: "border-radius",_1: "4px"}]))]),
-           _U.list([$Html.text(_p2._0)]));}
+           _U.list([$Html.text(_p4._0)]));}
    };
    var componentToHtml = function (component) {
-      var _p4 = component;
-      if (_p4.ctor === "Text") {
-            return A2($Html.p,_U.list([]),A2($List.map,textComponentToHtml,_p4._0));
+      var _p6 = component;
+      if (_p6.ctor === "Text") {
+            return A2($Html.p,_U.list([]),A2($List.map,textComponentToHtml,_p6._0));
          } else {
             return A2($Html.pre,
             _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid grey"}
@@ -11437,11 +11457,14 @@ Elm.Post.make = function (_elm) {
                                                     ,{ctor: "_Tuple2",_0: "background",_1: "black"}
                                                     ,{ctor: "_Tuple2",_0: "color",_1: "#64FE2E"}
                                                     ,{ctor: "_Tuple2",_0: "border-radius",_1: "4px"}]))]),
-            _U.list([$Html.text(_p4._1)]));
+            _U.list([$Html.text(_p6._1)]));
          }
    };
    var contentToHtml = function (cs) {    return A2($Html.div,_U.list([]),A2($List.map,componentToHtml,cs));};
-   var postToHtml = function (_p5) {    var _p6 = _p5;return A2($Html.div,_U.list([]),_U.list([A2(titleToHtml,_p6._0,_p6._2),contentToHtml(_p6._3)]));};
+   var postToHtml = function (_p7) {
+      var _p8 = _p7;
+      return A2($Html.div,_U.list([]),_U.list([A2(titleToHtml,_p8._0,_p8._2),contentToHtml(_p8._3),tagsToHtml(_p8._1)]));
+   };
    var BlogPost = F4(function (a,b,c,d) {    return {ctor: "BlogPost",_0: a,_1: b,_2: c,_3: d};});
    var Code = F2(function (a,b) {    return {ctor: "Code",_0: a,_1: b};});
    var Text = function (a) {    return {ctor: "Text",_0: a};};
@@ -11489,6 +11512,8 @@ Elm.Post.make = function (_elm) {
                              ,componentToHtml: componentToHtml
                              ,contentToHtml: contentToHtml
                              ,titleToHtml: titleToHtml
+                             ,tagsToHtml: tagsToHtml
+                             ,tagToString: tagToString
                              ,postToHtml: postToHtml};
 };Elm.Posts = Elm.Posts || {};
 Elm.Posts.IntroducingMappy = Elm.Posts.IntroducingMappy || {};
@@ -11683,7 +11708,7 @@ Elm.Posts.WriteAFileInIdris.make = function (_elm) {
    var _op = {};
    var write_a_file_in_idris = A4($Post.BlogPost,
    "Write a File in Idris",
-   _U.list([$Post.FPTag,$Post.ProgrammingTag,$Post.IdrisTag,$Post.ProgrammingTag]),
+   _U.list([$Post.FPTag,$Post.IdrisTag,$Post.ProgrammingTag]),
    {ctor: "_Tuple3",_0: 2015,_1: 11,_2: 15},
    _U.list([$Post.Text(_U.list([$Post.Plain("Although Idris\' documentation seems better than 99% of opensource projects out there, I couldn\'t easily find the steps necessary to write a file. After recalling that")
                                ,A2($Post.Link,"Brian McKenna wrote his blog in Idris","http://brianmckenna.org/blog/idris_blog")

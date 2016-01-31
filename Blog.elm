@@ -1,6 +1,6 @@
 module Blog (Action(..), Model, view, init, update) where
 
-import Html exposing (div, h1, h3, text, button, ul, li, a)
+import Html exposing (div, h3, text, ul, li, a)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Dict

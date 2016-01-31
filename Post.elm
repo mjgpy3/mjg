@@ -1,6 +1,6 @@
 module Post where
 
-import Html exposing (div, a, code, text, p, pre, node, h1, h6, br, ul, li)
+import Html exposing (div, a, code, text, p, pre, h1, br, ul, li, i)
 import Html.Attributes exposing (..)
 import String
 
@@ -91,9 +91,31 @@ titleToHtml title (year, month, day) =
     , br [] []
     ]
 
+tagsToHtml : List Tag -> Html.Html
+tagsToHtml tags =
+  tags |>
+  List.map (text << tagToString) |>
+  List.intersperse (text ", ") |>
+  (::) (text "Tags: ") |>
+  i []
+
+tagToString : Tag -> String
+tagToString tag = case tag of
+  ProgrammingTag -> "programming"
+  ClojureTag -> "clojure"
+  HaskellTag -> "haskell"
+  LispTag -> "lisp"
+  MappyTag -> "mappy"
+  FPTag -> "functional_programming"
+  OOPTag -> "object_oriented_programming"
+  IdrisTag -> "idris"
+  DSATag -> "data_structures_and_algorithms"
+
 postToHtml : Post -> Html.Html
 postToHtml (BlogPost title tags date content) =
   div
     []
     [ titleToHtml title date
-    , contentToHtml content ]
+    , contentToHtml content
+    , tagsToHtml tags
+    ]
