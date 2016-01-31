@@ -8,7 +8,7 @@ post = object_oriented_clojure_example
 
 object_oriented_clojure_example : Post
 object_oriented_clojure_example =
-  BlogPost "Object Oriented Clojure Example" [ClojureTag, FPTag, OOPTag, ProgrammingTag] (2015, 06, 28) [
+  BlogPost "Object Oriented Clojure Example" [ClojureTag, FPTag, OOPTag, ProgrammingTag, SICPTag] (2015, 06, 28) [
     Text [
       Plain "Inspired by the message passing content in",
       Link

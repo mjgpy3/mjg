@@ -26,6 +26,9 @@ type Tag =
   | DeletingCodeTag
   | IdrisTag
   | DSATag
+  | SchemeTag
+  | MonadTag
+  | SICPTag
 
 type alias Tags = List Tag
 
@@ -134,8 +137,11 @@ tagToString tag = case tag of
   OOPTag -> "object_oriented_programming"
   IdrisTag -> "idris"
   DSATag -> "data_structures_and_algorithms"
+  SICPTag -> "struct_and_interp_of_computer_programs"
   SoftwareEngineeringTag -> "software_engineering"
   DeletingCodeTag -> "deleting_code"
+  SchemeTag -> "scheme"
+  MonadTag -> "monad"
 
 postToHtml : Post -> Html.Html
 postToHtml (BlogPost title tags date content) =

@@ -11412,8 +11412,11 @@ Elm.Post.make = function (_elm) {
          case "OOPTag": return "object_oriented_programming";
          case "IdrisTag": return "idris";
          case "DSATag": return "data_structures_and_algorithms";
+         case "SICPTag": return "struct_and_interp_of_computer_programs";
          case "SoftwareEngineeringTag": return "software_engineering";
-         default: return "deleting_code";}
+         case "DeletingCodeTag": return "deleting_code";
+         case "SchemeTag": return "scheme";
+         default: return "monad";}
    };
    var tagsToHtml = function (tags) {
       return A2($Html.i,
@@ -11494,6 +11497,9 @@ Elm.Post.make = function (_elm) {
    var Link = F2(function (a,b) {    return {ctor: "Link",_0: a,_1: b};});
    var Emph = function (a) {    return {ctor: "Emph",_0: a};};
    var Plain = function (a) {    return {ctor: "Plain",_0: a};};
+   var SICPTag = {ctor: "SICPTag"};
+   var MonadTag = {ctor: "MonadTag"};
+   var SchemeTag = {ctor: "SchemeTag"};
    var DSATag = {ctor: "DSATag"};
    var IdrisTag = {ctor: "IdrisTag"};
    var DeletingCodeTag = {ctor: "DeletingCodeTag"};
@@ -11527,6 +11533,9 @@ Elm.Post.make = function (_elm) {
                              ,DeletingCodeTag: DeletingCodeTag
                              ,IdrisTag: IdrisTag
                              ,DSATag: DSATag
+                             ,SchemeTag: SchemeTag
+                             ,MonadTag: MonadTag
+                             ,SICPTag: SICPTag
                              ,Plain: Plain
                              ,Emph: Emph
                              ,Link: Link
@@ -11601,6 +11610,138 @@ Elm.Posts.FavorDeletableCodeOverReusableCode.make = function (_elm) {
                                        ,$Post.Plain(". At this point, I could spend paragraphs describing the value obtained by having code that, by nature, is easy to delete. But, to do so would be a waste of time when Greg has so well articulated the points. So, with that, I urge you to watch the linked talk, and rip my arguments to shreds in the comments section.")]))]))]));
    return _elm.Posts.FavorDeletableCodeOverReusableCode.values = {_op: _op,post: post};
 };Elm.Posts = Elm.Posts || {};
+Elm.Posts.FunctionalProgrammingAhaMoments = Elm.Posts.FunctionalProgrammingAhaMoments || {};
+Elm.Posts.FunctionalProgrammingAhaMoments.make = function (_elm) {
+   "use strict";
+   _elm.Posts = _elm.Posts || {};
+   _elm.Posts.FunctionalProgrammingAhaMoments = _elm.Posts.FunctionalProgrammingAhaMoments || {};
+   if (_elm.Posts.FunctionalProgrammingAhaMoments.values) return _elm.Posts.FunctionalProgrammingAhaMoments.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Post = Elm.Post.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var post = A4($Post.BlogPost,
+   "Functional Programming Aha! Moments",
+   _U.list([$Post.ClojureTag,$Post.FPTag,$Post.HaskellTag,$Post.LispTag,$Post.MonadTag,$Post.SICPTag,$Post.SchemeTag]),
+   {ctor: "_Tuple3",_0: 2015,_1: 5,_2: 19},
+   _U.list([$Post.Text(_U.list([$Post.Plain("In the past couple of years, I\'ve dedicated a fair amount of time to closet-functional-programming. Although I haven\'t gotten an opportunity to use a more purist functional programming language (e.g. not Framework_of_the_day.JS) in my day-to-day day, industry work, I believe some of the values of functional programming have bled into my daily practice, for the better.")]))
+           ,$Post.Text(_U.list([$Post.Plain("Industry aside, I want to share some of the \"Aha! moments\" I\'ve had while learning about functional programming. These are moments where something just clicked for me; some part of me almost can\'t help but share them.")]))
+           ,A2($Post.Section,
+           "Lets can be described by anonymous functions",
+           _U.list([$Post.Text(_U.list([$Post.Plain("Although \"functional programming\" is one of those things were if you ask five people for a definition you are likely to get six different definitions, one general consensus seems to hold: assignment should be reduced, minimally scoped or eliminated entirely in functional programming.")]))
+                   ,$Post.Text(_U.list([$Post.Plain("The let macro/expression/sugar is basically a means of reducing assignments into minimally scoped, (generally) non-mutative expressions with a set of bindings. Here\'s a contrived example of what this might look like in Clojure")]))
+                   ,A2($Post.Img,$Maybe.Just(40),"fp_aha_1.png")
+                   ,$Post.Text(_U.list([$Post.Plain("Here we\'re saying, let\'s bind ")
+                                       ,$Post.InlineCode("x")
+                                       ,$Post.Plain(" to ")
+                                       ,$Post.InlineCode("35")
+                                       ,$Post.Plain(" then ")
+                                       ,$Post.InlineCode("y")
+                                       ,$Post.Plain(" to a value calculated from ")
+                                       ,$Post.InlineCode("x")
+                                       ,$Post.Plain(", then we\'ll use ")
+                                       ,$Post.InlineCode("y")
+                                       ,$Post.Plain(" to calculate some result. This entire expression is just that, it\'s an expression. This ")
+                                       ,$Post.InlineCode("let")
+                                       ,$Post.Plain(" is evaluated as a whole, and the result is simply ")
+                                       ,$Post.InlineCode("42")
+                                       ,$Post.Plain(".")]))
+                   ,$Post.Text(_U.list([$Post.Plain("So, here comes the first \"Aha!\" This same kind of scoped assignment can be done through applying anonymous functions! Here\'s what that looks like for the above example")]))
+                   ,A2($Post.Img,$Maybe.Just(40),"fp_aha_2.png")
+                   ,$Post.Text(_U.list([$Post.Plain("Basically the pattern here is just, for each bound symbol (in this case ")
+                                       ,$Post.InlineCode("x")
+                                       ,$Post.Plain(" and ")
+                                       ,$Post.InlineCode("y")
+                                       ,$Post.Plain(") nest and call an anonymous function, passing the bound value down (")
+                                       ,$Post.InlineCode("35")
+                                       ,$Post.Plain(" and ")
+                                       ,$Post.InlineCode("(- x 14)")
+                                       ,$Post.Plain(")! I found this discovery exceptionally cool because it further emphasized the power of these functional languages: something as simple as anonymous functions can be combined to form powerful abstractions. ")]))]))
+           ,A2($Post.Section,
+           "Monadic bind is like method chaining",
+           _U.list([$Post.Text(_U.list([$Post.Plain("Monads, in general, have provided many an \"Aha\" for me. They\'re definitely one of those constructs where, once you get passed the initial \"this is slightly out of my comfort zone\" feeling, you are ready to embrace an overwhelming amount of power.")
+                                       ,$Post.InlineCode("bind")
+                                       ,$Post.Plain("(symbolically ")
+                                       ,$Post.InlineCode(">>=")
+                                       ,$Post.Plain(") is one of the crucial operations implementable by a monad, it has the following type signature")]))
+                   ,A2($Post.Img,$Maybe.Just(40),"fp_aha_3.png")
+                   ,$Post.Text(_U.list([$Post.Plain("Ignoring currying and some other subtleties, if I\'m thinking in an \"object oriented mindset\" I might reason about this as follows")
+                                       ,$Post.BulletedList(_U.list([_U.list([$Post.InlineCode("bind")
+                                                                            ,$Post.Plain(" is a function that take 2 arguments")
+                                                                            ,$Post.BulletedList(_U.list([_U.list([$Post.Plain("a generic wrapper around some type ")
+                                                                                                                 ,$Post.InlineCode("a")])
+                                                                                                        ,_U.list([$Post.Plain("a function which takes some ")
+                                                                                                                 ,$Post.InlineCode("a")
+                                                                                                                 ,$Post.Plain("and returns some generic wrapper around type ")
+                                                                                                                 ,$Post.InlineCode("b")
+                                                                                                                 ,$Post.Plain(" (where ")
+                                                                                                                 ,$Post.InlineCode("b")
+                                                                                                                 ,$Post.Plain(" may be the same type as ")
+                                                                                                                 ,$Post.InlineCode("a")
+                                                                                                                 ,$Post.Plain(")")])]))])
+                                                                   ,_U.list([$Post.InlineCode("bind")
+                                                                            ,$Post.Plain(" returns some generic wrapper around type ")
+                                                                            ,$Post.InlineCode("b")])]))]))
+                   ,$Post.Text(_U.list([$Post.Plain("To me, this sounds exactly like a single call that enables method chaining! Think a la calling ")
+                                       ,$Post.InlineCode("bind")
+                                       ,$Post.Plain(" to transform from monad to monad to monad... In my mind, ")
+                                       ,$Post.InlineCode("bind")
+                                       ,$Post.Plain(" is an enabling feature, that allows Haskell code to be elegant, expressive and powerful without lacking type safety (see ")
+                                       ,A2($Post.Link,"do-notation","http://en.wikibooks.org/wiki/Haskell/do_notation")
+                                       ,$Post.Plain(").")]))
+                   ,$Post.Text(_U.list([$Post.Plain("To visualize how this is kind of like method chaining, observe the following Ruby code")]))
+                   ,A2($Post.Img,$Maybe.Just(40),"fp_aha_4.png")
+                   ,$Post.Text(_U.list([$Post.Plain("We can imagine these calls (with the exception of ")
+                                       ,$Post.InlineCode("count")
+                                       ,$Post.Plain(") being like a type-not-so-safe version of Haskell\'s ")
+                                       ,$Post.InlineCode("bind")
+                                       ,$Post.Plain(" applied a couple of times (2 to be exact). Here are what the steps might look like")
+                                       ,$Post.NumberedList(_U.list([_U.list([$Post.InlineCode("m a")
+                                                                            ,$Post.Plain(" is a range of ")
+                                                                            ,$Post.InlineCode("Fixnum")
+                                                                            ,$Post.Plain(" (e.g. ")
+                                                                            ,$Post.InlineCode("Range Fixnum")
+                                                                            ,$Post.Plain(")")])
+                                                                   ,_U.list([$Post.InlineCode("map")
+                                                                            ,$Post.Plain(" applies a block that takes the ")
+                                                                            ,$Post.InlineCode("Range Fixnum")
+                                                                            ,$Post.Plain(" and returns an ")
+                                                                            ,$Post.InlineCode("Array Fixnum")])
+                                                                   ,_U.list([$Post.InlineCode("select")
+                                                                            ,$Post.Plain(", with its block, takes an ")
+                                                                            ,$Post.InlineCode("Array Fixnum")
+                                                                            ,$Post.Plain(" and returns an ")
+                                                                            ,$Post.InlineCode("Array Fixnum")])
+                                                                   ,_U.list([$Post.Plain("Finally, ")
+                                                                            ,$Post.InlineCode("count")
+                                                                            ,$Post.Plain(" is simply applied to the ")
+                                                                            ,$Post.InlineCode("Array Fixnum")])]))]))]))
+           ,A2($Post.Section,
+           "Message passing (OOP style) can be achieved via closures",
+           _U.list([$Post.Text(_U.list([$Post.Plain("Disclaimer/Plug: this last \"Aha\" is shamelessly ripped off from")
+                                       ,A2($Post.Link,
+                                       "The Structure and Interpretation of Computer Programs",
+                                       "https://mitpress.mit.edu/sicp/full-text/book/book.html")
+                                       ,$Post.Plain("(SICP). I am over half way through this book, it is wonderful, please consider showing the authors your support by buying it.")]))
+                   ,$Post.Text(_U.list([$Post.Plain("The authors of SICP take the reader through a fantastic journey in which the powers of LISP and functional programming are clearly displayed through examples in the Scheme dialect. One piece of this journey that recently blew my mind was when the authors used closures to define a mutable bank account that responds to different messages. Here\'s the code ")
+                                       ,A2($Post.Link,
+                                       "(again shamelessly ripped)",
+                                       "https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-20.html#%_sec_3.1.1")]))
+                   ,A2($Post.Img,$Maybe.Just(40),"fp_aha_5.png")
+                   ,$Post.Text(_U.list([$Post.Plain("What you\'re seeing here is basically a constructor that builds objects, given a beginning balance, that respond to the ")
+                                       ,$Post.InlineCode("\'withdraw")
+                                       ,$Post.Plain(" and ")
+                                       ,$Post.InlineCode("\'deposit")
+                                       ,$Post.Plain(" messages.")]))
+                   ,$Post.Text(_U.list([$Post.Plain("Frankly, I don\'t really know what I can say about this that the authors haven\'t already said (1) more articulately, (2) more clearly and (3) in a more inspirational manner.")]))
+                   ,$Post.Text(_U.list([$Post.Plain("In conclusion, these are just a few of the awesome concepts I\'ve picked up in my pursuit of functional programming. If you have any thoughts on these, or my description of them, don\'t hesitate to comment.")]))]))]));
+   return _elm.Posts.FunctionalProgrammingAhaMoments.values = {_op: _op,post: post};
+};Elm.Posts = Elm.Posts || {};
 Elm.Posts.IntroducingMappy = Elm.Posts.IntroducingMappy || {};
 Elm.Posts.IntroducingMappy.make = function (_elm) {
    "use strict";
@@ -11665,7 +11806,7 @@ Elm.Posts.ObjectOrientedClojureExample.make = function (_elm) {
    var _op = {};
    var object_oriented_clojure_example = A4($Post.BlogPost,
    "Object Oriented Clojure Example",
-   _U.list([$Post.ClojureTag,$Post.FPTag,$Post.OOPTag,$Post.ProgrammingTag]),
+   _U.list([$Post.ClojureTag,$Post.FPTag,$Post.OOPTag,$Post.ProgrammingTag,$Post.SICPTag]),
    {ctor: "_Tuple3",_0: 2015,_1: 6,_2: 28},
    _U.list([$Post.Text(_U.list([$Post.Plain("Inspired by the message passing content in")
                                ,A2($Post.Link,
@@ -11823,6 +11964,7 @@ Elm.Posts.make = function (_elm) {
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
    $Posts$FavorDeletableCodeOverReusableCode = Elm.Posts.FavorDeletableCodeOverReusableCode.make(_elm),
+   $Posts$FunctionalProgrammingAhaMoments = Elm.Posts.FunctionalProgrammingAhaMoments.make(_elm),
    $Posts$IntroducingMappy = Elm.Posts.IntroducingMappy.make(_elm),
    $Posts$ObjectOrientedClojureExample = Elm.Posts.ObjectOrientedClojureExample.make(_elm),
    $Posts$TrieInHaskell = Elm.Posts.TrieInHaskell.make(_elm),
@@ -11834,7 +11976,8 @@ Elm.Posts.make = function (_elm) {
                               ,{ctor: "_Tuple2",_0: 99,_1: $Posts$ObjectOrientedClojureExample.post}
                               ,{ctor: "_Tuple2",_0: 98,_1: $Posts$TrieInHaskell.post}
                               ,{ctor: "_Tuple2",_0: 97,_1: $Posts$WriteAFileInIdris.post}
-                              ,{ctor: "_Tuple2",_0: 96,_1: $Posts$FavorDeletableCodeOverReusableCode.post}]);
+                              ,{ctor: "_Tuple2",_0: 96,_1: $Posts$FavorDeletableCodeOverReusableCode.post}
+                              ,{ctor: "_Tuple2",_0: 95,_1: $Posts$FunctionalProgrammingAhaMoments.post}]);
    var postById = function (id) {    return A2($Dict.get,id,$Dict.fromList(postsWithIds));};
    var yearMonthToPost = function () {
       var getWithDefault = F3(function (def,k,d) {    return A2($Maybe.withDefault,def,A2($Dict.get,k,d));});

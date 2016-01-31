@@ -2,6 +2,7 @@ module Posts (yearMonthToPost, postById) where
 
 import Post
 import Posts.FavorDeletableCodeOverReusableCode
+import Posts.FunctionalProgrammingAhaMoments
 import Posts.IntroducingMappy
 import Posts.ObjectOrientedClojureExample
 import Posts.TrieInHaskell
@@ -32,4 +33,5 @@ postsWithIds =
   , (98, Posts.TrieInHaskell.post)
   , (97,Posts.WriteAFileInIdris.post)
   , (96,Posts.FavorDeletableCodeOverReusableCode.post)
+  , (95,Posts.FunctionalProgrammingAhaMoments.post)
   ]
