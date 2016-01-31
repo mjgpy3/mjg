@@ -47,6 +47,6 @@ post =
       Link
         "issues"
         "https://github.com/PolyglotSymposium/mappy/issues",
-      Plain "or feel free to play with it (see the README) and file some issues!"
+      Plain "or feel free to play with it, see the README, and/or file some issues!"
     ]
   ]
