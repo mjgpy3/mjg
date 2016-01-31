@@ -8,7 +8,7 @@ post = write_a_file_in_idris
 
 write_a_file_in_idris : Post
 write_a_file_in_idris =
-  BlogPost "Write a File in Idris" [FPTag, ProgrammingTag, IdrisTag] (2015, 11, 15) [
+  BlogPost "Write a File in Idris" [FPTag, ProgrammingTag, IdrisTag, ProgrammingTag] (2015, 11, 15) [
     Text [
       Plain "Although Idris' documentation seems better than 99% of opensource projects out there, I couldn't easily find the steps necessary to write a file. After recalling that",
       Link

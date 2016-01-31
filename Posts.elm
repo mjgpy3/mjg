@@ -8,6 +8,7 @@ import Html
 import Post
 import Dict
 import Posts.ObjectOrientedClojureExample
+import Posts.TrieInHaskell
 import Posts.WriteAFileInIdris
 
 type alias Model =
@@ -81,5 +82,6 @@ postsWithIds =
 allPosts : List Post.Post
 allPosts =
   [ Posts.ObjectOrientedClojureExample.post
+  , Posts.TrieInHaskell.post
   , Posts.WriteAFileInIdris.post
   ]

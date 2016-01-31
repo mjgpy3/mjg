@@ -1,6 +1,6 @@
 module Post where
 
-import Html exposing (div, a, code, text, p, pre, node, h1, h6, br)
+import Html exposing (div, a, code, text, p, pre, node, h1, h6, br, ul, li)
 import Html.Attributes exposing (..)
 import String
 
@@ -8,10 +8,18 @@ type alias Title = String
 
 type ProgrammingLanguage =
   ClojureLanguage
+  | HaskellLanguage
   | IdrisLanguage
   | BashLanguage
 
-type Tag = ClojureTag | FPTag | OOPTag | ProgrammingTag | IdrisTag
+type Tag =
+  ClojureTag
+  | HaskellTag
+  | FPTag
+  | OOPTag
+  | ProgrammingTag
+  | IdrisTag
+  | DSATag
 
 type alias Tags = List Tag
 
@@ -21,6 +29,7 @@ type TextComponent =
   Plain String
   | Link String Url
   | InlineCode String
+  | BulletedList (List (List TextComponent))
 
 type Component =
   Text (List TextComponent)
@@ -37,6 +46,7 @@ textComponentToHtml : TextComponent -> Html.Html
 textComponentToHtml component = case component of
   (Plain content) -> text content
   (Link content url) -> a [target "_blank", href url] [text <| " " ++ content ++ " "]
+  (BulletedList items) -> ul [] <| List.map (li [] << List.map textComponentToHtml) items
   (InlineCode content) ->
     code
       [ style

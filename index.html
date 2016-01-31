@@ -10359,6 +10359,9 @@ Elm.Post.make = function (_elm) {
          case "Link": return A2($Html.a,
            _U.list([$Html$Attributes.target("_blank"),$Html$Attributes.href(_p2._1)]),
            _U.list([$Html.text(A2($Basics._op["++"]," ",A2($Basics._op["++"],_p2._0," ")))]));
+         case "BulletedList": return A2($Html.ul,
+           _U.list([]),
+           A2($List.map,function (_p3) {    return A2($Html.li,_U.list([]),A2($List.map,textComponentToHtml,_p3));},_p2._0));
          default: return A2($Html.code,
            _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid grey"}
                                                    ,{ctor: "_Tuple2",_0: "background",_1: "black"}
@@ -10367,9 +10370,9 @@ Elm.Post.make = function (_elm) {
            _U.list([$Html.text(_p2._0)]));}
    };
    var componentToHtml = function (component) {
-      var _p3 = component;
-      if (_p3.ctor === "Text") {
-            return A2($Html.p,_U.list([]),A2($List.map,textComponentToHtml,_p3._0));
+      var _p4 = component;
+      if (_p4.ctor === "Text") {
+            return A2($Html.p,_U.list([]),A2($List.map,textComponentToHtml,_p4._0));
          } else {
             return A2($Html.pre,
             _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid grey"}
@@ -10378,37 +10381,45 @@ Elm.Post.make = function (_elm) {
                                                     ,{ctor: "_Tuple2",_0: "background",_1: "black"}
                                                     ,{ctor: "_Tuple2",_0: "color",_1: "#64FE2E"}
                                                     ,{ctor: "_Tuple2",_0: "border-radius",_1: "4px"}]))]),
-            _U.list([$Html.text(_p3._1)]));
+            _U.list([$Html.text(_p4._1)]));
          }
    };
    var contentToHtml = function (cs) {    return A2($Html.div,_U.list([]),A2($List.map,componentToHtml,cs));};
-   var postToHtml = function (_p4) {    var _p5 = _p4;return A2($Html.div,_U.list([]),_U.list([A2(titleToHtml,_p5._0,_p5._2),contentToHtml(_p5._3)]));};
+   var postToHtml = function (_p5) {    var _p6 = _p5;return A2($Html.div,_U.list([]),_U.list([A2(titleToHtml,_p6._0,_p6._2),contentToHtml(_p6._3)]));};
    var BlogPost = F4(function (a,b,c,d) {    return {ctor: "BlogPost",_0: a,_1: b,_2: c,_3: d};});
    var Code = F2(function (a,b) {    return {ctor: "Code",_0: a,_1: b};});
    var Text = function (a) {    return {ctor: "Text",_0: a};};
+   var BulletedList = function (a) {    return {ctor: "BulletedList",_0: a};};
    var InlineCode = function (a) {    return {ctor: "InlineCode",_0: a};};
    var Link = F2(function (a,b) {    return {ctor: "Link",_0: a,_1: b};});
    var Plain = function (a) {    return {ctor: "Plain",_0: a};};
+   var DSATag = {ctor: "DSATag"};
    var IdrisTag = {ctor: "IdrisTag"};
    var ProgrammingTag = {ctor: "ProgrammingTag"};
    var OOPTag = {ctor: "OOPTag"};
    var FPTag = {ctor: "FPTag"};
+   var HaskellTag = {ctor: "HaskellTag"};
    var ClojureTag = {ctor: "ClojureTag"};
    var BashLanguage = {ctor: "BashLanguage"};
    var IdrisLanguage = {ctor: "IdrisLanguage"};
+   var HaskellLanguage = {ctor: "HaskellLanguage"};
    var ClojureLanguage = {ctor: "ClojureLanguage"};
    return _elm.Post.values = {_op: _op
                              ,ClojureLanguage: ClojureLanguage
+                             ,HaskellLanguage: HaskellLanguage
                              ,IdrisLanguage: IdrisLanguage
                              ,BashLanguage: BashLanguage
                              ,ClojureTag: ClojureTag
+                             ,HaskellTag: HaskellTag
                              ,FPTag: FPTag
                              ,OOPTag: OOPTag
                              ,ProgrammingTag: ProgrammingTag
                              ,IdrisTag: IdrisTag
+                             ,DSATag: DSATag
                              ,Plain: Plain
                              ,Link: Link
                              ,InlineCode: InlineCode
+                             ,BulletedList: BulletedList
                              ,Text: Text
                              ,Code: Code
                              ,BlogPost: BlogPost
@@ -10461,6 +10472,91 @@ Elm.Posts.ObjectOrientedClojureExample.make = function (_elm) {
    var post = object_oriented_clojure_example;
    return _elm.Posts.ObjectOrientedClojureExample.values = {_op: _op,post: post};
 };Elm.Posts = Elm.Posts || {};
+Elm.Posts.TrieInHaskell = Elm.Posts.TrieInHaskell || {};
+Elm.Posts.TrieInHaskell.make = function (_elm) {
+   "use strict";
+   _elm.Posts = _elm.Posts || {};
+   _elm.Posts.TrieInHaskell = _elm.Posts.TrieInHaskell || {};
+   if (_elm.Posts.TrieInHaskell.values) return _elm.Posts.TrieInHaskell.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Post = Elm.Post.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var post = A4($Post.BlogPost,
+   "Trie in Haskell",
+   _U.list([$Post.DSATag,$Post.FPTag,$Post.HaskellTag,$Post.ProgrammingTag]),
+   {ctor: "_Tuple3",_0: 2015,_1: 10,_2: 25},
+   _U.list([$Post.Text(_U.list([$Post.Plain("Lately I\'ve been playing around with Haskell. As an exercise, I decided to partially implement a Trie. I ignored the various implementations out there, including")
+                               ,A2($Post.Link,"Data.Trie","https://hackage.haskell.org/package/bytestring-trie-0.2.4.1/docs/Data-Trie.html")
+                               ,$Post.Plain("and the one linked on Wikipedia. Instead I focused on iterating on a Trie from scratch, and I found the results to be pretty interesting, so I\'m sharing them here.")]))
+           ,$Post.Text(_U.list([$Post.Plain("My real goal with this exercise was to implement ")
+                               ,$Post.InlineCode("member")
+                               ,$Post.Plain(", ")
+                               ,$Post.InlineCode("insert")
+                               ,$Post.Plain(" and a sorted ")
+                               ,$Post.InlineCode("toList")
+                               ,$Post.Plain(". This interface turns out to be more similar to a Set than say a Map, because there aren\'t values associated with members. I used")
+                               ,$Post.InlineCode("[a]")
+                               ,$Post.Plain(" to represent a member of the ")
+                               ,$Post.InlineCode("Trie a")
+                               ,$Post.Plain(" which, in retrospect, looks like a")
+                               ,A2($Post.Link,"Monoid","https://en.wikibooks.org/wiki/Haskell/Monoids")
+                               ,$Post.Plain(". Well, anyways, my first structure came out looking like")]))
+           ,A2($Post.Code,
+           $Post.HaskellLanguage,
+           "data Trie a =\n  RootNode [TrieNode a]\n  deriving Show\n\ndata TrieNode a =\n  Leaf a\n  | SpineEnd a [TrieNode a]\n  | Spine a [TrieNode a]\n  deriving Show\n")
+           ,$Post.Text(_U.list([$Post.Plain("In this modeling, ")
+                               ,$Post.InlineCode("Leaf a")
+                               ,$Post.Plain(" indicated the end of a member at a leaf, ")
+                               ,$Post.InlineCode("SpineEnd a [TrieNode a]")
+                               ,$Post.Plain(" indicated an end on a spine, ")
+                               ,$Post.InlineCode("Spine a [TrieNode a]")
+                               ,$Post.Plain(" was a non-ending spine, and well ")
+                               ,$Post.InlineCode("RootNode [TrieNode a]")
+                               ,$Post.Plain(" indicated the root. At first glance, I really liked this model. After implementing the Trie, however, I found the structure less than desirable for a few reasons")
+                               ,$Post.BulletedList(_U.list([_U.list([$Post.Plain("Since \"edges\" are a list, a fair amount of boilerplate traversal code was necessary to implement the operations")])
+                                                           ,_U.list([$Post.Plain("Although at first I liked keeping ")
+                                                                    ,$Post.InlineCode("RootNode")
+                                                                    ,$Post.Plain("separate, but later I realized it was inhibiting me from inserting the empty list")])
+                                                           ,_U.list([$Post.Plain("Turns out that ")
+                                                                    ,$Post.InlineCode("Leaf a")
+                                                                    ,$Post.Plain(" is totally redundant with ")
+                                                                    ,$Post.InlineCode("SpineEnd a []")])]))
+                               ,$Post.Plain("I\'m much more pleased with the second structure I came up with")]))
+           ,A2($Post.Code,
+           $Post.HaskellLanguage,
+           "import qualified Data.Map as M\n\ntype TrieEdges a = M.Map a (Trie a)\n\ndata Trie a =\n  Node { edges :: TrieEdges a }\n  | EndNode { edges :: TrieEdges a }\n  deriving (Show, Eq)\n\nempty :: Trie a\nempty = Node M.empty\n")
+           ,$Post.Text(_U.list([$Post.Plain("Not only does this design have fewer parts than the other, but it yielded a simpler implementation. Here\'s the code for ")
+                               ,$Post.InlineCode("insert")]))
+           ,A2($Post.Code,
+           $Post.HaskellLanguage,
+           "insert :: Ord a => [a] -> Trie a -> Trie a\ninsert [] n = EndNode $ edges n\ninsert vs (Node m) = Node $ insertBelow vs m\ninsert vs (EndNode m) = EndNode $ insertBelow vs m\n\ninsertBelow (v:vs) m = M.insert v (insert vs child) m\n  where child = M.findWithDefault empty v m\n")
+           ,$Post.Text(_U.list([$Post.Plain("I believe it\'s pretty straightforward. The only real tricks were safely creating edges where none existed (which is the main purpose of ")
+                               ,$Post.InlineCode("insertBelow")
+                               ,$Post.Plain(") and ensuring that the node at the end of a member is an ")
+                               ,$Post.InlineCode("EndNode")
+                               ,$Post.Plain(". The ")
+                               ,$Post.InlineCode("member")
+                               ,$Post.Plain(" function turned out even nicer")]))
+           ,A2($Post.Code,
+           $Post.HaskellLanguage,
+           "member :: Ord a => [a] -> Trie a -> Bool\nmember [] (EndNode _) = True\nmember [] (Node _) = False\nmember (v:vs) n = maybe False (member vs) . M.lookup v $ edges n\n")
+           ,$Post.Text(_U.list([$Post.Plain("Getting an in-order ")
+                               ,$Post.InlineCode("toList")
+                               ,$Post.Plain(" was a little bit tricker but, thanks to the useful functions in ")
+                               ,$Post.InlineCode("Data.Map")
+                               ,$Post.Plain(" it was quite doable")]))
+           ,A2($Post.Code,
+           $Post.HaskellLanguage,
+           "toList :: Trie a -> [[a]]\ntoList = go []\n  where\n  go acc (Node m) = continue acc m\n  go acc (EndNode m) = reverse acc:continue acc m\n\n  accumulating acc v n = go (v:acc) n\n \n  continue acc = concatMap (accumulating acc) . M.toList\n")
+           ,$Post.Text(_U.list([$Post.Plain("In conclusion, if you have any comments, improvements or tips to make this better let me know!")]))]));
+   return _elm.Posts.TrieInHaskell.values = {_op: _op,post: post};
+};Elm.Posts = Elm.Posts || {};
 Elm.Posts.WriteAFileInIdris = Elm.Posts.WriteAFileInIdris || {};
 Elm.Posts.WriteAFileInIdris.make = function (_elm) {
    "use strict";
@@ -10478,7 +10574,7 @@ Elm.Posts.WriteAFileInIdris.make = function (_elm) {
    var _op = {};
    var write_a_file_in_idris = A4($Post.BlogPost,
    "Write a File in Idris",
-   _U.list([$Post.FPTag,$Post.ProgrammingTag,$Post.IdrisTag]),
+   _U.list([$Post.FPTag,$Post.ProgrammingTag,$Post.IdrisTag,$Post.ProgrammingTag]),
    {ctor: "_Tuple3",_0: 2015,_1: 11,_2: 15},
    _U.list([$Post.Text(_U.list([$Post.Plain("Although Idris\' documentation seems better than 99% of opensource projects out there, I couldn\'t easily find the steps necessary to write a file. After recalling that")
                                ,A2($Post.Link,"Brian McKenna wrote his blog in Idris","http://brianmckenna.org/blog/idris_blog")
@@ -10511,11 +10607,12 @@ Elm.Posts.make = function (_elm) {
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
    $Posts$ObjectOrientedClojureExample = Elm.Posts.ObjectOrientedClojureExample.make(_elm),
+   $Posts$TrieInHaskell = Elm.Posts.TrieInHaskell.make(_elm),
    $Posts$WriteAFileInIdris = Elm.Posts.WriteAFileInIdris.make(_elm),
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var allPosts = _U.list([$Posts$ObjectOrientedClojureExample.post,$Posts$WriteAFileInIdris.post]);
+   var allPosts = _U.list([$Posts$ObjectOrientedClojureExample.post,$Posts$TrieInHaskell.post,$Posts$WriteAFileInIdris.post]);
    var postsWithIds = A3($List.map2,F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),_U.range(1,$List.length(allPosts)),allPosts);
    var postHtmlById = function (id) {    return A2($Dict.get,id,$Dict.fromList(postsWithIds));};
    var yearMonthToPost = function () {
