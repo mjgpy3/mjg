@@ -25,5 +25,4 @@ imageStyle =
   CommonStyles.image
     [
       ("max-width","60%")
-    , ("height","auto")
     ]

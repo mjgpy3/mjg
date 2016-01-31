@@ -10,4 +10,5 @@ image attrs =
       ("margin-left", "auto")
     , ("margin-right", "auto")
     , ("display", "block")
+    , ("height","auto")
     ] ++ attrs)

@@ -42,9 +42,12 @@ toMonthList address (year, month) posts list = list ++ [
 
 toPost : Signal.Address Action -> (Int, Post.Post) -> Html.Html
 toPost address (id, Post.BlogPost title _ _ _) =
-  a
-    [href "#", onClick address <| SelectPost id]
-    [text title]
+  li
+    []
+    [a
+      [href "#", onClick address <| SelectPost id]
+      [text title]
+    ]
 
 singlePost : Signal.Address Action -> Int -> Html.Html
 singlePost address id = div

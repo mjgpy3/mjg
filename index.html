@@ -11352,7 +11352,10 @@ Elm.CommonStyles.make = function (_elm) {
    var _op = {};
    var image = function (attrs) {
       return $Html$Attributes.style(A2($Basics._op["++"],
-      _U.list([{ctor: "_Tuple2",_0: "margin-left",_1: "auto"},{ctor: "_Tuple2",_0: "margin-right",_1: "auto"},{ctor: "_Tuple2",_0: "display",_1: "block"}]),
+      _U.list([{ctor: "_Tuple2",_0: "margin-left",_1: "auto"}
+              ,{ctor: "_Tuple2",_0: "margin-right",_1: "auto"}
+              ,{ctor: "_Tuple2",_0: "display",_1: "block"}
+              ,{ctor: "_Tuple2",_0: "height",_1: "auto"}]),
       attrs));
    };
    return _elm.CommonStyles.values = {_op: _op,image: image};
@@ -11372,7 +11375,7 @@ Elm.About.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var imageStyle = $CommonStyles.image(_U.list([{ctor: "_Tuple2",_0: "max-width",_1: "60%"},{ctor: "_Tuple2",_0: "height",_1: "auto"}]));
+   var imageStyle = $CommonStyles.image(_U.list([{ctor: "_Tuple2",_0: "max-width",_1: "60%"}]));
    var imageSource = "https://github.com/mjgpy3/mjg/blob/master/images/me.jpg?raw=true";
    var tagLine = "My name is Michael Gilliland. I\'m a software engineer who enjoys functional programming, testing, collaboratively building software and problem solving.";
    var view = A2($Html.div,
@@ -11388,6 +11391,7 @@ Elm.Post.make = function (_elm) {
    if (_elm.Post.values) return _elm.Post.values;
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
+   $CommonStyles = Elm.CommonStyles.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
@@ -11407,7 +11411,9 @@ Elm.Post.make = function (_elm) {
          case "FPTag": return "functional_programming";
          case "OOPTag": return "object_oriented_programming";
          case "IdrisTag": return "idris";
-         default: return "data_structures_and_algorithms";}
+         case "DSATag": return "data_structures_and_algorithms";
+         case "SoftwareEngineeringTag": return "software_engineering";
+         default: return "deleting_code";}
    };
    var tagsToHtml = function (tags) {
       return A2($Html.i,
@@ -11447,18 +11453,23 @@ Elm.Post.make = function (_elm) {
    };
    var componentToHtml = function (component) {
       var _p6 = component;
-      if (_p6.ctor === "Text") {
-            return A2($Html.p,_U.list([]),A2($List.map,textComponentToHtml,_p6._0));
-         } else {
-            return A2($Html.pre,
-            _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid grey"}
-                                                    ,{ctor: "_Tuple2",_0: "padding",_1: "10px"}
-                                                    ,{ctor: "_Tuple2",_0: "white-space",_1: "pre-wrap"}
-                                                    ,{ctor: "_Tuple2",_0: "background",_1: "black"}
-                                                    ,{ctor: "_Tuple2",_0: "color",_1: "#64FE2E"}
-                                                    ,{ctor: "_Tuple2",_0: "border-radius",_1: "4px"}]))]),
-            _U.list([$Html.text(_p6._1)]));
-         }
+      switch (_p6.ctor)
+      {case "Text": return A2($Html.p,_U.list([]),A2($List.map,textComponentToHtml,_p6._0));
+         case "Code": return A2($Html.pre,
+           _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid grey"}
+                                                   ,{ctor: "_Tuple2",_0: "padding",_1: "10px"}
+                                                   ,{ctor: "_Tuple2",_0: "white-space",_1: "pre-wrap"}
+                                                   ,{ctor: "_Tuple2",_0: "background",_1: "black"}
+                                                   ,{ctor: "_Tuple2",_0: "color",_1: "#64FE2E"}
+                                                   ,{ctor: "_Tuple2",_0: "border-radius",_1: "4px"}]))]),
+           _U.list([$Html.text(_p6._1)]));
+         case "Section": return A2($Html.div,
+           _U.list([]),
+           A2($List._op["::"],A2($Html.h2,_U.list([]),_U.list([$Html.text(_p6._0)])),A2($List.map,componentToHtml,_p6._1)));
+         default: return A2($Html.img,
+           _U.list([$CommonStyles.image(_U.list([{ctor: "_Tuple2",_0: "max-width",_1: "60%"}]))
+                   ,$Html$Attributes.src(A2($Basics._op["++"],"https://github.com/mjgpy3/mjg/blob/master/images/",A2($Basics._op["++"],_p6._0,"?raw=true")))]),
+           _U.list([]));}
    };
    var contentToHtml = function (cs) {    return A2($Html.div,_U.list([]),A2($List.map,componentToHtml,cs));};
    var postToHtml = function (_p7) {
@@ -11466,6 +11477,8 @@ Elm.Post.make = function (_elm) {
       return A2($Html.div,_U.list([]),_U.list([A2(titleToHtml,_p8._0,_p8._2),contentToHtml(_p8._3),tagsToHtml(_p8._1)]));
    };
    var BlogPost = F4(function (a,b,c,d) {    return {ctor: "BlogPost",_0: a,_1: b,_2: c,_3: d};});
+   var Img = function (a) {    return {ctor: "Img",_0: a};};
+   var Section = F2(function (a,b) {    return {ctor: "Section",_0: a,_1: b};});
    var Code = F2(function (a,b) {    return {ctor: "Code",_0: a,_1: b};});
    var Text = function (a) {    return {ctor: "Text",_0: a};};
    var BulletedList = function (a) {    return {ctor: "BulletedList",_0: a};};
@@ -11474,6 +11487,8 @@ Elm.Post.make = function (_elm) {
    var Plain = function (a) {    return {ctor: "Plain",_0: a};};
    var DSATag = {ctor: "DSATag"};
    var IdrisTag = {ctor: "IdrisTag"};
+   var DeletingCodeTag = {ctor: "DeletingCodeTag"};
+   var SoftwareEngineeringTag = {ctor: "SoftwareEngineeringTag"};
    var ProgrammingTag = {ctor: "ProgrammingTag"};
    var OOPTag = {ctor: "OOPTag"};
    var FPTag = {ctor: "FPTag"};
@@ -11499,6 +11514,8 @@ Elm.Post.make = function (_elm) {
                              ,FPTag: FPTag
                              ,OOPTag: OOPTag
                              ,ProgrammingTag: ProgrammingTag
+                             ,SoftwareEngineeringTag: SoftwareEngineeringTag
+                             ,DeletingCodeTag: DeletingCodeTag
                              ,IdrisTag: IdrisTag
                              ,DSATag: DSATag
                              ,Plain: Plain
@@ -11507,6 +11524,8 @@ Elm.Post.make = function (_elm) {
                              ,BulletedList: BulletedList
                              ,Text: Text
                              ,Code: Code
+                             ,Section: Section
+                             ,Img: Img
                              ,BlogPost: BlogPost
                              ,textComponentToHtml: textComponentToHtml
                              ,componentToHtml: componentToHtml
@@ -11515,6 +11534,33 @@ Elm.Post.make = function (_elm) {
                              ,tagsToHtml: tagsToHtml
                              ,tagToString: tagToString
                              ,postToHtml: postToHtml};
+};Elm.Posts = Elm.Posts || {};
+Elm.Posts.FavorDeletableCodeOverReusableCode = Elm.Posts.FavorDeletableCodeOverReusableCode || {};
+Elm.Posts.FavorDeletableCodeOverReusableCode.make = function (_elm) {
+   "use strict";
+   _elm.Posts = _elm.Posts || {};
+   _elm.Posts.FavorDeletableCodeOverReusableCode = _elm.Posts.FavorDeletableCodeOverReusableCode || {};
+   if (_elm.Posts.FavorDeletableCodeOverReusableCode.values) return _elm.Posts.FavorDeletableCodeOverReusableCode.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Post = Elm.Post.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var post = A4($Post.BlogPost,
+   "Favor Deletable Code Over Reusable Code",
+   _U.list([$Post.DeletingCodeTag,$Post.ProgrammingTag,$Post.SoftwareEngineeringTag]),
+   {ctor: "_Tuple3",_0: 2015,_1: 6,_2: 28},
+   _U.list([$Post.Text(_U.list([$Post.Plain("As problem solvers who work primarily in the medium of software, we\'re sold reusability throughout our careers (and even, likely, in our educations). We\'re told that if we just think ahead, if we put forth more effort, we can jump to a new plane of abstraction and achieve a solution that will be usable in the future to more quickly and easily solve a similar problem. Although this sounds pretty awesome in theory, I don\'t buy it in practice.")]))
+           ,A2($Post.Section,
+           "Arguments against optimizing for reuse",
+           _U.list([$Post.Text(_U.list([$Post.Plain("The first real problem I have with premature abstraction (in the hope of reuse) is just that -- it\'s premature. We\'d like to think we know how our system ought to flex in the future, but we just don\'t. We\'re not fortune tellers.")]))
+                   ,$Post.Text(_U.list([$Post.Plain("We mean well. We build a more general solution than needed to solve a real problem")]))
+                   ,$Post.Img("favor_delete_1.png")]))]));
+   return _elm.Posts.FavorDeletableCodeOverReusableCode.values = {_op: _op,post: post};
 };Elm.Posts = Elm.Posts || {};
 Elm.Posts.IntroducingMappy = Elm.Posts.IntroducingMappy || {};
 Elm.Posts.IntroducingMappy.make = function (_elm) {
@@ -11737,6 +11783,7 @@ Elm.Posts.make = function (_elm) {
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
+   $Posts$FavorDeletableCodeOverReusableCode = Elm.Posts.FavorDeletableCodeOverReusableCode.make(_elm),
    $Posts$IntroducingMappy = Elm.Posts.IntroducingMappy.make(_elm),
    $Posts$ObjectOrientedClojureExample = Elm.Posts.ObjectOrientedClojureExample.make(_elm),
    $Posts$TrieInHaskell = Elm.Posts.TrieInHaskell.make(_elm),
@@ -11747,7 +11794,8 @@ Elm.Posts.make = function (_elm) {
    var postsWithIds = _U.list([{ctor: "_Tuple2",_0: 100,_1: $Posts$IntroducingMappy.post}
                               ,{ctor: "_Tuple2",_0: 99,_1: $Posts$ObjectOrientedClojureExample.post}
                               ,{ctor: "_Tuple2",_0: 98,_1: $Posts$TrieInHaskell.post}
-                              ,{ctor: "_Tuple2",_0: 97,_1: $Posts$WriteAFileInIdris.post}]);
+                              ,{ctor: "_Tuple2",_0: 97,_1: $Posts$WriteAFileInIdris.post}
+                              ,{ctor: "_Tuple2",_0: 96,_1: $Posts$FavorDeletableCodeOverReusableCode.post}]);
    var postById = function (id) {    return A2($Dict.get,id,$Dict.fromList(postsWithIds));};
    var yearMonthToPost = function () {
       var getWithDefault = F3(function (def,k,d) {    return A2($Maybe.withDefault,def,A2($Dict.get,k,d));});
@@ -11790,7 +11838,9 @@ Elm.Blog.make = function (_elm) {
    var SelectPost = function (a) {    return {ctor: "SelectPost",_0: a};};
    var toPost = F2(function (address,_p1) {
       var _p2 = _p1;
-      return A2($Html.a,_U.list([$Html$Attributes.href("#"),A2($Html$Events.onClick,address,SelectPost(_p2._0))]),_U.list([$Html.text(_p2._1._0)]));
+      return A2($Html.li,
+      _U.list([]),
+      _U.list([A2($Html.a,_U.list([$Html$Attributes.href("#"),A2($Html$Events.onClick,address,SelectPost(_p2._0))]),_U.list([$Html.text(_p2._1._0)]))]));
    });
    var toMonthList = F4(function (address,_p3,posts,list) {
       var _p4 = _p3;

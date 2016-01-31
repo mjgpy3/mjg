@@ -1,8 +1,9 @@
 module Post where
 
-import Html exposing (div, a, code, text, p, pre, h1, br, ul, li, i)
+import Html exposing (..)
 import Html.Attributes exposing (..)
 import String
+import CommonStyles
 
 type alias Title = String
 
@@ -21,6 +22,8 @@ type Tag =
   | FPTag
   | OOPTag
   | ProgrammingTag
+  | SoftwareEngineeringTag
+  | DeletingCodeTag
   | IdrisTag
   | DSATag
 
@@ -37,6 +40,8 @@ type TextComponent =
 type Component =
   Text (List TextComponent)
   | Code ProgrammingLanguage String
+  | Section String (List Component)
+  | Img String
 
 type alias Content = List Component
 
@@ -76,6 +81,14 @@ componentToHtml component = case component of
         ]
       ]
       [ text content ]
+  (Section title components) ->
+    div [] <| h2 [] [text title]::List.map componentToHtml components
+  (Img assetname) ->
+    img
+      [ CommonStyles.image [("max-width","60%")]
+      , src <| "https://github.com/mjgpy3/mjg/blob/master/images/" ++ assetname ++ "?raw=true"
+      ]
+      []
 
 contentToHtml : Content -> Html.Html
 contentToHtml cs = div [] <| List.map componentToHtml cs
@@ -110,6 +123,8 @@ tagToString tag = case tag of
   OOPTag -> "object_oriented_programming"
   IdrisTag -> "idris"
   DSATag -> "data_structures_and_algorithms"
+  SoftwareEngineeringTag -> "software_engineering"
+  DeletingCodeTag -> "deleting_code"
 
 postToHtml : Post -> Html.Html
 postToHtml (BlogPost title tags date content) =
