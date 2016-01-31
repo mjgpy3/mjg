@@ -36,12 +36,13 @@ object_oriented_clojure_example =
     Text [
       Plain "Overall, it was a fun little bit of code to write! It has a constructor (make-account), a private variable with mutation (bal) and some messages it responds to (",
       InlineCode ":withdraw",
-      Plain ",",
+      Plain ", ",
       InlineCode ":deposit",
-      Plain ",",
+      Plain ", ",
       InlineCode ":amount",
-      Plain "and",
-      InlineCode ":reset"
+      Plain " and ",
+      InlineCode ":reset",
+      Plain ")"
     ],
     Text [
       Plain "Here's an example of it being used"

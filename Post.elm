@@ -38,7 +38,16 @@ textComponentToHtml : TextComponent -> Html.Html
 textComponentToHtml component = case component of
   (Plain content) -> text content
   (Link content url) -> a [target "_blank", href url] [text <| " " ++ content ++ " "]
-  (InlineCode content) -> code [] [text content]
+  (InlineCode content) ->
+    code
+      [ style
+        [("border", "1px solid grey")
+        , ("background", "black")
+        , ("color", "#64FE2E")
+        , ("border-radius", "4px")
+        ]
+      ]
+      [text content]
 
 componentToHtml : Component -> Html.Html
 componentToHtml component = case component of
@@ -51,6 +60,7 @@ componentToHtml component = case component of
         , ("white-space", "pre-wrap")
         , ("background", "black")
         , ("color", "#64FE2E")
+        , ("border-radius", "4px")
         ]
       ]
       [ text content ]

@@ -10359,7 +10359,12 @@ Elm.Post.make = function (_elm) {
          case "Link": return A2($Html.a,
            _U.list([$Html$Attributes.target("_blank"),$Html$Attributes.href(_p2._1)]),
            _U.list([$Html.text(A2($Basics._op["++"]," ",A2($Basics._op["++"],_p2._0," ")))]));
-         default: return A2($Html.code,_U.list([]),_U.list([$Html.text(_p2._0)]));}
+         default: return A2($Html.code,
+           _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid grey"}
+                                                   ,{ctor: "_Tuple2",_0: "background",_1: "black"}
+                                                   ,{ctor: "_Tuple2",_0: "color",_1: "#64FE2E"}
+                                                   ,{ctor: "_Tuple2",_0: "border-radius",_1: "4px"}]))]),
+           _U.list([$Html.text(_p2._0)]));}
    };
    var componentToHtml = function (component) {
       var _p3 = component;
@@ -10371,7 +10376,8 @@ Elm.Post.make = function (_elm) {
                                                     ,{ctor: "_Tuple2",_0: "padding",_1: "10px"}
                                                     ,{ctor: "_Tuple2",_0: "white-space",_1: "pre-wrap"}
                                                     ,{ctor: "_Tuple2",_0: "background",_1: "black"}
-                                                    ,{ctor: "_Tuple2",_0: "color",_1: "#64FE2E"}]))]),
+                                                    ,{ctor: "_Tuple2",_0: "color",_1: "#64FE2E"}
+                                                    ,{ctor: "_Tuple2",_0: "border-radius",_1: "4px"}]))]),
             _U.list([$Html.text(_p3._1)]));
          }
    };
@@ -10437,12 +10443,13 @@ Elm.Posts.ObjectOrientedClojureExample.make = function (_elm) {
            "(defn make-account [initial-balance]\n  (let [bal (ref initial-balance)\n        withdraw (fn [amount]\n                   (dosync (alter bal #(- % amount))))\n        deposit (fn [amount]\n                  (dosync (alter bal (partial + amount))))\n        amount (fn []\n                 (deref bal))\n        reset (fn []\n                (dosync (ref-set bal initial-balance)))]\n    (fn [meth & args]\n      (cond\n        (= meth :withdraw) (withdraw (first args))\n        (= meth :deposit) (deposit (first args))\n        (= meth :amount) (amount)\n        (= meth :reset) (reset)))))\n")
            ,$Post.Text(_U.list([$Post.Plain("Overall, it was a fun little bit of code to write! It has a constructor (make-account), a private variable with mutation (bal) and some messages it responds to (")
                                ,$Post.InlineCode(":withdraw")
-                               ,$Post.Plain(",")
+                               ,$Post.Plain(", ")
                                ,$Post.InlineCode(":deposit")
-                               ,$Post.Plain(",")
+                               ,$Post.Plain(", ")
                                ,$Post.InlineCode(":amount")
-                               ,$Post.Plain("and")
-                               ,$Post.InlineCode(":reset")]))
+                               ,$Post.Plain(" and ")
+                               ,$Post.InlineCode(":reset")
+                               ,$Post.Plain(")")]))
            ,$Post.Text(_U.list([$Post.Plain("Here\'s an example of it being used")]))
            ,A2($Post.Code,
            $Post.ClojureLanguage,
