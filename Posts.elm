@@ -1,4 +1,4 @@
-module Posts (Action, Model, update, view, init) where
+module Posts (Action(..), Model, update, view, init) where
 
 import Html exposing (div, h1, h3, text, button, ul, li, a)
 import Html.Events exposing (onClick)
@@ -75,15 +75,10 @@ postHtmlById id =
   Dict.fromList |>
   Dict.get id
 
-postsWithIds : List (Int, Post.Post)
+postsWithIds  : List (Int, Post.Post)
 postsWithIds =
-  allPosts |>
-  List.map2 (,) [1..List.length allPosts]
-
-allPosts : List Post.Post
-allPosts =
-  [ Posts.IntroducingMappy.post
-  , Posts.ObjectOrientedClojureExample.post
-  , Posts.TrieInHaskell.post
-  , Posts.WriteAFileInIdris.post
+  [ (100, Posts.IntroducingMappy.post)
+  , (99, Posts.ObjectOrientedClojureExample.post)
+  , (98, Posts.TrieInHaskell.post)
+  , (97,Posts.WriteAFileInIdris.post)
   ]
