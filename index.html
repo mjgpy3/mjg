@@ -10340,23 +10340,43 @@ Elm.Post.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
+   var titleToHtml = F2(function (title,_p0) {
+      var _p1 = _p0;
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.h1,_U.list([]),_U.list([$Html.text(title)]))
+              ,A2($Html.p,
+              _U.list([]),
+              _U.list([$Html.text(A2($Basics._op["++"],
+              $Basics.toString(_p1._2),
+              A2($Basics._op["++"],"/",A2($Basics._op["++"],$Basics.toString(_p1._1),A2($Basics._op["++"],"/",$Basics.toString(_p1._0))))))]))
+              ,A2($Html.br,_U.list([]),_U.list([]))]));
+   });
    var textComponentToHtml = function (component) {
-      var _p0 = component;
-      switch (_p0.ctor)
-      {case "Plain": return $Html.text(_p0._0);
-         case "Link": return A2($Html.a,_U.list([$Html$Attributes.target("_blank"),$Html$Attributes.href(_p0._1)]),_U.list([$Html.text(_p0._0)]));
-         default: return A2($Html.code,_U.list([]),_U.list([$Html.text(_p0._0)]));}
+      var _p2 = component;
+      switch (_p2.ctor)
+      {case "Plain": return $Html.text(_p2._0);
+         case "Link": return A2($Html.a,
+           _U.list([$Html$Attributes.target("_blank"),$Html$Attributes.href(_p2._1)]),
+           _U.list([$Html.text(A2($Basics._op["++"]," ",A2($Basics._op["++"],_p2._0," ")))]));
+         default: return A2($Html.code,_U.list([]),_U.list([$Html.text(_p2._0)]));}
    };
    var componentToHtml = function (component) {
-      var _p1 = component;
-      if (_p1.ctor === "Text") {
-            return A2($Html.p,_U.list([]),A2($List.map,textComponentToHtml,_p1._0));
+      var _p3 = component;
+      if (_p3.ctor === "Text") {
+            return A2($Html.p,_U.list([]),A2($List.map,textComponentToHtml,_p3._0));
          } else {
-            return A2($Html.pre,_U.list([]),_U.list([$Html.text(_p1._1)]));
+            return A2($Html.pre,
+            _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid grey"}
+                                                    ,{ctor: "_Tuple2",_0: "padding",_1: "10px"}
+                                                    ,{ctor: "_Tuple2",_0: "white-space",_1: "pre-wrap"}
+                                                    ,{ctor: "_Tuple2",_0: "background",_1: "black"}
+                                                    ,{ctor: "_Tuple2",_0: "color",_1: "#64FE2E"}]))]),
+            _U.list([$Html.text(_p3._1)]));
          }
    };
    var contentToHtml = function (cs) {    return A2($Html.div,_U.list([]),A2($List.map,componentToHtml,cs));};
-   var postToHtml = function (_p2) {    var _p3 = _p2;return A2($Html.div,_U.list([]),_U.list([contentToHtml(_p3._3)]));};
+   var postToHtml = function (_p4) {    var _p5 = _p4;return A2($Html.div,_U.list([]),_U.list([A2(titleToHtml,_p5._0,_p5._2),contentToHtml(_p5._3)]));};
    var BlogPost = F4(function (a,b,c,d) {    return {ctor: "BlogPost",_0: a,_1: b,_2: c,_3: d};});
    var Code = F2(function (a,b) {    return {ctor: "Code",_0: a,_1: b};});
    var Text = function (a) {    return {ctor: "Text",_0: a};};
@@ -10367,7 +10387,7 @@ Elm.Post.make = function (_elm) {
    var OOPTag = {ctor: "OOPTag"};
    var FPTag = {ctor: "FPTag"};
    var ClojureTag = {ctor: "ClojureTag"};
-   var languageToString = function (lang) {    var _p4 = lang;return "clojure";};
+   var languageToString = function (lang) {    var _p6 = lang;return "clojure";};
    var ClojureLanguage = {ctor: "ClojureLanguage"};
    return _elm.Post.values = {_op: _op
                              ,ClojureLanguage: ClojureLanguage
@@ -10385,6 +10405,7 @@ Elm.Post.make = function (_elm) {
                              ,textComponentToHtml: textComponentToHtml
                              ,componentToHtml: componentToHtml
                              ,contentToHtml: contentToHtml
+                             ,titleToHtml: titleToHtml
                              ,postToHtml: postToHtml};
 };Elm.Posts = Elm.Posts || {};
 Elm.Posts.ObjectOrientedClojureExample = Elm.Posts.ObjectOrientedClojureExample || {};
@@ -10396,7 +10417,6 @@ Elm.Posts.ObjectOrientedClojureExample.make = function (_elm) {
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
-   $Html = Elm.Html.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
@@ -10427,7 +10447,7 @@ Elm.Posts.ObjectOrientedClojureExample.make = function (_elm) {
            ,A2($Post.Code,
            $Post.ClojureLanguage,
            "(def account (make-account 1000))\n(println (account :amount))\n; -> 1000\n\n(account :withdraw 75)\n(println (account :amount))\n; -> 1925\n\n(account :reset)\n(println (account :amount))\n; -> 1000\n")]));
-   var post = {ctor: "_Tuple2",_0: object_oriented_clojure_example,_1: $Post.postToHtml(object_oriented_clojure_example)};
+   var post = object_oriented_clojure_example;
    return _elm.Posts.ObjectOrientedClojureExample.values = {_op: _op,post: post};
 };Elm.Posts = Elm.Posts || {};
 Elm.Posts.make = function (_elm) {
@@ -10449,10 +10469,7 @@ Elm.Posts.make = function (_elm) {
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
    var allPosts = _U.list([$Posts$ObjectOrientedClojureExample.post]);
-   var postsWithIds = A3($List.map2,
-   F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),
-   _U.range(1,$List.length(allPosts)),
-   A2($List.map,$Basics.fst,allPosts));
+   var postsWithIds = A3($List.map2,F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),_U.range(1,$List.length(allPosts)),allPosts);
    var postHtmlById = function (id) {    return A2($Dict.get,id,$Dict.fromList(postsWithIds));};
    var yearMonthToPost = function () {
       var getWithDefault = F3(function (def,k,d) {    return A2($Maybe.withDefault,def,A2($Dict.get,k,d));});
@@ -10474,7 +10491,7 @@ Elm.Posts.make = function (_elm) {
                  if (_p2.ctor === "Nothing") {
                        return A2($Html.div,_U.list([]),_U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text("Post not found!")]))]));
                     } else {
-                       return A2($Html.div,_U.list([]),_U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text($Basics.toString(id))]))]));
+                       return $Post.postToHtml(_p2._0);
                     }
               }()]));
    });

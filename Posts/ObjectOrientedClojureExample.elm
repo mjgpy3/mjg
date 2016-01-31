@@ -3,8 +3,8 @@ module Posts.ObjectOrientedClojureExample (post) where
 import Post exposing (..)
 import Html
 
-post : (Post.Post, Html.Html)
-post = (object_oriented_clojure_example, postToHtml object_oriented_clojure_example)
+post : Post.Post
+post = object_oriented_clojure_example
 
 object_oriented_clojure_example : Post
 object_oriented_clojure_example =

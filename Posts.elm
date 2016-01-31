@@ -46,7 +46,7 @@ singlePost address id = div
   [ a [onClick address MoveToList, href "#"] [text "Archive"]
   , case postHtmlById id of
       Nothing -> div [] [h3 [] [text "Post not found!"]]
-      Just _ -> div [] [h3 [] [text <| toString id]]
+      Just post -> Post.postToHtml post
   ]
 
 type Action = MoveToList | SelectPost Int
@@ -75,10 +75,9 @@ postHtmlById id =
 postsWithIds : List (Int, Post.Post)
 postsWithIds =
   allPosts |>
-  List.map fst |>
   List.map2 (,) [1..List.length allPosts]
 
-allPosts : List (Post.Post, Html.Html)
+allPosts : List Post.Post
 allPosts =
   [ Posts.ObjectOrientedClojureExample.post
   ]
