@@ -90,7 +90,7 @@ view address model =
 
 update : Action -> Model -> (Model, Effects.Effects Action)
 update action model = (case action of
-    HeaderAction headerAction -> { model | header = Header.update headerAction model.header }
+    HeaderAction headerAction -> { blog = (fst init).blog, header = Header.update headerAction model.header }
     BlogAction blogAction -> { model | blog = Blog.update blogAction model.blog }
     NoOp -> model
   ,
