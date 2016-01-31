@@ -24,6 +24,6 @@ imageStyle : Html.Attribute
 imageStyle =
   CommonStyles.image
     [
-      ("max-width","80%")
+      ("max-width","60%")
     , ("height","auto")
     ]
