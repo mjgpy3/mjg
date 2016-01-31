@@ -13,6 +13,7 @@ type ProgrammingLanguage =
   | IdrisLanguage
   | BashLanguage
   | MappyLanguage
+  | RubyLanguage
 
 type Tag =
   ClojureTag
@@ -29,6 +30,7 @@ type Tag =
   | SchemeTag
   | MonadTag
   | SICPTag
+  | RubyTag
 
 type alias Tags = List Tag
 
@@ -45,9 +47,10 @@ type TextComponent =
 type Component =
   Text (List TextComponent)
   | Code ProgrammingLanguage String
+  | Quote (List TextComponent)
   | Section String (List Component)
   | Img (Maybe Int) String
-
+ 
 type alias Content = List Component
 
 type alias Date = (Int, Int, Int)
@@ -79,6 +82,7 @@ list f items = f [] <| List.map (li [] << List.map textComponentToHtml) items
 componentToHtml : Component -> Html.Html
 componentToHtml component = case component of
   (Text elements) -> p [] <| List.map textComponentToHtml elements
+  (Quote components) -> blockquote [] <| List.map textComponentToHtml components
   (Code lang content) ->
     pre
       [style
@@ -138,6 +142,7 @@ tagToString tag = case tag of
   IdrisTag -> "idris"
   DSATag -> "data_structures_and_algorithms"
   SICPTag -> "struct_and_interp_of_computer_programs"
+  RubyTag -> "ruby"
   SoftwareEngineeringTag -> "software_engineering"
   DeletingCodeTag -> "deleting_code"
   SchemeTag -> "scheme"

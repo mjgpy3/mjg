@@ -4,6 +4,7 @@ import Post
 import Posts.FavorDeletableCodeOverReusableCode
 import Posts.FunctionalProgrammingAhaMoments
 import Posts.IntroducingMappy
+import Posts.OOPSettersPartialApplication 
 import Posts.ObjectOrientedClojureExample
 import Posts.TrieInHaskell
 import Posts.WriteAFileInIdris
@@ -34,4 +35,5 @@ postsWithIds =
   , (97,Posts.WriteAFileInIdris.post)
   , (96,Posts.FavorDeletableCodeOverReusableCode.post)
   , (95,Posts.FunctionalProgrammingAhaMoments.post)
+  , (94,Posts.OOPSettersPartialApplication.post)
   ]

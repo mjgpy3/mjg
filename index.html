@@ -11413,6 +11413,7 @@ Elm.Post.make = function (_elm) {
          case "IdrisTag": return "idris";
          case "DSATag": return "data_structures_and_algorithms";
          case "SICPTag": return "struct_and_interp_of_computer_programs";
+         case "RubyTag": return "ruby";
          case "SoftwareEngineeringTag": return "software_engineering";
          case "DeletingCodeTag": return "deleting_code";
          case "SchemeTag": return "scheme";
@@ -11461,6 +11462,7 @@ Elm.Post.make = function (_elm) {
       var _p6 = component;
       switch (_p6.ctor)
       {case "Text": return A2($Html.p,_U.list([]),A2($List.map,textComponentToHtml,_p6._0));
+         case "Quote": return A2($Html.blockquote,_U.list([]),A2($List.map,textComponentToHtml,_p6._0));
          case "Code": return A2($Html.pre,
            _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid grey"}
                                                    ,{ctor: "_Tuple2",_0: "padding",_1: "10px"}
@@ -11489,6 +11491,7 @@ Elm.Post.make = function (_elm) {
    var BlogPost = F4(function (a,b,c,d) {    return {ctor: "BlogPost",_0: a,_1: b,_2: c,_3: d};});
    var Img = F2(function (a,b) {    return {ctor: "Img",_0: a,_1: b};});
    var Section = F2(function (a,b) {    return {ctor: "Section",_0: a,_1: b};});
+   var Quote = function (a) {    return {ctor: "Quote",_0: a};};
    var Code = F2(function (a,b) {    return {ctor: "Code",_0: a,_1: b};});
    var Text = function (a) {    return {ctor: "Text",_0: a};};
    var NumberedList = function (a) {    return {ctor: "NumberedList",_0: a};};
@@ -11497,6 +11500,7 @@ Elm.Post.make = function (_elm) {
    var Link = F2(function (a,b) {    return {ctor: "Link",_0: a,_1: b};});
    var Emph = function (a) {    return {ctor: "Emph",_0: a};};
    var Plain = function (a) {    return {ctor: "Plain",_0: a};};
+   var RubyTag = {ctor: "RubyTag"};
    var SICPTag = {ctor: "SICPTag"};
    var MonadTag = {ctor: "MonadTag"};
    var SchemeTag = {ctor: "SchemeTag"};
@@ -11511,6 +11515,7 @@ Elm.Post.make = function (_elm) {
    var LispTag = {ctor: "LispTag"};
    var HaskellTag = {ctor: "HaskellTag"};
    var ClojureTag = {ctor: "ClojureTag"};
+   var RubyLanguage = {ctor: "RubyLanguage"};
    var MappyLanguage = {ctor: "MappyLanguage"};
    var BashLanguage = {ctor: "BashLanguage"};
    var IdrisLanguage = {ctor: "IdrisLanguage"};
@@ -11522,6 +11527,7 @@ Elm.Post.make = function (_elm) {
                              ,IdrisLanguage: IdrisLanguage
                              ,BashLanguage: BashLanguage
                              ,MappyLanguage: MappyLanguage
+                             ,RubyLanguage: RubyLanguage
                              ,ClojureTag: ClojureTag
                              ,HaskellTag: HaskellTag
                              ,LispTag: LispTag
@@ -11536,6 +11542,7 @@ Elm.Post.make = function (_elm) {
                              ,SchemeTag: SchemeTag
                              ,MonadTag: MonadTag
                              ,SICPTag: SICPTag
+                             ,RubyTag: RubyTag
                              ,Plain: Plain
                              ,Emph: Emph
                              ,Link: Link
@@ -11544,6 +11551,7 @@ Elm.Post.make = function (_elm) {
                              ,NumberedList: NumberedList
                              ,Text: Text
                              ,Code: Code
+                             ,Quote: Quote
                              ,Section: Section
                              ,Img: Img
                              ,BlogPost: BlogPost
@@ -11789,6 +11797,55 @@ Elm.Posts.IntroducingMappy.make = function (_elm) {
                                ,$Post.Plain("or feel free to play with it, see the README, and/or file some issues!")]))]));
    return _elm.Posts.IntroducingMappy.values = {_op: _op,post: post};
 };Elm.Posts = Elm.Posts || {};
+Elm.Posts.OOPSettersPartialApplication = Elm.Posts.OOPSettersPartialApplication || {};
+Elm.Posts.OOPSettersPartialApplication.make = function (_elm) {
+   "use strict";
+   _elm.Posts = _elm.Posts || {};
+   _elm.Posts.OOPSettersPartialApplication = _elm.Posts.OOPSettersPartialApplication || {};
+   if (_elm.Posts.OOPSettersPartialApplication.values) return _elm.Posts.OOPSettersPartialApplication.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Post = Elm.Post.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var post = A4($Post.BlogPost,
+   "OOP Setters Can be Used to Emulate Partial Application",
+   _U.list([$Post.ClojureTag,$Post.FPTag,$Post.OOPTag,$Post.ProgrammingTag,$Post.HaskellTag,$Post.RubyTag]),
+   {ctor: "_Tuple3",_0: 2015,_1: 4,_2: 9},
+   _U.list([$Post.Text(_U.list([$Post.Plain("Recently I was asked an awesome question that went something like")]))
+           ,$Post.Quote(_U.list([$Post.Plain("How would you do something like high-order functions and")
+                                ,A2($Post.Link,"partial application","http://en.wikipedia.org/wiki/Partial_application")
+                                ,$Post.Plain("in object-oriented programming?")]))
+           ,$Post.Text(_U.list([$Post.Plain("For high-order function my mind immediately jumped to Guava\'s Function Interface. I said, \"hmmmm, let\'s see, could have some method (maybe called ")
+                               ,$Post.InlineCode("partiallyApply")
+                               ,$Post.Plain(") that took an argument and returned another ")
+                               ,$Post.InlineCode("Function")
+                               ,$Post.Plain(".\" In retrospect, this may have been overly complex, and a much simpler implementation of ")
+                               ,$Post.InlineCode("Function")
+                               ,$Post.Plain("may work just as well in this case: ")
+                               ,A2($Post.Link,"fluent setters.","http://en.wikipedia.org/wiki/Fluent_interface")]))
+           ,$Post.Text(_U.list([$Post.Plain("Let\'s look at a contrived, dead-horse-esque example. A partial function that does addition on two arguments.")]))
+           ,$Post.Text(_U.list([$Post.Plain("In Haskell, if I wanted to build such a function, and partially apply it to, let\'s say 5, I might do the following")]))
+           ,A2($Post.Code,$Post.HaskellLanguage,"add5 = (+) 5\n\nadd5 10 -- is 15\n")
+           ,$Post.Text(_U.list([$Post.Plain("In Clojure, this might look like")]))
+           ,A2($Post.Code,$Post.ClojureLanguage,"(def add-5 (partial + 5))\n\n(add-5 10) ; is 15\n")
+           ,$Post.Text(_U.list([$Post.Plain("So, how would I do this using setters? Simple! Here\'s some Ruby code")]))
+           ,A2($Post.Code,
+           $Post.RubyLanguage,
+           "class Adder\n  def value(first)\n    @first = first\n    self\n  end\n\n  def to(second)\n    @second = second\n    self\n  end\n\n  def add\n    @first + @second\n  end\nend\n\nadder_of_5 = Adder.new.value(5)\n\nadder_of_5.to(10).add # is 15\n")
+           ,$Post.Text(_U.list([$Post.Plain("This code (obviously) has a lot more ceremony wrapped around it, but it does achieve some of the same benefits as partial application (e.g. laziness, partial parameter fulfillment). The point is, if this were Java code, I could easily implement ")
+                               ,$Post.InlineCode("Function")
+                               ,$Post.Plain(" and change ")
+                               ,$Post.InlineCode("add")
+                               ,$Post.Plain(" to ")
+                               ,$Post.InlineCode("invoke")
+                               ,$Post.Plain(" and have a partial function in an object-oriented system.")]))]));
+   return _elm.Posts.OOPSettersPartialApplication.values = {_op: _op,post: post};
+};Elm.Posts = Elm.Posts || {};
 Elm.Posts.ObjectOrientedClojureExample = Elm.Posts.ObjectOrientedClojureExample || {};
 Elm.Posts.ObjectOrientedClojureExample.make = function (_elm) {
    "use strict";
@@ -11966,6 +12023,7 @@ Elm.Posts.make = function (_elm) {
    $Posts$FavorDeletableCodeOverReusableCode = Elm.Posts.FavorDeletableCodeOverReusableCode.make(_elm),
    $Posts$FunctionalProgrammingAhaMoments = Elm.Posts.FunctionalProgrammingAhaMoments.make(_elm),
    $Posts$IntroducingMappy = Elm.Posts.IntroducingMappy.make(_elm),
+   $Posts$OOPSettersPartialApplication = Elm.Posts.OOPSettersPartialApplication.make(_elm),
    $Posts$ObjectOrientedClojureExample = Elm.Posts.ObjectOrientedClojureExample.make(_elm),
    $Posts$TrieInHaskell = Elm.Posts.TrieInHaskell.make(_elm),
    $Posts$WriteAFileInIdris = Elm.Posts.WriteAFileInIdris.make(_elm),
@@ -11977,7 +12035,8 @@ Elm.Posts.make = function (_elm) {
                               ,{ctor: "_Tuple2",_0: 98,_1: $Posts$TrieInHaskell.post}
                               ,{ctor: "_Tuple2",_0: 97,_1: $Posts$WriteAFileInIdris.post}
                               ,{ctor: "_Tuple2",_0: 96,_1: $Posts$FavorDeletableCodeOverReusableCode.post}
-                              ,{ctor: "_Tuple2",_0: 95,_1: $Posts$FunctionalProgrammingAhaMoments.post}]);
+                              ,{ctor: "_Tuple2",_0: 95,_1: $Posts$FunctionalProgrammingAhaMoments.post}
+                              ,{ctor: "_Tuple2",_0: 94,_1: $Posts$OOPSettersPartialApplication.post}]);
    var postById = function (id) {    return A2($Dict.get,id,$Dict.fromList(postsWithIds));};
    var yearMonthToPost = function () {
       var getWithDefault = F3(function (def,k,d) {    return A2($Maybe.withDefault,def,A2($Dict.get,k,d));});
