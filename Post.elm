@@ -6,13 +6,12 @@ import String
 
 type alias Title = String
 
-type ProgrammingLanguage = ClojureLanguage
+type ProgrammingLanguage =
+  ClojureLanguage
+  | IdrisLanguage
+  | BashLanguage
 
-languageToString : ProgrammingLanguage -> String
-languageToString lang = case lang of
-  ClojureLanguage -> "clojure"
-
-type Tag = ClojureTag | FPTag | OOPTag | ProgrammingTag
+type Tag = ClojureTag | FPTag | OOPTag | ProgrammingTag | IdrisTag
 
 type alias Tags = List Tag
 

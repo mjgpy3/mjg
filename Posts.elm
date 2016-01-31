@@ -6,8 +6,9 @@ import Html.Attributes exposing (..)
 
 import Html
 import Post
-import Posts.ObjectOrientedClojureExample
 import Dict
+import Posts.ObjectOrientedClojureExample
+import Posts.WriteAFileInIdris
 
 type alias Model =
   Maybe
@@ -24,7 +25,7 @@ view address model = case model of
 
 postList : Signal.Address Action -> Html.Html
 postList address = div
-  [] <| [ul [] <| Dict.foldl (toMonthList address) [] yearMonthToPost]
+  [] <| [ul [] <| Dict.foldr (toMonthList address) [] yearMonthToPost]
 
 toMonthList : Signal.Address Action -> (Int, Int) -> List (Int, Post.Post) -> List Html.Html -> List Html.Html
 toMonthList address (year, month) posts list = list ++ [
@@ -80,4 +81,5 @@ postsWithIds =
 allPosts : List Post.Post
 allPosts =
   [ Posts.ObjectOrientedClojureExample.post
+  , Posts.WriteAFileInIdris.post
   ]
