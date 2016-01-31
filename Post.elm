@@ -11,10 +11,13 @@ type ProgrammingLanguage =
   | HaskellLanguage
   | IdrisLanguage
   | BashLanguage
+  | MappyLanguage
 
 type Tag =
   ClojureTag
   | HaskellTag
+  | LispTag
+  | MappyTag
   | FPTag
   | OOPTag
   | ProgrammingTag
@@ -84,7 +87,7 @@ titleToHtml title (year, month, day) =
     [ h1
         []
         [ text title ]
-    , p [] [text <| toString day ++ "/" ++ toString month ++ "/" ++ toString year]
+    , p [] [text <| toString month ++ "/" ++ toString day ++ "/" ++ toString year]
     , br [] []
     ]
 

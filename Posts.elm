@@ -7,6 +7,7 @@ import Html.Attributes exposing (..)
 import Html
 import Post
 import Dict
+import Posts.IntroducingMappy
 import Posts.ObjectOrientedClojureExample
 import Posts.TrieInHaskell
 import Posts.WriteAFileInIdris
@@ -81,7 +82,8 @@ postsWithIds =
 
 allPosts : List Post.Post
 allPosts =
-  [ Posts.ObjectOrientedClojureExample.post
+  [ Posts.IntroducingMappy.post
+  , Posts.ObjectOrientedClojureExample.post
   , Posts.TrieInHaskell.post
   , Posts.WriteAFileInIdris.post
   ]

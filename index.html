@@ -10348,8 +10348,8 @@ Elm.Post.make = function (_elm) {
               ,A2($Html.p,
               _U.list([]),
               _U.list([$Html.text(A2($Basics._op["++"],
-              $Basics.toString(_p1._2),
-              A2($Basics._op["++"],"/",A2($Basics._op["++"],$Basics.toString(_p1._1),A2($Basics._op["++"],"/",$Basics.toString(_p1._0))))))]))
+              $Basics.toString(_p1._1),
+              A2($Basics._op["++"],"/",A2($Basics._op["++"],$Basics.toString(_p1._2),A2($Basics._op["++"],"/",$Basics.toString(_p1._0))))))]))
               ,A2($Html.br,_U.list([]),_U.list([]))]));
    });
    var textComponentToHtml = function (component) {
@@ -10398,8 +10398,11 @@ Elm.Post.make = function (_elm) {
    var ProgrammingTag = {ctor: "ProgrammingTag"};
    var OOPTag = {ctor: "OOPTag"};
    var FPTag = {ctor: "FPTag"};
+   var MappyTag = {ctor: "MappyTag"};
+   var LispTag = {ctor: "LispTag"};
    var HaskellTag = {ctor: "HaskellTag"};
    var ClojureTag = {ctor: "ClojureTag"};
+   var MappyLanguage = {ctor: "MappyLanguage"};
    var BashLanguage = {ctor: "BashLanguage"};
    var IdrisLanguage = {ctor: "IdrisLanguage"};
    var HaskellLanguage = {ctor: "HaskellLanguage"};
@@ -10409,8 +10412,11 @@ Elm.Post.make = function (_elm) {
                              ,HaskellLanguage: HaskellLanguage
                              ,IdrisLanguage: IdrisLanguage
                              ,BashLanguage: BashLanguage
+                             ,MappyLanguage: MappyLanguage
                              ,ClojureTag: ClojureTag
                              ,HaskellTag: HaskellTag
+                             ,LispTag: LispTag
+                             ,MappyTag: MappyTag
                              ,FPTag: FPTag
                              ,OOPTag: OOPTag
                              ,ProgrammingTag: ProgrammingTag
@@ -10428,6 +10434,53 @@ Elm.Post.make = function (_elm) {
                              ,contentToHtml: contentToHtml
                              ,titleToHtml: titleToHtml
                              ,postToHtml: postToHtml};
+};Elm.Posts = Elm.Posts || {};
+Elm.Posts.IntroducingMappy = Elm.Posts.IntroducingMappy || {};
+Elm.Posts.IntroducingMappy.make = function (_elm) {
+   "use strict";
+   _elm.Posts = _elm.Posts || {};
+   _elm.Posts.IntroducingMappy = _elm.Posts.IntroducingMappy || {};
+   if (_elm.Posts.IntroducingMappy.values) return _elm.Posts.IntroducingMappy.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Post = Elm.Post.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var post = A4($Post.BlogPost,
+   "Introducing Mappy",
+   _U.list([$Post.HaskellTag,$Post.LispTag,$Post.FPTag,$Post.ProgrammingTag,$Post.MappyTag]),
+   {ctor: "_Tuple3",_0: 2016,_1: 1,_2: 31},
+   _U.list([$Post.Text(_U.list([$Post.Plain("During my nice little break last week I figured, why not? I\'ll make my toy programing language more real! The result is")
+                               ,A2($Post.Link,
+                               "a functional programming language that is similar to Lisp, except maps (aka dictionaries, aka HashMaps, aka Hashes) are the core primitive",
+                               "https://github.com/PolyglotSymposium/mappy")
+                               ,$Post.Plain(", not lists.")]))
+           ,$Post.Text(_U.list([$Post.Plain("You\'re probably thinking to yourself, \"what\'s the point in yet another Lisp-like language?\" Well, that\'s a great question! Mappy\'s really a breakable toy for my amusement (i.e. in its current state, Mappy\'s definitely not ready for production). That being said, here are some interesting design choices in the language")
+                               ,$Post.BulletedList(_U.list([_U.list([$Post.Plain("I decided to go with maps rather than lists, because maps are more closely related to functions")])
+                                                           ,_U.list([$Post.Plain("Keeping expressions simple and singular (a la Lisp) makes parsing and grammar rules trivial")])
+                                                           ,_U.list([$Post.Plain("(Bias alert) Haskell is an amazing language in which to implement compilers")])
+                                                           ,_U.list([$Post.Plain("I didn\'t want to implement ")
+                                                                    ,$Post.InlineCode("if")
+                                                                    ,$Post.Plain(" as a core primitive, so I had to choose between non-strictness and auto-closure function arguments (the latter won for simplicity reasons)")])
+                                                           ,_U.list([$Post.Plain("Parsec and QuickCheck can really save you when you\'re trying to keep complex rules consistent (e.g. parsing)")])
+                                                           ,_U.list([$Post.Plain("Github issues and milestones are an excellent way to break a problem into small chunks and really focus")])
+                                                           ,_U.list([$Post.Plain("Implementing IO as a map has had constraining effects (no pun intended) that are similar to the IO monad")])]))
+                               ,$Post.Plain("If you\'re curious what the language looks like, I\'d check out the")
+                               ,A2($Post.Link,
+                               "work in progress prelude (standard library)",
+                               "https://github.com/PolyglotSymposium/mappy/blob/master/prelude/prelude.map")
+                               ,$Post.Plain("otherwise, here\'s a taste of the language")]))
+           ,A2($Post.Code,
+           $Post.MappyLanguage,
+           "filter p? xs = [\n  if [empty? xs]\n    nil\n    let\n      first = [take :head xs]\n      rest = [take :tail xs]\n    in [if [p? first]\n         [cons first [filter p? rest]]\n         [filter p? rest]]\n]\n")
+           ,$Post.Text(_U.list([$Post.Plain("If you\'re interested in contributing, have a peek at the")
+                               ,A2($Post.Link,"issues","https://github.com/PolyglotSymposium/mappy/issues")
+                               ,$Post.Plain("or feel free to play with it (see the README) and file some issues!")]))]));
+   return _elm.Posts.IntroducingMappy.values = {_op: _op,post: post};
 };Elm.Posts = Elm.Posts || {};
 Elm.Posts.ObjectOrientedClojureExample = Elm.Posts.ObjectOrientedClojureExample || {};
 Elm.Posts.ObjectOrientedClojureExample.make = function (_elm) {
@@ -10606,13 +10659,14 @@ Elm.Posts.make = function (_elm) {
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
+   $Posts$IntroducingMappy = Elm.Posts.IntroducingMappy.make(_elm),
    $Posts$ObjectOrientedClojureExample = Elm.Posts.ObjectOrientedClojureExample.make(_elm),
    $Posts$TrieInHaskell = Elm.Posts.TrieInHaskell.make(_elm),
    $Posts$WriteAFileInIdris = Elm.Posts.WriteAFileInIdris.make(_elm),
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var allPosts = _U.list([$Posts$ObjectOrientedClojureExample.post,$Posts$TrieInHaskell.post,$Posts$WriteAFileInIdris.post]);
+   var allPosts = _U.list([$Posts$IntroducingMappy.post,$Posts$ObjectOrientedClojureExample.post,$Posts$TrieInHaskell.post,$Posts$WriteAFileInIdris.post]);
    var postsWithIds = A3($List.map2,F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),_U.range(1,$List.length(allPosts)),allPosts);
    var postHtmlById = function (id) {    return A2($Dict.get,id,$Dict.fromList(postsWithIds));};
    var yearMonthToPost = function () {
