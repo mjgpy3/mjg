@@ -11709,9 +11709,6 @@ Elm.Posts.make = function (_elm) {
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $Dict = Elm.Dict.make(_elm),
-   $Html = Elm.Html.make(_elm),
-   $Html$Attributes = Elm.Html.Attributes.make(_elm),
-   $Html$Events = Elm.Html.Events.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
@@ -11726,7 +11723,7 @@ Elm.Posts.make = function (_elm) {
                               ,{ctor: "_Tuple2",_0: 99,_1: $Posts$ObjectOrientedClojureExample.post}
                               ,{ctor: "_Tuple2",_0: 98,_1: $Posts$TrieInHaskell.post}
                               ,{ctor: "_Tuple2",_0: 97,_1: $Posts$WriteAFileInIdris.post}]);
-   var postHtmlById = function (id) {    return A2($Dict.get,id,$Dict.fromList(postsWithIds));};
+   var postById = function (id) {    return A2($Dict.get,id,$Dict.fromList(postsWithIds));};
    var yearMonthToPost = function () {
       var getWithDefault = F3(function (def,k,d) {    return A2($Maybe.withDefault,def,A2($Dict.get,k,d));});
       var reducer = F2(function (_p0,r) {
@@ -11736,55 +11733,7 @@ Elm.Posts.make = function (_elm) {
       });
       return A3($List.foldr,reducer,$Dict.empty,postsWithIds);
    }();
-   var SelectPost = function (a) {    return {ctor: "SelectPost",_0: a};};
-   var MoveToList = {ctor: "MoveToList"};
-   var singlePost = F2(function (address,id) {
-      return A2($Html.div,
-      _U.list([]),
-      _U.list([A2($Html.a,_U.list([A2($Html$Events.onClick,address,MoveToList),$Html$Attributes.href("#")]),_U.list([$Html.text("Archive")]))
-              ,function () {
-                 var _p2 = postHtmlById(id);
-                 if (_p2.ctor === "Nothing") {
-                       return A2($Html.div,_U.list([]),_U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text("Post not found!")]))]));
-                    } else {
-                       return $Post.postToHtml(_p2._0);
-                    }
-              }()]));
-   });
-   var toPost = F2(function (address,_p3) {
-      var _p4 = _p3;
-      return A2($Html.a,_U.list([$Html$Attributes.href("#"),A2($Html$Events.onClick,address,SelectPost(_p4._0))]),_U.list([$Html.text(_p4._1._0)]));
-   });
-   var toMonthList = F4(function (address,_p5,posts,list) {
-      var _p6 = _p5;
-      return A2($Basics._op["++"],
-      list,
-      _U.list([A2($Html.li,
-      _U.list([]),
-      _U.list([$Html.text(A2($Basics._op["++"],$Basics.toString(_p6._1),A2($Basics._op["++"],"/",$Basics.toString(_p6._0))))
-              ,A2($Html.ul,_U.list([]),A2($List.map,toPost(address),posts))]))]));
-   });
-   var postList = function (address) {
-      return A2($Html.div,_U.list([]),_U.list([A2($Html.ul,_U.list([]),A3($Dict.foldr,toMonthList(address),_U.list([]),yearMonthToPost))]));
-   };
-   var view = F2(function (address,model) {
-      var _p7 = model;
-      if (_p7.ctor === "Nothing") {
-            return postList(address);
-         } else {
-            return A2(singlePost,address,_p7._0.selectedPostId);
-         }
-   });
-   var init = $Maybe.Nothing;
-   var update = F2(function (action,model) {
-      var _p8 = action;
-      if (_p8.ctor === "MoveToList") {
-            return init;
-         } else {
-            return $Maybe.Just({selectedPostId: _p8._0});
-         }
-   });
-   return _elm.Posts.values = {_op: _op,update: update,view: view,init: init,MoveToList: MoveToList,SelectPost: SelectPost};
+   return _elm.Posts.values = {_op: _op,yearMonthToPost: yearMonthToPost,postById: postById};
 };Elm.Blog = Elm.Blog || {};
 Elm.Blog.make = function (_elm) {
    "use strict";
@@ -11793,17 +11742,66 @@ Elm.Blog.make = function (_elm) {
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
+   $Dict = Elm.Dict.make(_elm),
    $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Html$Events = Elm.Html.Events.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
+   $Post = Elm.Post.make(_elm),
    $Posts = Elm.Posts.make(_elm),
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var view = F2(function (address,model) {    return A2($Html.div,_U.list([]),_U.list([A2($Posts.view,address,model)]));});
-   var update = $Posts.update;
-   var init = $Posts.init;
-   return _elm.Blog.values = {_op: _op,view: view,init: init,update: update};
+   var init = $Maybe.Nothing;
+   var update = F2(function (action,model) {
+      var _p0 = action;
+      if (_p0.ctor === "MoveToList") {
+            return init;
+         } else {
+            return $Maybe.Just({selectedPostId: _p0._0});
+         }
+   });
+   var SelectPost = function (a) {    return {ctor: "SelectPost",_0: a};};
+   var toPost = F2(function (address,_p1) {
+      var _p2 = _p1;
+      return A2($Html.a,_U.list([$Html$Attributes.href("#"),A2($Html$Events.onClick,address,SelectPost(_p2._0))]),_U.list([$Html.text(_p2._1._0)]));
+   });
+   var toMonthList = F4(function (address,_p3,posts,list) {
+      var _p4 = _p3;
+      return A2($Basics._op["++"],
+      list,
+      _U.list([A2($Html.li,
+      _U.list([]),
+      _U.list([$Html.text(A2($Basics._op["++"],$Basics.toString(_p4._1),A2($Basics._op["++"],"/",$Basics.toString(_p4._0))))
+              ,A2($Html.ul,_U.list([]),A2($List.map,toPost(address),posts))]))]));
+   });
+   var postList = function (address) {
+      return A2($Html.div,_U.list([]),_U.list([A2($Html.ul,_U.list([]),A3($Dict.foldr,toMonthList(address),_U.list([]),$Posts.yearMonthToPost))]));
+   };
+   var MoveToList = {ctor: "MoveToList"};
+   var singlePost = F2(function (address,id) {
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.a,_U.list([A2($Html$Events.onClick,address,MoveToList),$Html$Attributes.href("#")]),_U.list([$Html.text("Archive")]))
+              ,function () {
+                 var _p5 = $Posts.postById(id);
+                 if (_p5.ctor === "Nothing") {
+                       return A2($Html.div,_U.list([]),_U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text("Post not found!")]))]));
+                    } else {
+                       return $Post.postToHtml(_p5._0);
+                    }
+              }()]));
+   });
+   var view = F2(function (address,model) {
+      var _p6 = model;
+      if (_p6.ctor === "Nothing") {
+            return postList(address);
+         } else {
+            return A2(singlePost,address,_p6._0.selectedPostId);
+         }
+   });
+   return _elm.Blog.values = {_op: _op,view: view,init: init,update: update,MoveToList: MoveToList,SelectPost: SelectPost};
 };Elm.Footer = Elm.Footer || {};
 Elm.Footer.make = function (_elm) {
    "use strict";
@@ -11944,7 +11942,6 @@ Elm.Main.make = function (_elm) {
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
-   $Posts = Elm.Posts.make(_elm),
    $Result = Elm.Result.make(_elm),
    $RouteHash = Elm.RouteHash.make(_elm),
    $Signal = Elm.Signal.make(_elm),
@@ -11990,16 +11987,16 @@ Elm.Main.make = function (_elm) {
       _v2_2: do {
          if (_p2.ctor === "::" && _p2._0 === "blog") {
                if (_p2._1.ctor === "[]") {
-                     return _U.list([HeaderAction({selectedModel: $Header.Blog}),BlogAction($Posts.MoveToList)]);
+                     return _U.list([HeaderAction({selectedModel: $Header.Blog}),BlogAction($Blog.MoveToList)]);
                   } else {
                      if (_p2._1._1.ctor === "[]") {
                            return _U.list([HeaderAction({selectedModel: $Header.Blog})
                                           ,function () {
                                              var _p3 = $String.toInt(_p2._1._0);
                                              if (_p3.ctor === "Ok") {
-                                                   return BlogAction($Posts.SelectPost(_p3._0));
+                                                   return BlogAction($Blog.SelectPost(_p3._0));
                                                 } else {
-                                                   return BlogAction($Posts.MoveToList);
+                                                   return BlogAction($Blog.MoveToList);
                                                 }
                                           }()]);
                         } else {

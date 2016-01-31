@@ -4,7 +4,6 @@ import About
 import Blog
 import Footer
 import Header
-import Posts
 
 import Html exposing (div)
 import Html.Attributes exposing (..)
@@ -49,13 +48,13 @@ location2action location = case location of
   ["blog"] ->
     [
       HeaderAction { selectedModel = Header.Blog },
-      BlogAction Posts.MoveToList
+      BlogAction Blog.MoveToList
     ]
   ["blog", id] ->
     [ HeaderAction { selectedModel = Header.Blog }
     , case String.toInt id of
-      Ok intId -> BlogAction <| Posts.SelectPost intId
-      Err _ -> BlogAction Posts.MoveToList
+      Ok intId -> BlogAction <| Blog.SelectPost intId
+      Err _ -> BlogAction Blog.MoveToList
     ]
   _ -> [HeaderAction { selectedModel = Header.About }]
 
