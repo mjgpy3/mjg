@@ -58,6 +58,15 @@ type alias Date = (Int, Int, Int)
 
 type Post = BlogPost Title Tags Date Content
 
+(->>) : String -> String -> TextComponent
+(->>) = Link
+
+c : String -> TextComponent
+c = InlineCode
+
+pl : String -> TextComponent
+pl = Plain
+
 textComponentToHtml : TextComponent -> Html.Html
 textComponentToHtml component = case component of
   (Plain content) -> text content

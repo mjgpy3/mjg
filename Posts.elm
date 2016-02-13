@@ -4,7 +4,7 @@ import Post
 import Posts.FavorDeletableCodeOverReusableCode
 import Posts.FunctionalProgrammingAhaMoments
 import Posts.IntroducingMappy
-import Posts.OOPSettersPartialApplication 
+import Posts.OOPSettersPartialApplication
 import Posts.ObjectOrientedClojureExample
 import Posts.TrieInHaskell
 import Posts.WriteAFileInIdris

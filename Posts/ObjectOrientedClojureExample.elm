@@ -10,11 +10,10 @@ object_oriented_clojure_example : Post
 object_oriented_clojure_example =
   BlogPost "Object Oriented Clojure Example" [ClojureTag, FPTag, OOPTag, ProgrammingTag, SICPTag] (2015, 06, 28) [
     Text [
-      Plain "Inspired by the message passing content in ",
-      Link
-        "The Structure and Interpretation of Computer Programs"
+      pl "Inspired by the message passing content in ",
+        "The Structure and Interpretation of Computer Programs" ->>
         "http://www.amazon.com/Structure-Interpretation-Computer-Programs-Engineering/dp/0262510871",
-      Plain " (SICP), I decided to try my hand at object oriented-style programming in Clojure. Here's what I came up with, using the traditional bank account example"
+      pl " (SICP), I decided to try my hand at object oriented-style programming in Clojure. Here's what I came up with, using the traditional bank account example"
     ],
     Code ClojureLanguage """(defn make-account [initial-balance]
   (let [bal (ref initial-balance)
@@ -34,18 +33,18 @@ object_oriented_clojure_example =
         (= meth :reset) (reset)))))
 """,
     Text [
-      Plain "Overall, it was a fun little bit of code to write! It has a constructor (make-account), a private variable with mutation (bal) and some messages it responds to (",
-      InlineCode ":withdraw",
-      Plain ", ",
-      InlineCode ":deposit",
-      Plain ", ",
-      InlineCode ":amount",
-      Plain " and ",
-      InlineCode ":reset",
-      Plain ")"
+      pl "Overall, it was a fun little bit of code to write! It has a constructor (make-account), a private variable with mutation (bal) and some messages it responds to (",
+      c ":withdraw",
+      pl ", ",
+      c ":deposit",
+      pl ", ",
+      c ":amount",
+      pl " and ",
+      c ":reset",
+      pl ")"
     ],
     Text [
-      Plain "Here's an example of it being used"
+      pl "Here's an example of it being used"
     ],
     Code ClojureLanguage """(def account (make-account 1000))
 (println (account :amount))
