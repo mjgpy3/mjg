@@ -10,11 +10,11 @@ object_oriented_clojure_example : Post
 object_oriented_clojure_example =
   BlogPost "Object Oriented Clojure Example" [ClojureTag, FPTag, OOPTag, ProgrammingTag, SICPTag] (2015, 06, 28) [
     Text [
-      Plain "Inspired by the message passing content in",
+      Plain "Inspired by the message passing content in ",
       Link
         "The Structure and Interpretation of Computer Programs"
         "http://www.amazon.com/Structure-Interpretation-Computer-Programs-Engineering/dp/0262510871",
-      Plain "(SICP), I decided to try my hand at object oriented-style programming in Clojure. Here's what I came up with, using the traditional bank account example"
+      Plain " (SICP), I decided to try my hand at object oriented-style programming in Clojure. Here's what I came up with, using the traditional bank account example"
     ],
     Code ClojureLanguage """(defn make-account [initial-balance]
   (let [bal (ref initial-balance)

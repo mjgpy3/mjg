@@ -106,11 +106,11 @@ post =
     ],
     Section "Message passing (OOP style) can be achieved via closures" [
       Text [
-        Plain "Disclaimer/Plug: this last \"Aha\" is shamelessly ripped off from",
+        Plain "Disclaimer/Plug: this last \"Aha\" is shamelessly ripped off from ",
         Link
           "The Structure and Interpretation of Computer Programs"
           "https://mitpress.mit.edu/sicp/full-text/book/book.html",
-        Plain "(SICP). I am over half way through this book, it is wonderful, please consider showing the authors your support by buying it."
+        Plain " (SICP). I am over half way through this book, it is wonderful, please consider showing the authors your support by buying it."
       ],
       Text [
         Plain "The authors of SICP take the reader through a fantastic journey in which the powers of LISP and functional programming are clearly displayed through examples in the Scheme dialect. One piece of this journey that recently blew my mind was when the authors used closures to define a mutable bank account that responds to different messages. Here's the code ",

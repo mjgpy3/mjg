@@ -7,11 +7,11 @@ post : Post
 post =
   BlogPost "Trie in Haskell" [DSATag, FPTag, HaskellTag, ProgrammingTag] (2015, 10, 25) [
     Text [
-      Plain "Lately I've been playing around with Haskell. As an exercise, I decided to partially implement a Trie. I ignored the various implementations out there, including",
+      Plain "Lately I've been playing around with Haskell. As an exercise, I decided to partially implement a Trie. I ignored the various implementations out there, including ",
       Link
         "Data.Trie"
         "https://hackage.haskell.org/package/bytestring-trie-0.2.4.1/docs/Data-Trie.html",
-      Plain "and the one linked on Wikipedia. Instead I focused on iterating on a Trie from scratch, and I found the results to be pretty interesting, so I'm sharing them here."
+      Plain " and the one linked on Wikipedia. Instead I focused on iterating on a Trie from scratch, and I found the results to be pretty interesting, so I'm sharing them here."
     ],
     Text [
       Plain "My real goal with this exercise was to implement ",
@@ -24,7 +24,7 @@ post =
       InlineCode "[a]",
       Plain " to represent a member of the ",
       InlineCode "Trie a",
-      Plain " which, in retrospect, looks like a",
+      Plain " which, in retrospect, looks like a ",
       Link
         "Monoid"
         "https://en.wikibooks.org/wiki/Haskell/Monoids",

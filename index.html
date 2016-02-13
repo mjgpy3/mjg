@@ -11443,9 +11443,7 @@ Elm.Post.make = function (_elm) {
       switch (_p4.ctor)
       {case "Plain": return $Html.text(_p4._0);
          case "Emph": return A2($Html.i,_U.list([]),_U.list([$Html.text(_p4._0)]));
-         case "Link": return A2($Html.a,
-           _U.list([$Html$Attributes.target("_blank"),$Html$Attributes.href(_p4._1)]),
-           _U.list([$Html.text(A2($Basics._op["++"]," ",A2($Basics._op["++"],_p4._0," ")))]));
+         case "Link": return A2($Html.a,_U.list([$Html$Attributes.target("_blank"),$Html$Attributes.href(_p4._1)]),_U.list([$Html.text(_p4._0)]));
          case "BulletedList": return A2(list,$Html.ul,_p4._0);
          case "NumberedList": return A2(list,$Html.ol,_p4._0);
          default: return A2($Html.code,
@@ -11613,7 +11611,7 @@ Elm.Posts.FavorDeletableCodeOverReusableCode.make = function (_elm) {
                    ,$Post.Text(_U.list([$Post.Plain("Like I said, I\'m a novice developer. So if you have solutions to these questions and problems, I\'m eager to hear them!")]))]))
            ,A2($Post.Section,
            "Deletable code",
-           _U.list([$Post.Text(_U.list([$Post.Plain("Alright, honesty time. The above words are truly my take on some points made in")
+           _U.list([$Post.Text(_U.list([$Post.Plain("Alright, honesty time. The above words are truly my take on some points made in ")
                                        ,A2($Post.Link,"Greg Young\'s the art of destroying software talk","https://vimeo.com/108441214")
                                        ,$Post.Plain(". At this point, I could spend paragraphs describing the value obtained by having code that, by nature, is easy to delete. But, to do so would be a waste of time when Greg has so well articulated the points. So, with that, I urge you to watch the linked talk, and rip my arguments to shreds in the comments section.")]))]))]));
    return _elm.Posts.FavorDeletableCodeOverReusableCode.values = {_op: _op,post: post};
@@ -11731,11 +11729,11 @@ Elm.Posts.FunctionalProgrammingAhaMoments.make = function (_elm) {
                                                                             ,$Post.InlineCode("Array Fixnum")])]))]))]))
            ,A2($Post.Section,
            "Message passing (OOP style) can be achieved via closures",
-           _U.list([$Post.Text(_U.list([$Post.Plain("Disclaimer/Plug: this last \"Aha\" is shamelessly ripped off from")
+           _U.list([$Post.Text(_U.list([$Post.Plain("Disclaimer/Plug: this last \"Aha\" is shamelessly ripped off from ")
                                        ,A2($Post.Link,
                                        "The Structure and Interpretation of Computer Programs",
                                        "https://mitpress.mit.edu/sicp/full-text/book/book.html")
-                                       ,$Post.Plain("(SICP). I am over half way through this book, it is wonderful, please consider showing the authors your support by buying it.")]))
+                                       ,$Post.Plain(" (SICP). I am over half way through this book, it is wonderful, please consider showing the authors your support by buying it.")]))
                    ,$Post.Text(_U.list([$Post.Plain("The authors of SICP take the reader through a fantastic journey in which the powers of LISP and functional programming are clearly displayed through examples in the Scheme dialect. One piece of this journey that recently blew my mind was when the authors used closures to define a mutable bank account that responds to different messages. Here\'s the code ")
                                        ,A2($Post.Link,
                                        "(again shamelessly ripped)",
@@ -11769,7 +11767,7 @@ Elm.Posts.IntroducingMappy.make = function (_elm) {
    "Introducing Mappy",
    _U.list([$Post.HaskellTag,$Post.LispTag,$Post.FPTag,$Post.ProgrammingTag,$Post.MappyTag]),
    {ctor: "_Tuple3",_0: 2016,_1: 1,_2: 31},
-   _U.list([$Post.Text(_U.list([$Post.Plain("During my nice little break last week I figured, why not? I\'ll make my toy programing language more real! The result is")
+   _U.list([$Post.Text(_U.list([$Post.Plain("During my nice little break last week I figured, why not? I\'ll make my toy programing language more real! The result is ")
                                ,A2($Post.Link,
                                "a functional programming language that is similar to Lisp, except maps (aka dictionaries, aka HashMaps, aka Hashes) are the core primitive",
                                "https://github.com/PolyglotSymposium/mappy")
@@ -11786,15 +11784,15 @@ Elm.Posts.IntroducingMappy.make = function (_elm) {
                                                            ,_U.list([$Post.Plain("Implementing IO as a map has had constraining effects (no pun intended) that are similar to the IO monad")])]))
                                ,$Post.Plain("If you\'re curious what the language looks like, I\'d check out the")
                                ,A2($Post.Link,
-                               "work in progress prelude (standard library)",
+                               " work in progress prelude (standard library)",
                                "https://github.com/PolyglotSymposium/mappy/blob/master/prelude/prelude.map")
-                               ,$Post.Plain("otherwise, here\'s a taste of the language")]))
+                               ,$Post.Plain(", otherwise, here\'s a taste of the language")]))
            ,A2($Post.Code,
            $Post.MappyLanguage,
            "filter p? xs = [\n  if [empty? xs]\n    nil\n    let\n      first = [take :head xs]\n      rest = [take :tail xs]\n    in [if [p? first]\n         [cons first [filter p? rest]]\n         [filter p? rest]]\n]\n")
-           ,$Post.Text(_U.list([$Post.Plain("If you\'re interested in contributing, have a peek at the")
+           ,$Post.Text(_U.list([$Post.Plain("If you\'re interested in contributing, have a peek at the ")
                                ,A2($Post.Link,"issues","https://github.com/PolyglotSymposium/mappy/issues")
-                               ,$Post.Plain("or feel free to play with it, see the README, and/or file some issues!")]))]));
+                               ,$Post.Plain(" or feel free to play with it, see the README, and/or file some issues!")]))]));
    return _elm.Posts.IntroducingMappy.values = {_op: _op,post: post};
 };Elm.Posts = Elm.Posts || {};
 Elm.Posts.OOPSettersPartialApplication = Elm.Posts.OOPSettersPartialApplication || {};
@@ -11817,9 +11815,9 @@ Elm.Posts.OOPSettersPartialApplication.make = function (_elm) {
    _U.list([$Post.ClojureTag,$Post.FPTag,$Post.OOPTag,$Post.ProgrammingTag,$Post.HaskellTag,$Post.RubyTag]),
    {ctor: "_Tuple3",_0: 2015,_1: 4,_2: 9},
    _U.list([$Post.Text(_U.list([$Post.Plain("Recently I was asked an awesome question that went something like")]))
-           ,$Post.Quote(_U.list([$Post.Plain("How would you do something like high-order functions and")
+           ,$Post.Quote(_U.list([$Post.Plain("How would you do something like high-order functions and ")
                                 ,A2($Post.Link,"partial application","http://en.wikipedia.org/wiki/Partial_application")
-                                ,$Post.Plain("in object-oriented programming?")]))
+                                ,$Post.Plain(" in object-oriented programming?")]))
            ,$Post.Text(_U.list([$Post.Plain("For high-order function my mind immediately jumped to Guava\'s Function Interface. I said, \"hmmmm, let\'s see, could have some method (maybe called ")
                                ,$Post.InlineCode("partiallyApply")
                                ,$Post.Plain(") that took an argument and returned another ")
@@ -11827,7 +11825,7 @@ Elm.Posts.OOPSettersPartialApplication.make = function (_elm) {
                                ,$Post.Plain(".\" In retrospect, this may have been overly complex, and a much simpler implementation of ")
                                ,$Post.InlineCode("Function")
                                ,$Post.Plain("may work just as well in this case: ")
-                               ,A2($Post.Link,"fluent setters.","http://en.wikipedia.org/wiki/Fluent_interface")]))
+                               ,A2($Post.Link," fluent setters.","http://en.wikipedia.org/wiki/Fluent_interface")]))
            ,$Post.Text(_U.list([$Post.Plain("Let\'s look at a contrived, dead-horse-esque example. A partial function that does addition on two arguments.")]))
            ,$Post.Text(_U.list([$Post.Plain("In Haskell, if I wanted to build such a function, and partially apply it to, let\'s say 5, I might do the following")]))
            ,A2($Post.Code,$Post.HaskellLanguage,"add5 = (+) 5\n\nadd5 10 -- is 15\n")
@@ -11865,11 +11863,11 @@ Elm.Posts.ObjectOrientedClojureExample.make = function (_elm) {
    "Object Oriented Clojure Example",
    _U.list([$Post.ClojureTag,$Post.FPTag,$Post.OOPTag,$Post.ProgrammingTag,$Post.SICPTag]),
    {ctor: "_Tuple3",_0: 2015,_1: 6,_2: 28},
-   _U.list([$Post.Text(_U.list([$Post.Plain("Inspired by the message passing content in")
+   _U.list([$Post.Text(_U.list([$Post.Plain("Inspired by the message passing content in ")
                                ,A2($Post.Link,
                                "The Structure and Interpretation of Computer Programs",
                                "http://www.amazon.com/Structure-Interpretation-Computer-Programs-Engineering/dp/0262510871")
-                               ,$Post.Plain("(SICP), I decided to try my hand at object oriented-style programming in Clojure. Here\'s what I came up with, using the traditional bank account example")]))
+                               ,$Post.Plain(" (SICP), I decided to try my hand at object oriented-style programming in Clojure. Here\'s what I came up with, using the traditional bank account example")]))
            ,A2($Post.Code,
            $Post.ClojureLanguage,
            "(defn make-account [initial-balance]\n  (let [bal (ref initial-balance)\n        withdraw (fn [amount]\n                   (dosync (alter bal #(- % amount))))\n        deposit (fn [amount]\n                  (dosync (alter bal (partial + amount))))\n        amount (fn []\n                 (deref bal))\n        reset (fn []\n                (dosync (ref-set bal initial-balance)))]\n    (fn [meth & args]\n      (cond\n        (= meth :withdraw) (withdraw (first args))\n        (= meth :deposit) (deposit (first args))\n        (= meth :amount) (amount)\n        (= meth :reset) (reset)))))\n")
@@ -11908,9 +11906,9 @@ Elm.Posts.TrieInHaskell.make = function (_elm) {
    "Trie in Haskell",
    _U.list([$Post.DSATag,$Post.FPTag,$Post.HaskellTag,$Post.ProgrammingTag]),
    {ctor: "_Tuple3",_0: 2015,_1: 10,_2: 25},
-   _U.list([$Post.Text(_U.list([$Post.Plain("Lately I\'ve been playing around with Haskell. As an exercise, I decided to partially implement a Trie. I ignored the various implementations out there, including")
+   _U.list([$Post.Text(_U.list([$Post.Plain("Lately I\'ve been playing around with Haskell. As an exercise, I decided to partially implement a Trie. I ignored the various implementations out there, including ")
                                ,A2($Post.Link,"Data.Trie","https://hackage.haskell.org/package/bytestring-trie-0.2.4.1/docs/Data-Trie.html")
-                               ,$Post.Plain("and the one linked on Wikipedia. Instead I focused on iterating on a Trie from scratch, and I found the results to be pretty interesting, so I\'m sharing them here.")]))
+                               ,$Post.Plain(" and the one linked on Wikipedia. Instead I focused on iterating on a Trie from scratch, and I found the results to be pretty interesting, so I\'m sharing them here.")]))
            ,$Post.Text(_U.list([$Post.Plain("My real goal with this exercise was to implement ")
                                ,$Post.InlineCode("member")
                                ,$Post.Plain(", ")
@@ -11921,7 +11919,7 @@ Elm.Posts.TrieInHaskell.make = function (_elm) {
                                ,$Post.InlineCode("[a]")
                                ,$Post.Plain(" to represent a member of the ")
                                ,$Post.InlineCode("Trie a")
-                               ,$Post.Plain(" which, in retrospect, looks like a")
+                               ,$Post.Plain(" which, in retrospect, looks like a ")
                                ,A2($Post.Link,"Monoid","https://en.wikibooks.org/wiki/Haskell/Monoids")
                                ,$Post.Plain(". Well, anyways, my first structure came out looking like")]))
            ,A2($Post.Code,
@@ -11993,11 +11991,11 @@ Elm.Posts.WriteAFileInIdris.make = function (_elm) {
    "Write a File in Idris",
    _U.list([$Post.FPTag,$Post.IdrisTag,$Post.ProgrammingTag]),
    {ctor: "_Tuple3",_0: 2015,_1: 11,_2: 15},
-   _U.list([$Post.Text(_U.list([$Post.Plain("Although Idris\' documentation seems better than 99% of opensource projects out there, I couldn\'t easily find the steps necessary to write a file. After recalling that")
+   _U.list([$Post.Text(_U.list([$Post.Plain("Although Idris\' documentation seems better than 99% of opensource projects out there, I couldn\'t easily find the steps necessary to write a file. After recalling that ")
                                ,A2($Post.Link,"Brian McKenna wrote his blog in Idris","http://brianmckenna.org/blog/idris_blog")
-                               ,$Post.Plain("I figured he would have a nice example of how to write a file and I was right! This post is heavily ripped from his work. The actual code (taken from the")
+                               ,$Post.Plain(" I figured he would have a nice example of how to write a file and I was right! This post is heavily ripped from his work. The actual code (taken from the ")
                                ,A2($Post.Link,"Main file","https://github.com/puffnfresh/bam-idris-blog/blob/master/Main.idr#L48-L53")
-                               ,$Post.Plain("of Brain\'s code generator) looks like")]))
+                               ,$Post.Plain(" of Brain\'s code generator) looks like")]))
            ,A2($Post.Code,
            $Post.IdrisLanguage,
            "writeFile : String -> String -> IO ()\nwriteFile f s = do\n  f <- openFile f Write\n  fwrite f s\n  closeFile f\n")

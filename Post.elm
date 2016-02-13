@@ -50,7 +50,7 @@ type Component =
   | Quote (List TextComponent)
   | Section String (List Component)
   | Img (Maybe Int) String
- 
+
 type alias Content = List Component
 
 type alias Date = (Int, Int, Int)
@@ -62,7 +62,7 @@ textComponentToHtml : TextComponent -> Html.Html
 textComponentToHtml component = case component of
   (Plain content) -> text content
   (Emph content) -> i [] [text content]
-  (Link content url) -> a [target "_blank", href url] [text <| " " ++ content ++ " "]
+  (Link content url) -> a [target "_blank", href url] [text <| content]
   (BulletedList items) -> list ul items
   (NumberedList items) -> list ol items
   (InlineCode content) ->

@@ -7,7 +7,7 @@ post : Post
 post =
   BlogPost "Introducing Mappy" [HaskellTag, LispTag, FPTag, ProgrammingTag, MappyTag] (2016, 1, 31) [
     Text [
-      Plain "During my nice little break last week I figured, why not? I'll make my toy programing language more real! The result is",
+      Plain "During my nice little break last week I figured, why not? I'll make my toy programing language more real! The result is ",
       Link
         "a functional programming language that is similar to Lisp, except maps (aka dictionaries, aka HashMaps, aka Hashes) are the core primitive"
         "https://github.com/PolyglotSymposium/mappy",
@@ -27,9 +27,9 @@ post =
         ],
       Plain "If you're curious what the language looks like, I'd check out the",
       Link
-        "work in progress prelude (standard library)"
+        " work in progress prelude (standard library)"
         "https://github.com/PolyglotSymposium/mappy/blob/master/prelude/prelude.map",
-      Plain "otherwise, here's a taste of the language"
+      Plain ", otherwise, here's a taste of the language"
     ],
     Code MappyLanguage """filter p? xs = [
   if [empty? xs]
@@ -43,10 +43,10 @@ post =
 ]
 """,
     Text [
-      Plain "If you're interested in contributing, have a peek at the",
+      Plain "If you're interested in contributing, have a peek at the ",
       Link
         "issues"
         "https://github.com/PolyglotSymposium/mappy/issues",
-      Plain "or feel free to play with it, see the README, and/or file some issues!"
+      Plain " or feel free to play with it, see the README, and/or file some issues!"
     ]
   ]

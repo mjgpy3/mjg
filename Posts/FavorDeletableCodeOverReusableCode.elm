@@ -66,7 +66,7 @@ post =
     ],
     Section "Deletable code" [
       Text [
-        Plain "Alright, honesty time. The above words are truly my take on some points made in",
+        Plain "Alright, honesty time. The above words are truly my take on some points made in ",
         Link
           "Greg Young's the art of destroying software talk"
           "https://vimeo.com/108441214",

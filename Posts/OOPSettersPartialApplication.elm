@@ -10,11 +10,11 @@ post =
       Plain "Recently I was asked an awesome question that went something like"
     ],
     Quote [
-      Plain "How would you do something like high-order functions and",
+      Plain "How would you do something like high-order functions and ",
       Link
         "partial application"
         "http://en.wikipedia.org/wiki/Partial_application",
-      Plain "in object-oriented programming?"
+      Plain " in object-oriented programming?"
     ],
     Text [
       Plain "For high-order function my mind immediately jumped to Guava's Function Interface. I said, \"hmmmm, let's see, could have some method (maybe called ",
@@ -25,7 +25,7 @@ post =
       InlineCode "Function",
       Plain "may work just as well in this case: ",
       Link
-        "fluent setters."
+        " fluent setters."
         "http://en.wikipedia.org/wiki/Fluent_interface"
     ],
     Text [

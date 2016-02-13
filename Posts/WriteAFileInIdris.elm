@@ -10,15 +10,15 @@ write_a_file_in_idris : Post
 write_a_file_in_idris =
   BlogPost "Write a File in Idris" [FPTag, IdrisTag, ProgrammingTag] (2015, 11, 15) [
     Text [
-      Plain "Although Idris' documentation seems better than 99% of opensource projects out there, I couldn't easily find the steps necessary to write a file. After recalling that",
+      Plain "Although Idris' documentation seems better than 99% of opensource projects out there, I couldn't easily find the steps necessary to write a file. After recalling that ",
       Link
         "Brian McKenna wrote his blog in Idris"
         "http://brianmckenna.org/blog/idris_blog",
-      Plain "I figured he would have a nice example of how to write a file and I was right! This post is heavily ripped from his work. The actual code (taken from the",
+      Plain " I figured he would have a nice example of how to write a file and I was right! This post is heavily ripped from his work. The actual code (taken from the ",
       Link
         "Main file"
         "https://github.com/puffnfresh/bam-idris-blog/blob/master/Main.idr#L48-L53",
-      Plain "of Brain's code generator) looks like"
+      Plain " of Brain's code generator) looks like"
     ],
     Code IdrisLanguage """writeFile : String -> String -> IO ()
 writeFile f s = do
