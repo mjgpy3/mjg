@@ -18,7 +18,7 @@ post =
       c "insert",
       pl " and a sorted ",
       c "toList",
-      pl ". This interface turns out to be more similar to a Set than say a Map, because there aren't values associated with members. I used",
+      pl ". This interface turns out to be more similar to a Set than say a Map, because there aren't values associated with members. I used ",
       c "[a]",
       pl " to represent a member of the ",
       c "Trie a",
