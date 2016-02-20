@@ -19,7 +19,7 @@ post =
       Text [
         pl "The let macro/expression/sugar is basically a means of reducing assignments into minimally scoped, (generally) non-mutative expressions with a set of bindings. Here's a contrived example of what this might look like in Clojure"
       ],
-      Img (Just 40) "fp_aha_1.png",
+      Img (Just 80) "fp_aha_1.png",
       Text [
         pl "Here we're saying, let's bind ",
         c "x",
@@ -40,7 +40,7 @@ post =
       Text [
         pl "So, here comes the first \"Aha!\" This same kind of scoped assignment can be done through applying anonymous functions! Here's what that looks like for the above example"
       ],
-      Img (Just 40) "fp_aha_2.png",
+      Img (Just 80) "fp_aha_2.png",
       Text [
         pl "Basically the pattern here is just, for each bound symbol (in this case ",
         c "x",
@@ -61,7 +61,7 @@ post =
         c ">>=",
         pl ") is one of the crucial operations implementable by a monad, it has the following type signature"
       ],
-      Img (Just 40) "fp_aha_3.png",
+      Img (Just 80) "fp_aha_3.png",
       Text [
         pl "Ignoring currying and some other subtleties, if I'm thinking in an \"object oriented mindset\" I might reason about this as follows",
         BulletedList [
@@ -87,7 +87,7 @@ post =
       Text [
         pl "To visualize how this is kind of like method chaining, observe the following Ruby code"
       ],
-      Img (Just 40) "fp_aha_4.png",
+      Img (Just 80) "fp_aha_4.png",
       Text [
         pl "We can imagine these calls (with the exception of ",
         c "count",
@@ -112,7 +112,7 @@ post =
         pl "The authors of SICP take the reader through a fantastic journey in which the powers of LISP and functional programming are clearly displayed through examples in the Scheme dialect. One piece of this journey that recently blew my mind was when the authors used closures to define a mutable bank account that responds to different messages. Here's the code ",
         "(again shamelessly ripped)" ->> "https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-20.html#%_sec_3.1.1"
       ],
-      Img (Just 40) "fp_aha_5.png",
+      Img (Just 80) "fp_aha_5.png",
       Text [
         pl "What you're seeing here is basically a constructor that builds objects, given a beginning balance, that respond to the ",
         c "'withdraw",
