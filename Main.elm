@@ -83,7 +83,8 @@ view address model =
       Header.About -> About.view
       Header.Blog -> Blog.view (Signal.forwardTo address BlogAction) model.blog
   in
-    div []
+    div [
+      ]
       [ Header.view (Signal.forwardTo address HeaderAction) model.header
       , div [contentStyle] [currentBody, Footer.view]
       ]
@@ -104,4 +105,5 @@ contentStyle =
       ("margin-left", "10%")
     , ("margin-right", "10%")
     , ("margin-top", "50px")
+    , ("font-size", "x-large")
     ]
