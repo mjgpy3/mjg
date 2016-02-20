@@ -20,14 +20,14 @@ post =
       Text [
         pl "Our hope, thinking and intention is that future, similar problems will fit nicely into our \"framework\""
       ],
-      Img (Just 40) "favor_delete_2.png",
+      Img (Just 60) "favor_delete_2.png",
       Text [
         pl "This sounds great, but there's a lot that can go wrong."
       ],
       Text [
         pl "Firstly, what happens if our expanded solution doesn't \"fully\" solve the problem at hand?"
       ],
-      Img (Just 40) "favor_delete_2.png",
+      Img (Just 60) "favor_delete_2.png",
       Text [
         pl "Do we rewrite our more general solution to accommodate the actual problem? I find, generally, we don't. Instead we extend and further abstract our large solution to make it encompass the areas we missed. If we do re-write the general solution entirely, the previous general solution was effectively a time sink."
       ],
