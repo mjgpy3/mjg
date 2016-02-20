@@ -45,18 +45,21 @@ delta2update _ new = case new.header of
 
 location2action : List String -> List Action
 location2action location = case location of
-  ["blog"] ->
-    [
-      HeaderAction { selectedModel = Header.Blog },
-      BlogAction Blog.MoveToList
-    ]
-  ["blog", id] ->
-    [ HeaderAction { selectedModel = Header.Blog }
-    , case String.toInt id of
-      Ok intId -> BlogAction <| Blog.SelectPost intId
-      Err _ -> BlogAction Blog.MoveToList
+  ("blog"::rest) -> [
+      HeaderAction { selectedModel = Header.Blog }
+    , blogLocation rest
     ]
   _ -> [HeaderAction { selectedModel = Header.About }]
+
+blogLocation : List String -> Action
+blogLocation components =
+  case components of
+    [id] ->
+      case String.toInt id of
+        (Ok intId) -> BlogAction <| Blog.SelectPost intId
+        (Err _) -> BlogAction Blog.MoveToList
+    _ ->
+      BlogAction Blog.MoveToList
 
 type Action =
   HeaderAction Header.Action
