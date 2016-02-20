@@ -6,52 +6,39 @@ import Html.Attributes exposing (..)
 view : Html.Html
 view =
   div
-    [style [("padding-top", "20px"), ("width", "30%"), ("margin", "auto")]]
-    [footerContent]
-
-connector : Html.Html
-connector =
-  div
-    [style [
-      ("width", "15px")
-    , ("height", "5px")
-    , ("background", "#970202")
-    , ("display", "inline-block")
-    , ("margin-left", "10px")
-    , ("margin-right", "10px")
-    , ("margin-bottom", "8px")
-    ]]
-    [ ball ("15px", "-3px")
-    , ball ("-5px", "-13px")
+    [
+      style
+        [
+          ("width", "100%")
+        , ("padding-top", "20px")
+        , ("padding-bottom", "20px")
+        , ("background-color", "SlateGrey")
+        , ("border-radius", "5px")
+        ]
     ]
+    [footerContent]
 
 styleOnly : List (String, String) -> Html.Html
 styleOnly attrs = div [style attrs] []
 
-ball : (String, String) -> Html.Html
-ball (left, top) =
-  styleOnly
-    [
-      ("content", "")
-    , ("display", "block")
-    , ("width", "5px")
-    , ("height", "10px")
-    , ("position", "relative")
-    , ("left", left)
-    , ("top", top)
-    , ("background", "#970202")
-    , ("border-radius", "5px")
-    , ("display", "")
-    ]
-
 footerContent : Html.Html
 footerContent =
-  div []
-  (items |> List.map linkImage |> List.intersperse connector)
+  div [
+    style [
+    ]
+  ]
+  (items |> List.map linkImage)
 
 linkImage : (String, String) -> Html.Html
 linkImage (link, image) =
-  a [href link, style [("display", "inline-block")]]
+  a [
+      href link
+    , style
+      [
+        ("padding-left", "10px")
+      , ("padding-right", "10px")
+      ]
+    ]
     [img [src <| "https://github.com/mjgpy3/mjg/blob/master/images/" ++ image ++ "?raw=true"] []]
 
 items : List (String, String)

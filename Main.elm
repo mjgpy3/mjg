@@ -86,7 +86,8 @@ view address model =
     div [
       ]
       [ Header.view (Signal.forwardTo address HeaderAction) model.header
-      , div [contentStyle] [currentBody, Footer.view]
+      , div [contentStyle] [currentBody]
+      , div [] [Footer.view]
       ]
 
 update : Action -> Model -> (Model, Effects.Effects Action)
@@ -104,6 +105,7 @@ contentStyle =
     [
       ("margin-left", "10%")
     , ("margin-right", "10%")
+    , ("margin-bottom", "50px")
     , ("margin-top", "50px")
     , ("font-size", "x-large")
     ]
