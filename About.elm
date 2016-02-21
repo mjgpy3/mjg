@@ -25,4 +25,6 @@ imageStyle =
   CommonStyles.image
     [
       ("max-width","60%")
+      , ("border-radius", "10px")
+      , ("border", "5px solid black")
     ]
