@@ -4,6 +4,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import String
 import CommonStyles
+import Tags exposing (..)
+import Tag exposing (Tags)
 
 type alias Title = String
 
@@ -14,25 +16,6 @@ type ProgrammingLanguage =
   | BashLanguage
   | MappyLanguage
   | RubyLanguage
-
-type Tag =
-  ClojureTag
-  | HaskellTag
-  | LispTag
-  | MappyTag
-  | FPTag
-  | OOPTag
-  | ProgrammingTag
-  | SoftwareEngineeringTag
-  | DeletingCodeTag
-  | IdrisTag
-  | DSATag
-  | SchemeTag
-  | MonadTag
-  | SICPTag
-  | RubyTag
-
-type alias Tags = List Tag
 
 type alias Url = String
 
@@ -130,32 +113,6 @@ titleToHtml title (year, month, day) =
     , p [] [text <| toString month ++ "/" ++ toString day ++ "/" ++ toString year]
     , br [] []
     ]
-
-tagsToHtml : List Tag -> Html.Html
-tagsToHtml tags =
-  tags |>
-  List.map (text << tagToString) |>
-  List.intersperse (text ", ") |>
-  (::) (text "Tags: ") |>
-  i []
-
-tagToString : Tag -> String
-tagToString tag = case tag of
-  ProgrammingTag -> "programming"
-  ClojureTag -> "clojure"
-  HaskellTag -> "haskell"
-  LispTag -> "lisp"
-  MappyTag -> "mappy"
-  FPTag -> "functional_programming"
-  OOPTag -> "object_oriented_programming"
-  IdrisTag -> "idris"
-  DSATag -> "data_structures_and_algorithms"
-  SICPTag -> "struct_and_interp_of_computer_programs"
-  RubyTag -> "ruby"
-  SoftwareEngineeringTag -> "software_engineering"
-  DeletingCodeTag -> "deleting_code"
-  SchemeTag -> "scheme"
-  MonadTag -> "monad"
 
 postToHtml : Post -> Html.Html
 postToHtml (BlogPost title tags date content) =

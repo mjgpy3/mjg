@@ -3,9 +3,11 @@ module Posts.TrieInHaskell (post) where
 import Post exposing (..)
 import Html
 
+import Tag
+
 post : Post
 post =
-  BlogPost "Trie in Haskell" [DSATag, FPTag, HaskellTag, ProgrammingTag] (2015, 10, 25) [
+  BlogPost "Trie in Haskell" [Tag.DSA, Tag.FP, Tag.Haskell, Tag.Programming] (2015, 10, 25) [
     Text [
       pl "Lately I've been playing around with Haskell. As an exercise, I decided to partially implement a Trie. I ignored the various implementations out there, including ",
       "Data.Trie" ->> "https://hackage.haskell.org/package/bytestring-trie-0.2.4.1/docs/Data-Trie.html",

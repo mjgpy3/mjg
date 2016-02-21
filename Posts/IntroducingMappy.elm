@@ -3,9 +3,11 @@ module Posts.IntroducingMappy (post) where
 import Post exposing (..)
 import Html
 
+import Tag
+
 post : Post
 post =
-  BlogPost "Introducing Mappy" [HaskellTag, LispTag, FPTag, ProgrammingTag, MappyTag] (2016, 1, 31) [
+  BlogPost "Introducing Mappy" [Tag.Haskell, Tag.Lisp, Tag.FP, Tag.Programming, Tag.Mappy] (2016, 1, 31) [
     Text [
       pl "During my nice little break last week I figured, why not? I'll make my toy programing language more real! The result is ",
       "a functional programming language that is similar to Lisp, except maps (aka dictionaries, aka HashMaps, aka Hashes) are the core primitive" ->> "https://github.com/PolyglotSymposium/mappy",

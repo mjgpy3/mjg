@@ -3,9 +3,11 @@ module Posts.FunctionalProgrammingAhaMoments (post) where
 import Post exposing (..)
 import Html
 
+import Tag
+
 post : Post
 post =
-  BlogPost "Functional Programming Aha! Moments" [ClojureTag, FPTag, HaskellTag, LispTag, MonadTag, SICPTag, SchemeTag] (2015, 5, 19) [
+  BlogPost "Functional Programming Aha! Moments" [Tag.Clojure, Tag.FP, Tag.Haskell, Tag.Lisp, Tag.Monad, Tag.SICP, Tag.Scheme] (2015, 5, 19) [
     Text [
       pl "In the past couple of years, I've dedicated a fair amount of time to closet-functional-programming. Although I haven't gotten an opportunity to use a more purist functional programming language (e.g. not Framework_of_the_day.JS) in my day-to-day day, industry work, I believe some of the values of functional programming have bled into my daily practice, for the better."
     ],

@@ -3,9 +3,11 @@ module Posts.OOPSettersPartialApplication (post) where
 import Post exposing (..)
 import Html
 
+import Tag
+
 post : Post
 post =
-  BlogPost "OOP Setters Can be Used to Emulate Partial Application" [ClojureTag, FPTag, OOPTag, ProgrammingTag, HaskellTag, RubyTag] (2015, 4, 9) [
+  BlogPost "OOP Setters Can be Used to Emulate Partial Application" [Tag.Clojure, Tag.FP, Tag.OOP, Tag.Programming, Tag.Haskell, Tag.Ruby] (2015, 4, 9) [
     Text [
       pl "Recently I was asked an awesome question that went something like"
     ],

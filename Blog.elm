@@ -12,22 +12,21 @@ import Post
 type Action = MoveToList | SelectPost Int
 
 type alias Model =
-  Maybe
-  { selectedPostId : Int
+  { selectedPostId : Maybe Int
   }
 
 init : Model
-init = Nothing
+init = { selectedPostId = Nothing }
 
 view : Signal.Address Action -> Model -> Html.Html
-view address model = case model of
+view address model = case model.selectedPostId of
   Nothing -> postList address
-  Just post -> singlePost address post.selectedPostId
+  Just post -> singlePost address post
 
 update : Action -> Model -> Model
 update action model = case action of
   MoveToList -> init
-  SelectPost id -> Just { selectedPostId = id }
+  SelectPost id -> { selectedPostId = Just id }
 
 postList : Signal.Address Action -> Html.Html
 postList address = div

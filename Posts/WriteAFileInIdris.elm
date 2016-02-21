@@ -3,12 +3,14 @@ module Posts.WriteAFileInIdris (post) where
 import Post exposing (..)
 import Html
 
+import Tag
+
 post : Post.Post
 post = write_a_file_in_idris
 
 write_a_file_in_idris : Post
 write_a_file_in_idris =
-  BlogPost "Write a File in Idris" [FPTag, IdrisTag, ProgrammingTag] (2015, 11, 15) [
+  BlogPost "Write a File in Idris" [Tag.FP, Tag.Idris, Tag.Programming] (2015, 11, 15) [
     Text [
       pl "Although Idris' documentation seems better than 99% of opensource projects out there, I couldn't easily find the steps necessary to write a file. After recalling that ",
       "Brian McKenna wrote his blog in Idris" ->> "http://brianmckenna.org/blog/idris_blog",

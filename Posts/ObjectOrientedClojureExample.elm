@@ -3,12 +3,14 @@ module Posts.ObjectOrientedClojureExample (post) where
 import Post exposing (..)
 import Html
 
+import Tag
+
 post : Post.Post
 post = object_oriented_clojure_example
 
 object_oriented_clojure_example : Post
 object_oriented_clojure_example =
-  BlogPost "Object Oriented Clojure Example" [ClojureTag, FPTag, OOPTag, ProgrammingTag, SICPTag] (2015, 06, 28) [
+  BlogPost "Object Oriented Clojure Example" [Tag.Clojure, Tag.FP, Tag.OOP, Tag.Programming, Tag.SICP] (2015, 06, 28) [
     Text [
       pl "Inspired by the message passing content in ",
         "The Structure and Interpretation of Computer Programs" ->>

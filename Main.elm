@@ -43,9 +43,9 @@ port routeTasks =
 
 delta2update : Model -> Model -> Maybe RouteHash.HashUpdate
 delta2update _ new = case new.header of
-  Header.Blog -> case new.blog of
+  Header.Blog -> case new.blog.selectedPostId of
     Nothing -> Just <| RouteHash.set ["blog"]
-    Just blog -> Just <| RouteHash.set ["blog", toString blog.selectedPostId]
+    Just blog -> Just <| RouteHash.set ["blog", toString blog]
   Header.About -> Just <| RouteHash.set ["about"]
 
 location2action : List String -> List Action

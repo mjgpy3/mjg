@@ -3,9 +3,11 @@ module Posts.FavorDeletableCodeOverReusableCode (post) where
 import Post exposing (..)
 import Html
 
+import Tag
+
 post : Post
 post =
-  BlogPost "Favor Deletable Code Over Reusable Code" [DeletingCodeTag, ProgrammingTag, SoftwareEngineeringTag] (2015, 6, 28) [
+  BlogPost "Favor Deletable Code Over Reusable Code" [Tag.DeletingCode, Tag.Programming, Tag.SoftwareEngineering] (2015, 6, 28) [
     Text [
       pl "As problem solvers who work primarily in the medium of software, we're sold reusability throughout our careers (and even, likely, in our educations). We're told that if we just think ahead, if we put forth more effort, we can jump to a new plane of abstraction and achieve a solution that will be usable in the future to more quickly and easily solve a similar problem. Although this sounds pretty awesome in theory, I don't buy it in practice."
     ],
