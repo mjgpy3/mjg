@@ -11375,7 +11375,9 @@ Elm.About.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var imageStyle = $CommonStyles.image(_U.list([{ctor: "_Tuple2",_0: "max-width",_1: "60%"}]));
+   var imageStyle = $CommonStyles.image(_U.list([{ctor: "_Tuple2",_0: "max-width",_1: "60%"}
+                                                ,{ctor: "_Tuple2",_0: "border-radius",_1: "10px"}
+                                                ,{ctor: "_Tuple2",_0: "border",_1: "5px solid black"}]));
    var imageSource = "https://github.com/mjgpy3/mjg/blob/master/images/me.jpg?raw=true";
    var tagLine = "My name is Michael Gilliland. I\'m a software engineer who enjoys functional programming, testing, collaboratively building software and problem solving.";
    var view = A2($Html.div,
@@ -11384,6 +11386,119 @@ Elm.About.make = function (_elm) {
            ,A2($Html.p,_U.list([]),_U.list([$Html.text("Here\'s a picture of me walking around Pittsburgh")]))
            ,A2($Html.img,_U.list([$Html$Attributes.src(imageSource),imageStyle]),_U.list([]))]));
    return _elm.About.values = {_op: _op,view: view};
+};Elm.CommonElements = Elm.CommonElements || {};
+Elm.CommonElements.make = function (_elm) {
+   "use strict";
+   _elm.CommonElements = _elm.CommonElements || {};
+   if (_elm.CommonElements.values) return _elm.CommonElements.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var internalLink = F2(function (attrs,elems) {
+      return A2($Html.a,
+      A2($List._op["::"],
+      $Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "color",_1: "blue"}
+                                     ,{ctor: "_Tuple2",_0: "text-decoration",_1: "underline"}
+                                     ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}])),
+      attrs),
+      elems);
+   });
+   return _elm.CommonElements.values = {_op: _op,internalLink: internalLink};
+};Elm.Tag = Elm.Tag || {};
+Elm.Tag.make = function (_elm) {
+   "use strict";
+   _elm.Tag = _elm.Tag || {};
+   if (_elm.Tag.values) return _elm.Tag.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var tagToString = function (tag) {
+      var _p0 = tag;
+      switch (_p0.ctor)
+      {case "Programming": return "programming";
+         case "Clojure": return "clojure";
+         case "Haskell": return "haskell";
+         case "Lisp": return "lisp";
+         case "Mappy": return "mappy";
+         case "FP": return "functional_programming";
+         case "OOP": return "object_oriented_programming";
+         case "Idris": return "idris";
+         case "DSA": return "data_structures_and_algorithms";
+         case "SICP": return "struct_and_interp_of_computer_programs";
+         case "Ruby": return "ruby";
+         case "SoftwareEngineering": return "software_engineering";
+         case "DeletingCode": return "deleting_code";
+         case "Scheme": return "scheme";
+         default: return "monad";}
+   };
+   var Ruby = {ctor: "Ruby"};
+   var SICP = {ctor: "SICP"};
+   var Monad = {ctor: "Monad"};
+   var Scheme = {ctor: "Scheme"};
+   var DSA = {ctor: "DSA"};
+   var Idris = {ctor: "Idris"};
+   var DeletingCode = {ctor: "DeletingCode"};
+   var SoftwareEngineering = {ctor: "SoftwareEngineering"};
+   var Programming = {ctor: "Programming"};
+   var OOP = {ctor: "OOP"};
+   var FP = {ctor: "FP"};
+   var Mappy = {ctor: "Mappy"};
+   var Lisp = {ctor: "Lisp"};
+   var Haskell = {ctor: "Haskell"};
+   var Clojure = {ctor: "Clojure"};
+   return _elm.Tag.values = {_op: _op
+                            ,Clojure: Clojure
+                            ,Haskell: Haskell
+                            ,Lisp: Lisp
+                            ,Mappy: Mappy
+                            ,FP: FP
+                            ,OOP: OOP
+                            ,Programming: Programming
+                            ,SoftwareEngineering: SoftwareEngineering
+                            ,DeletingCode: DeletingCode
+                            ,Idris: Idris
+                            ,DSA: DSA
+                            ,Scheme: Scheme
+                            ,Monad: Monad
+                            ,SICP: SICP
+                            ,Ruby: Ruby
+                            ,tagToString: tagToString};
+};Elm.Tags = Elm.Tags || {};
+Elm.Tags.make = function (_elm) {
+   "use strict";
+   _elm.Tags = _elm.Tags || {};
+   if (_elm.Tags.values) return _elm.Tags.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Tag = Elm.Tag.make(_elm);
+   var _op = {};
+   var singleton = function (a) {    return _U.list([a]);};
+   var tagsToHtml = function (tags) {
+      return A2($Html.i,
+      _U.list([]),
+      A2(F2(function (x,y) {    return A2($List._op["::"],x,y);}),
+      $Html.text("Tags: "),
+      A2($List.intersperse,$Html.text(", "),A2($List.map,function (_p0) {    return $Html.text($Tag.tagToString(_p0));},tags))));
+   };
+   return _elm.Tags.values = {_op: _op,tagsToHtml: tagsToHtml,singleton: singleton};
 };Elm.Post = Elm.Post || {};
 Elm.Post.make = function (_elm) {
    "use strict";
@@ -11398,69 +11513,45 @@ Elm.Post.make = function (_elm) {
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
+   $Signal = Elm.Signal.make(_elm),
+   $Tag = Elm.Tag.make(_elm),
+   $Tags = Elm.Tags.make(_elm);
    var _op = {};
-   var tagToString = function (tag) {
-      var _p0 = tag;
-      switch (_p0.ctor)
-      {case "ProgrammingTag": return "programming";
-         case "ClojureTag": return "clojure";
-         case "HaskellTag": return "haskell";
-         case "LispTag": return "lisp";
-         case "MappyTag": return "mappy";
-         case "FPTag": return "functional_programming";
-         case "OOPTag": return "object_oriented_programming";
-         case "IdrisTag": return "idris";
-         case "DSATag": return "data_structures_and_algorithms";
-         case "SICPTag": return "struct_and_interp_of_computer_programs";
-         case "RubyTag": return "ruby";
-         case "SoftwareEngineeringTag": return "software_engineering";
-         case "DeletingCodeTag": return "deleting_code";
-         case "SchemeTag": return "scheme";
-         default: return "monad";}
-   };
-   var tagsToHtml = function (tags) {
-      return A2($Html.i,
-      _U.list([]),
-      A2(F2(function (x,y) {    return A2($List._op["::"],x,y);}),
-      $Html.text("Tags: "),
-      A2($List.intersperse,$Html.text(", "),A2($List.map,function (_p1) {    return $Html.text(tagToString(_p1));},tags))));
-   };
-   var titleToHtml = F2(function (title,_p2) {
-      var _p3 = _p2;
+   var titleToHtml = F2(function (title,_p0) {
+      var _p1 = _p0;
       return A2($Html.div,
       _U.list([]),
       _U.list([A2($Html.h1,_U.list([]),_U.list([$Html.text(title)]))
               ,A2($Html.p,
               _U.list([]),
               _U.list([$Html.text(A2($Basics._op["++"],
-              $Basics.toString(_p3._1),
-              A2($Basics._op["++"],"/",A2($Basics._op["++"],$Basics.toString(_p3._2),A2($Basics._op["++"],"/",$Basics.toString(_p3._0))))))]))
+              $Basics.toString(_p1._1),
+              A2($Basics._op["++"],"/",A2($Basics._op["++"],$Basics.toString(_p1._2),A2($Basics._op["++"],"/",$Basics.toString(_p1._0))))))]))
               ,A2($Html.br,_U.list([]),_U.list([]))]));
    });
    var textComponentToHtml = function (component) {
-      var _p4 = component;
-      switch (_p4.ctor)
-      {case "Plain": return $Html.text(_p4._0);
-         case "Emph": return A2($Html.i,_U.list([]),_U.list([$Html.text(_p4._0)]));
-         case "Link": return A2($Html.a,_U.list([$Html$Attributes.target("_blank"),$Html$Attributes.href(_p4._1)]),_U.list([$Html.text(_p4._0)]));
-         case "BulletedList": return A2(list,$Html.ul,_p4._0);
-         case "NumberedList": return A2(list,$Html.ol,_p4._0);
+      var _p2 = component;
+      switch (_p2.ctor)
+      {case "Plain": return $Html.text(_p2._0);
+         case "Emph": return A2($Html.i,_U.list([]),_U.list([$Html.text(_p2._0)]));
+         case "Link": return A2($Html.a,_U.list([$Html$Attributes.target("_blank"),$Html$Attributes.href(_p2._1)]),_U.list([$Html.text(_p2._0)]));
+         case "BulletedList": return A2(list,$Html.ul,_p2._0);
+         case "NumberedList": return A2(list,$Html.ol,_p2._0);
          default: return A2($Html.code,
            _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid grey"}
                                                    ,{ctor: "_Tuple2",_0: "background",_1: "black"}
                                                    ,{ctor: "_Tuple2",_0: "color",_1: "#64FE2E"}
                                                    ,{ctor: "_Tuple2",_0: "border-radius",_1: "4px"}]))]),
-           _U.list([$Html.text(_p4._0)]));}
+           _U.list([$Html.text(_p2._0)]));}
    };
    var list = F2(function (f,items) {
-      return A2(f,_U.list([]),A2($List.map,function (_p5) {    return A2($Html.li,_U.list([]),A2($List.map,textComponentToHtml,_p5));},items));
+      return A2(f,_U.list([]),A2($List.map,function (_p3) {    return A2($Html.li,_U.list([]),A2($List.map,textComponentToHtml,_p3));},items));
    });
    var componentToHtml = function (component) {
-      var _p6 = component;
-      switch (_p6.ctor)
-      {case "Text": return A2($Html.p,_U.list([]),A2($List.map,textComponentToHtml,_p6._0));
-         case "Quote": return A2($Html.blockquote,_U.list([]),A2($List.map,textComponentToHtml,_p6._0));
+      var _p4 = component;
+      switch (_p4.ctor)
+      {case "Text": return A2($Html.p,_U.list([]),A2($List.map,textComponentToHtml,_p4._0));
+         case "Quote": return A2($Html.blockquote,_U.list([]),A2($List.map,textComponentToHtml,_p4._0));
          case "Code": return A2($Html.pre,
            _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid grey"}
                                                    ,{ctor: "_Tuple2",_0: "padding",_1: "10px"}
@@ -11468,23 +11559,23 @@ Elm.Post.make = function (_elm) {
                                                    ,{ctor: "_Tuple2",_0: "background",_1: "black"}
                                                    ,{ctor: "_Tuple2",_0: "color",_1: "#64FE2E"}
                                                    ,{ctor: "_Tuple2",_0: "border-radius",_1: "4px"}]))]),
-           _U.list([$Html.text(_p6._1)]));
+           _U.list([$Html.text(_p4._1)]));
          case "Section": return A2($Html.div,
            _U.list([]),
-           A2($List._op["::"],A2($Html.h2,_U.list([]),_U.list([$Html.text(_p6._0)])),A2($List.map,componentToHtml,_p6._1)));
+           A2($List._op["::"],A2($Html.h2,_U.list([]),_U.list([$Html.text(_p4._0)])),A2($List.map,componentToHtml,_p4._1)));
          default: return A2($Html.img,
            _U.list([$CommonStyles.image(_U.list([{ctor: "_Tuple2"
                                                  ,_0: "max-width"
-                                                 ,_1: A2($Basics._op["++"],$Basics.toString(A2($Maybe.withDefault,60,_p6._0)),"%")}
+                                                 ,_1: A2($Basics._op["++"],$Basics.toString(A2($Maybe.withDefault,60,_p4._0)),"%")}
                                                 ,{ctor: "_Tuple2",_0: "border-radius",_1: "10px"}
                                                 ,{ctor: "_Tuple2",_0: "border",_1: "5px solid black"}]))
-                   ,$Html$Attributes.src(A2($Basics._op["++"],"https://github.com/mjgpy3/mjg/blob/master/images/",A2($Basics._op["++"],_p6._1,"?raw=true")))]),
+                   ,$Html$Attributes.src(A2($Basics._op["++"],"https://github.com/mjgpy3/mjg/blob/master/images/",A2($Basics._op["++"],_p4._1,"?raw=true")))]),
            _U.list([]));}
    };
    var contentToHtml = function (cs) {    return A2($Html.div,_U.list([]),A2($List.map,componentToHtml,cs));};
-   var postToHtml = function (_p7) {
-      var _p8 = _p7;
-      return A2($Html.div,_U.list([]),_U.list([A2(titleToHtml,_p8._0,_p8._2),contentToHtml(_p8._3),tagsToHtml(_p8._1)]));
+   var postToHtml = function (_p5) {
+      var _p6 = _p5;
+      return A2($Html.div,_U.list([]),_U.list([A2(titleToHtml,_p6._0,_p6._2),contentToHtml(_p6._3),$Tags.tagsToHtml(_p6._1)]));
    };
    var BlogPost = F4(function (a,b,c,d) {    return {ctor: "BlogPost",_0: a,_1: b,_2: c,_3: d};});
    var Img = F2(function (a,b) {    return {ctor: "Img",_0: a,_1: b};});
@@ -11501,21 +11592,6 @@ Elm.Post.make = function (_elm) {
    var Emph = function (a) {    return {ctor: "Emph",_0: a};};
    var Plain = function (a) {    return {ctor: "Plain",_0: a};};
    var pl = Plain;
-   var RubyTag = {ctor: "RubyTag"};
-   var SICPTag = {ctor: "SICPTag"};
-   var MonadTag = {ctor: "MonadTag"};
-   var SchemeTag = {ctor: "SchemeTag"};
-   var DSATag = {ctor: "DSATag"};
-   var IdrisTag = {ctor: "IdrisTag"};
-   var DeletingCodeTag = {ctor: "DeletingCodeTag"};
-   var SoftwareEngineeringTag = {ctor: "SoftwareEngineeringTag"};
-   var ProgrammingTag = {ctor: "ProgrammingTag"};
-   var OOPTag = {ctor: "OOPTag"};
-   var FPTag = {ctor: "FPTag"};
-   var MappyTag = {ctor: "MappyTag"};
-   var LispTag = {ctor: "LispTag"};
-   var HaskellTag = {ctor: "HaskellTag"};
-   var ClojureTag = {ctor: "ClojureTag"};
    var RubyLanguage = {ctor: "RubyLanguage"};
    var MappyLanguage = {ctor: "MappyLanguage"};
    var BashLanguage = {ctor: "BashLanguage"};
@@ -11529,21 +11605,6 @@ Elm.Post.make = function (_elm) {
                              ,BashLanguage: BashLanguage
                              ,MappyLanguage: MappyLanguage
                              ,RubyLanguage: RubyLanguage
-                             ,ClojureTag: ClojureTag
-                             ,HaskellTag: HaskellTag
-                             ,LispTag: LispTag
-                             ,MappyTag: MappyTag
-                             ,FPTag: FPTag
-                             ,OOPTag: OOPTag
-                             ,ProgrammingTag: ProgrammingTag
-                             ,SoftwareEngineeringTag: SoftwareEngineeringTag
-                             ,DeletingCodeTag: DeletingCodeTag
-                             ,IdrisTag: IdrisTag
-                             ,DSATag: DSATag
-                             ,SchemeTag: SchemeTag
-                             ,MonadTag: MonadTag
-                             ,SICPTag: SICPTag
-                             ,RubyTag: RubyTag
                              ,Plain: Plain
                              ,Emph: Emph
                              ,Link: Link
@@ -11563,8 +11624,6 @@ Elm.Post.make = function (_elm) {
                              ,componentToHtml: componentToHtml
                              ,contentToHtml: contentToHtml
                              ,titleToHtml: titleToHtml
-                             ,tagsToHtml: tagsToHtml
-                             ,tagToString: tagToString
                              ,postToHtml: postToHtml};
 };Elm.Posts = Elm.Posts || {};
 Elm.Posts.FavorDeletableCodeOverReusableCode = Elm.Posts.FavorDeletableCodeOverReusableCode || {};
@@ -11580,11 +11639,12 @@ Elm.Posts.FavorDeletableCodeOverReusableCode.make = function (_elm) {
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
    $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
+   $Signal = Elm.Signal.make(_elm),
+   $Tag = Elm.Tag.make(_elm);
    var _op = {};
    var post = A4($Post.BlogPost,
    "Favor Deletable Code Over Reusable Code",
-   _U.list([$Post.DeletingCodeTag,$Post.ProgrammingTag,$Post.SoftwareEngineeringTag]),
+   _U.list([$Tag.DeletingCode,$Tag.Programming,$Tag.SoftwareEngineering]),
    {ctor: "_Tuple3",_0: 2015,_1: 6,_2: 28},
    _U.list([$Post.Text(_U.list([$Post.pl("As problem solvers who work primarily in the medium of software, we\'re sold reusability throughout our careers (and even, likely, in our educations). We\'re told that if we just think ahead, if we put forth more effort, we can jump to a new plane of abstraction and achieve a solution that will be usable in the future to more quickly and easily solve a similar problem. Although this sounds pretty awesome in theory, I don\'t buy it in practice.")]))
            ,A2($Post.Section,
@@ -11593,10 +11653,10 @@ Elm.Posts.FavorDeletableCodeOverReusableCode.make = function (_elm) {
                    ,$Post.Text(_U.list([$Post.pl("We mean well. We build a more general solution than needed to solve a real problem")]))
                    ,A2($Post.Img,$Maybe.Nothing,"favor_delete_1.png")
                    ,$Post.Text(_U.list([$Post.pl("Our hope, thinking and intention is that future, similar problems will fit nicely into our \"framework\"")]))
-                   ,A2($Post.Img,$Maybe.Just(40),"favor_delete_2.png")
+                   ,A2($Post.Img,$Maybe.Just(60),"favor_delete_2.png")
                    ,$Post.Text(_U.list([$Post.pl("This sounds great, but there\'s a lot that can go wrong.")]))
                    ,$Post.Text(_U.list([$Post.pl("Firstly, what happens if our expanded solution doesn\'t \"fully\" solve the problem at hand?")]))
-                   ,A2($Post.Img,$Maybe.Just(40),"favor_delete_2.png")
+                   ,A2($Post.Img,$Maybe.Just(60),"favor_delete_2.png")
                    ,$Post.Text(_U.list([$Post.pl("Do we rewrite our more general solution to accommodate the actual problem? I find, generally, we don\'t. Instead we extend and further abstract our large solution to make it encompass the areas we missed. If we do re-write the general solution entirely, the previous general solution was effectively a time sink.")]))
                    ,$Post.Text(_U.list([$Post.pl("There\'s a fair amount of regression headache here as well. If I decided to extend my prior abstraction, then I have to do without breaking the parts that partially solved the problem to begin with. Also, assuming I still believed parts of the original abstraction to be valuable to future solutions, I would be required to also keep those from breaking.")]))
                    ,$Post.Text(_U.list([$Post.pl("Secondly, there\'s a question I try to ask myself before I solve future problems: ")
@@ -11634,11 +11694,12 @@ Elm.Posts.FunctionalProgrammingAhaMoments.make = function (_elm) {
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
    $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
+   $Signal = Elm.Signal.make(_elm),
+   $Tag = Elm.Tag.make(_elm);
    var _op = {};
    var post = A4($Post.BlogPost,
    "Functional Programming Aha! Moments",
-   _U.list([$Post.ClojureTag,$Post.FPTag,$Post.HaskellTag,$Post.LispTag,$Post.MonadTag,$Post.SICPTag,$Post.SchemeTag]),
+   _U.list([$Tag.Clojure,$Tag.FP,$Tag.Haskell,$Tag.Lisp,$Tag.Monad,$Tag.SICP,$Tag.Scheme]),
    {ctor: "_Tuple3",_0: 2015,_1: 5,_2: 19},
    _U.list([$Post.Text(_U.list([$Post.pl("In the past couple of years, I\'ve dedicated a fair amount of time to closet-functional-programming. Although I haven\'t gotten an opportunity to use a more purist functional programming language (e.g. not Framework_of_the_day.JS) in my day-to-day day, industry work, I believe some of the values of functional programming have bled into my daily practice, for the better.")]))
            ,$Post.Text(_U.list([$Post.pl("Industry aside, I want to share some of the \"Aha! moments\" I\'ve had while learning about functional programming. These are moments where something just clicked for me; some part of me almost can\'t help but share them.")]))
@@ -11646,7 +11707,7 @@ Elm.Posts.FunctionalProgrammingAhaMoments.make = function (_elm) {
            "Lets can be described by anonymous functions",
            _U.list([$Post.Text(_U.list([$Post.pl("Although \"functional programming\" is one of those things were if you ask five people for a definition you are likely to get six different definitions, one general consensus seems to hold: assignment should be reduced, minimally scoped or eliminated entirely in functional programming.")]))
                    ,$Post.Text(_U.list([$Post.pl("The let macro/expression/sugar is basically a means of reducing assignments into minimally scoped, (generally) non-mutative expressions with a set of bindings. Here\'s a contrived example of what this might look like in Clojure")]))
-                   ,A2($Post.Img,$Maybe.Just(40),"fp_aha_1.png")
+                   ,A2($Post.Img,$Maybe.Just(80),"fp_aha_1.png")
                    ,$Post.Text(_U.list([$Post.pl("Here we\'re saying, let\'s bind ")
                                        ,$Post.c("x")
                                        ,$Post.pl(" to ")
@@ -11663,7 +11724,7 @@ Elm.Posts.FunctionalProgrammingAhaMoments.make = function (_elm) {
                                        ,$Post.c("42")
                                        ,$Post.pl(".")]))
                    ,$Post.Text(_U.list([$Post.pl("So, here comes the first \"Aha!\" This same kind of scoped assignment can be done through applying anonymous functions! Here\'s what that looks like for the above example")]))
-                   ,A2($Post.Img,$Maybe.Just(40),"fp_aha_2.png")
+                   ,A2($Post.Img,$Maybe.Just(80),"fp_aha_2.png")
                    ,$Post.Text(_U.list([$Post.pl("Basically the pattern here is just, for each bound symbol (in this case ")
                                        ,$Post.c("x")
                                        ,$Post.pl(" and ")
@@ -11680,7 +11741,7 @@ Elm.Posts.FunctionalProgrammingAhaMoments.make = function (_elm) {
                                        ,$Post.pl("(symbolically ")
                                        ,$Post.c(">>=")
                                        ,$Post.pl(") is one of the crucial operations implementable by a monad, it has the following type signature")]))
-                   ,A2($Post.Img,$Maybe.Just(40),"fp_aha_3.png")
+                   ,A2($Post.Img,$Maybe.Just(80),"fp_aha_3.png")
                    ,$Post.Text(_U.list([$Post.pl("Ignoring currying and some other subtleties, if I\'m thinking in an \"object oriented mindset\" I might reason about this as follows")
                                        ,$Post.BulletedList(_U.list([_U.list([$Post.c("bind")
                                                                             ,$Post.pl(" is a function that take 2 arguments")
@@ -11706,7 +11767,7 @@ Elm.Posts.FunctionalProgrammingAhaMoments.make = function (_elm) {
                                        ,A2($Post._op["->>"],"do-notation","http://en.wikibooks.org/wiki/Haskell/do_notation")
                                        ,$Post.pl(").")]))
                    ,$Post.Text(_U.list([$Post.pl("To visualize how this is kind of like method chaining, observe the following Ruby code")]))
-                   ,A2($Post.Img,$Maybe.Just(40),"fp_aha_4.png")
+                   ,A2($Post.Img,$Maybe.Just(80),"fp_aha_4.png")
                    ,$Post.Text(_U.list([$Post.pl("We can imagine these calls (with the exception of ")
                                        ,$Post.c("count")
                                        ,$Post.pl(") being like a type-not-so-safe version of Haskell\'s ")
@@ -11743,7 +11804,7 @@ Elm.Posts.FunctionalProgrammingAhaMoments.make = function (_elm) {
                                        ,A2($Post._op["->>"],
                                        "(again shamelessly ripped)",
                                        "https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-20.html#%_sec_3.1.1")]))
-                   ,A2($Post.Img,$Maybe.Just(40),"fp_aha_5.png")
+                   ,A2($Post.Img,$Maybe.Just(80),"fp_aha_5.png")
                    ,$Post.Text(_U.list([$Post.pl("What you\'re seeing here is basically a constructor that builds objects, given a beginning balance, that respond to the ")
                                        ,$Post.c("\'withdraw")
                                        ,$Post.pl(" and ")
@@ -11766,11 +11827,12 @@ Elm.Posts.IntroducingMappy.make = function (_elm) {
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
    $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
+   $Signal = Elm.Signal.make(_elm),
+   $Tag = Elm.Tag.make(_elm);
    var _op = {};
    var post = A4($Post.BlogPost,
    "Introducing Mappy",
-   _U.list([$Post.HaskellTag,$Post.LispTag,$Post.FPTag,$Post.ProgrammingTag,$Post.MappyTag]),
+   _U.list([$Tag.Haskell,$Tag.Lisp,$Tag.FP,$Tag.Programming,$Tag.Mappy]),
    {ctor: "_Tuple3",_0: 2016,_1: 1,_2: 31},
    _U.list([$Post.Text(_U.list([$Post.pl("During my nice little break last week I figured, why not? I\'ll make my toy programing language more real! The result is ")
                                ,A2($Post._op["->>"],
@@ -11813,11 +11875,12 @@ Elm.Posts.OOPSettersPartialApplication.make = function (_elm) {
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
    $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
+   $Signal = Elm.Signal.make(_elm),
+   $Tag = Elm.Tag.make(_elm);
    var _op = {};
    var post = A4($Post.BlogPost,
    "OOP Setters Can be Used to Emulate Partial Application",
-   _U.list([$Post.ClojureTag,$Post.FPTag,$Post.OOPTag,$Post.ProgrammingTag,$Post.HaskellTag,$Post.RubyTag]),
+   _U.list([$Tag.Clojure,$Tag.FP,$Tag.OOP,$Tag.Programming,$Tag.Haskell,$Tag.Ruby]),
    {ctor: "_Tuple3",_0: 2015,_1: 4,_2: 9},
    _U.list([$Post.Text(_U.list([$Post.pl("Recently I was asked an awesome question that went something like")]))
            ,$Post.Quote(_U.list([$Post.pl("How would you do something like high-order functions and ")
@@ -11863,11 +11926,12 @@ Elm.Posts.ObjectOrientedClojureExample.make = function (_elm) {
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
    $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
+   $Signal = Elm.Signal.make(_elm),
+   $Tag = Elm.Tag.make(_elm);
    var _op = {};
    var object_oriented_clojure_example = A4($Post.BlogPost,
    "Object Oriented Clojure Example",
-   _U.list([$Post.ClojureTag,$Post.FPTag,$Post.OOPTag,$Post.ProgrammingTag,$Post.SICPTag]),
+   _U.list([$Tag.Clojure,$Tag.FP,$Tag.OOP,$Tag.Programming,$Tag.SICP]),
    {ctor: "_Tuple3",_0: 2015,_1: 6,_2: 28},
    _U.list([$Post.Text(_U.list([$Post.pl("Inspired by the message passing content in ")
                                ,A2($Post._op["->>"],
@@ -11906,11 +11970,12 @@ Elm.Posts.TrieInHaskell.make = function (_elm) {
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
    $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
+   $Signal = Elm.Signal.make(_elm),
+   $Tag = Elm.Tag.make(_elm);
    var _op = {};
    var post = A4($Post.BlogPost,
    "Trie in Haskell",
-   _U.list([$Post.DSATag,$Post.FPTag,$Post.HaskellTag,$Post.ProgrammingTag]),
+   _U.list([$Tag.DSA,$Tag.FP,$Tag.Haskell,$Tag.Programming]),
    {ctor: "_Tuple3",_0: 2015,_1: 10,_2: 25},
    _U.list([$Post.Text(_U.list([$Post.pl("Lately I\'ve been playing around with Haskell. As an exercise, I decided to partially implement a Trie. I ignored the various implementations out there, including ")
                                ,A2($Post._op["->>"],"Data.Trie","https://hackage.haskell.org/package/bytestring-trie-0.2.4.1/docs/Data-Trie.html")
@@ -11991,11 +12056,12 @@ Elm.Posts.WriteAFileInIdris.make = function (_elm) {
    $Maybe = Elm.Maybe.make(_elm),
    $Post = Elm.Post.make(_elm),
    $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
+   $Signal = Elm.Signal.make(_elm),
+   $Tag = Elm.Tag.make(_elm);
    var _op = {};
    var write_a_file_in_idris = A4($Post.BlogPost,
    "Write a File in Idris",
-   _U.list([$Post.FPTag,$Post.IdrisTag,$Post.ProgrammingTag]),
+   _U.list([$Tag.FP,$Tag.Idris,$Tag.Programming]),
    {ctor: "_Tuple3",_0: 2015,_1: 11,_2: 15},
    _U.list([$Post.Text(_U.list([$Post.pl("Although Idris\' documentation seems better than 99% of opensource projects out there, I couldn\'t easily find the steps necessary to write a file. After recalling that ")
                                ,A2($Post._op["->>"],"Brian McKenna wrote his blog in Idris","http://brianmckenna.org/blog/idris_blog")
@@ -12059,6 +12125,7 @@ Elm.Blog.make = function (_elm) {
    if (_elm.Blog.values) return _elm.Blog.values;
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
+   $CommonElements = Elm.CommonElements.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $Dict = Elm.Dict.make(_elm),
    $Html = Elm.Html.make(_elm),
@@ -12071,30 +12138,33 @@ Elm.Blog.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var init = $Maybe.Nothing;
+   var init = {selectedPostId: $Maybe.Nothing};
    var update = F2(function (action,model) {
       var _p0 = action;
       if (_p0.ctor === "MoveToList") {
             return init;
          } else {
-            return $Maybe.Just({selectedPostId: _p0._0});
+            return {selectedPostId: $Maybe.Just(_p0._0)};
          }
    });
+   var Model = function (a) {    return {selectedPostId: a};};
    var SelectPost = function (a) {    return {ctor: "SelectPost",_0: a};};
    var toPost = F2(function (address,_p1) {
       var _p2 = _p1;
       return A2($Html.li,
       _U.list([]),
-      _U.list([A2($Html.a,_U.list([$Html$Attributes.href("#"),A2($Html$Events.onClick,address,SelectPost(_p2._0))]),_U.list([$Html.text(_p2._1._0)]))]));
+      _U.list([A2($CommonElements.internalLink,_U.list([A2($Html$Events.onClick,address,SelectPost(_p2._0))]),_U.list([$Html.text(_p2._1._0)]))]));
    });
    var toMonthList = F4(function (address,_p3,posts,list) {
       var _p4 = _p3;
       return A2($Basics._op["++"],
       list,
       _U.list([A2($Html.li,
-      _U.list([]),
+      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "padding",_1: "5px"},{ctor: "_Tuple2",_0: "list-style-type",_1: "none"}]))]),
       _U.list([$Html.text(A2($Basics._op["++"],$Basics.toString(_p4._1),A2($Basics._op["++"],"/",$Basics.toString(_p4._0))))
-              ,A2($Html.ul,_U.list([]),A2($List.map,toPost(address),posts))]))]));
+              ,A2($Html.ul,
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "list-style-type",_1: "none"}]))]),
+              A2($List.map,toPost(address),posts))]))]));
    });
    var postList = function (address) {
       return A2($Html.div,_U.list([]),_U.list([A2($Html.ul,_U.list([]),A3($Dict.foldr,toMonthList(address),_U.list([]),$Posts.yearMonthToPost))]));
@@ -12103,7 +12173,7 @@ Elm.Blog.make = function (_elm) {
    var singlePost = F2(function (address,id) {
       return A2($Html.div,
       _U.list([]),
-      _U.list([A2($Html.a,_U.list([A2($Html$Events.onClick,address,MoveToList),$Html$Attributes.href("#")]),_U.list([$Html.text("Archive")]))
+      _U.list([A2($CommonElements.internalLink,_U.list([A2($Html$Events.onClick,address,MoveToList)]),_U.list([$Html.text("Archive")]))
               ,function () {
                  var _p5 = $Posts.postById(id);
                  if (_p5.ctor === "Nothing") {
@@ -12114,14 +12184,14 @@ Elm.Blog.make = function (_elm) {
               }()]));
    });
    var view = F2(function (address,model) {
-      var _p6 = model;
+      var _p6 = model.selectedPostId;
       if (_p6.ctor === "Nothing") {
             return postList(address);
          } else {
-            return A2(singlePost,address,_p6._0.selectedPostId);
+            return A2(singlePost,address,_p6._0);
          }
    });
-   return _elm.Blog.values = {_op: _op,view: view,init: init,update: update,MoveToList: MoveToList,SelectPost: SelectPost};
+   return _elm.Blog.values = {_op: _op,view: view,init: init,update: update,Model: Model,MoveToList: MoveToList,SelectPost: SelectPost};
 };Elm.Footer = Elm.Footer || {};
 Elm.Footer.make = function (_elm) {
    "use strict";
@@ -12273,41 +12343,35 @@ Elm.Main.make = function (_elm) {
               ,A2($Html.div,_U.list([contentStyle]),_U.list([currentBody]))
               ,A2($Html.div,_U.list([]),_U.list([$Footer.view]))]));
    });
-   var location2action = function (location) {
-      var _p2 = location;
-      _v2_2: do {
-         if (_p2.ctor === "::" && _p2._0 === "blog") {
-               if (_p2._1.ctor === "[]") {
-                     return _U.list([HeaderAction({selectedModel: $Header.Blog}),BlogAction($Blog.MoveToList)]);
-                  } else {
-                     if (_p2._1._1.ctor === "[]") {
-                           return _U.list([HeaderAction({selectedModel: $Header.Blog})
-                                          ,function () {
-                                             var _p3 = $String.toInt(_p2._1._0);
-                                             if (_p3.ctor === "Ok") {
-                                                   return BlogAction($Blog.SelectPost(_p3._0));
-                                                } else {
-                                                   return BlogAction($Blog.MoveToList);
-                                                }
-                                          }()]);
-                        } else {
-                           break _v2_2;
-                        }
-                  }
-            } else {
-               break _v2_2;
-            }
-      } while (false);
-      return _U.list([HeaderAction({selectedModel: $Header.About})]);
+   var blogLocation = function (components) {
+      var _p2 = components;
+      if (_p2.ctor === "::" && _p2._1.ctor === "[]") {
+            var _p3 = $String.toInt(_p2._0);
+            if (_p3.ctor === "Ok") {
+                  return BlogAction($Blog.SelectPost(_p3._0));
+               } else {
+                  return BlogAction($Blog.MoveToList);
+               }
+         } else {
+            return BlogAction($Blog.MoveToList);
+         }
    };
-   var delta2update = F2(function (_p4,$new) {
-      var _p5 = $new.header;
-      if (_p5.ctor === "Blog") {
-            var _p6 = $new.blog;
-            if (_p6.ctor === "Nothing") {
+   var location2action = function (location) {
+      var _p4 = location;
+      if (_p4.ctor === "::" && _p4._0 === "blog") {
+            return _U.list([HeaderAction({selectedModel: $Header.Blog}),blogLocation(_p4._1)]);
+         } else {
+            return _U.list([HeaderAction({selectedModel: $Header.About})]);
+         }
+   };
+   var delta2update = F2(function (_p5,$new) {
+      var _p6 = $new.header;
+      if (_p6.ctor === "Blog") {
+            var _p7 = $new.blog.selectedPostId;
+            if (_p7.ctor === "Nothing") {
                   return $Maybe.Just($RouteHash.set(_U.list(["blog"])));
                } else {
-                  return $Maybe.Just($RouteHash.set(_U.list(["blog",$Basics.toString(_p6._0.selectedPostId)])));
+                  return $Maybe.Just($RouteHash.set(_U.list(["blog",$Basics.toString(_p7._0)])));
                }
          } else {
             return $Maybe.Just($RouteHash.set(_U.list(["about"])));
@@ -12329,6 +12393,7 @@ Elm.Main.make = function (_elm) {
                              ,messages: messages
                              ,delta2update: delta2update
                              ,location2action: location2action
+                             ,blogLocation: blogLocation
                              ,HeaderAction: HeaderAction
                              ,BlogAction: BlogAction
                              ,NoOp: NoOp
