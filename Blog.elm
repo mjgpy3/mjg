@@ -1,10 +1,11 @@
 module Blog (Action(..), Model, view, init, update) where
 
-import Html exposing (div, h3, text, ul, li, a)
+import Html exposing (div, h3, text, ul, li)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Dict
 
+import CommonElements exposing (internalLink)
 import Posts
 import Post
 
@@ -44,15 +45,15 @@ toPost : Signal.Address Action -> (Int, Post.Post) -> Html.Html
 toPost address (id, Post.BlogPost title _ _ _) =
   li
     []
-    [a
-      [href "#", onClick address <| SelectPost id]
+    [internalLink
+      [onClick address <| SelectPost id]
       [text title]
     ]
 
 singlePost : Signal.Address Action -> Int -> Html.Html
 singlePost address id = div
   []
-  [ a [onClick address MoveToList, href "#"] [text "Archive"]
+  [ internalLink [onClick address MoveToList] [text "Archive"]
   , case Posts.postById id of
       Nothing -> div [] [h3 [] [text "Post not found!"]]
       Just post -> Post.postToHtml post

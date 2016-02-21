@@ -14,7 +14,12 @@ import Task
 import String
 
 app =
-  StartApp.start { init = init, view = view, update = update, inputs = [ messages.signal ] }
+  StartApp.start {
+      init = init
+    , view = view
+    , update = update
+    , inputs = [ messages.signal ]
+  }
 
 main =
   app.html
@@ -95,8 +100,13 @@ view address model =
 
 update : Action -> Model -> (Model, Effects.Effects Action)
 update action model = (case action of
-    HeaderAction headerAction -> { blog = (fst init).blog, header = Header.update headerAction model.header }
-    BlogAction blogAction -> { model | blog = Blog.update blogAction model.blog }
+    HeaderAction headerAction -> {
+      blog = (fst init).blog,
+      header = Header.update headerAction model.header
+    }
+    BlogAction blogAction -> { model |
+      blog = Blog.update blogAction model.blog
+    }
     NoOp -> model
   ,
     Effects.none
