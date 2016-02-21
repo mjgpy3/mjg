@@ -35,9 +35,13 @@ postList address = div
 
 toMonthList : Signal.Address Action -> (Int, Int) -> List (Int, Post.Post) -> List Html.Html -> List Html.Html
 toMonthList address (year, month) posts list = list ++ [
-  li [] [
+  li [
+    style [("padding", "5px"), ("list-style-type", "none")]
+    ] [
       text <| toString month ++ "/" ++ toString year
-    , ul [] <| List.map (toPost address) posts
+    , ul [
+      style [("list-style-type", "none")]
+      ] <| List.map (toPost address) posts
     ]
   ]
 
